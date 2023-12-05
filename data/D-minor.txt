@@ -1,0 +1,29 @@
+dm- i- 2 9 14 17;
+Bb- VI- -2 10 13 17;
+C- VII- 0 12 16 19;
+F- III- -7 12 17 21;
+gm- iv- -5 10 14 19;
+am- v- -3 12 16 21;
+A- V(maj)- -3 13 16 21;
+Bb(maj7)- VI(7)- -2 9 14 17;
+dm7- i(7)- 2 12 17 21;
+gm7- iv(7)- -5 10 14 17;
+am7- v(7)- -3 12 16 19;
+dm/A- i6/4- -3 9 14 17;
+A7- V(maj7)- -3 13 16 19;
+dm/F- i6- -7 9 14 17;
+C/E- VII6- 4 12 16 19;
+F/C- III6/4- ;
+F/A- III6- ;
+A/C#- V6(maj)- ;
+D- I(maj)- ;
+gm/Bb- iv6- ;
+relative-keys- F-Major C-Myxolidian G-Dorian Bb-Lydian A-Phrygian E-Locrian;
+
+
+
+
+
+
+
+
