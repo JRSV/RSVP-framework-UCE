@@ -1,0 +1,38 @@
+#N canvas 2266 185 450 473 10;
+#X obj 100 100 cnv 15 100 60 empty zsamp-canvas empty 20 12 0 14 -33289
+-33289 0;
+#X obj 105 105 cnv 15 90 50 empty empty SAMP 8 11 0 14 -233017 -66577
+0;
+#X obj 82 263 s to_pd~_subprocess;
+#X obj 82 242 message-to-pd~ FIRE \$1;
+#X obj 15 334 return-from-pd~ \$1-sig-in;
+#X obj 15 374 sel 0 1;
+#X obj 15 355 speedlim 500;
+#X obj 95 373 loadbang;
+#X obj 82 222 1;
+#X obj 148 108 bng 45 250 50 0 empty empty PLAY 5 23 0 15 -4160 -258113
+-228856;
+#X obj 58 32 r MASTER_ATTACK-PERC;
+#X obj 144 209 message-to-pd~ DSP \$1;
+#X obj 117 123 tgl-but_pre DSP;
+#X obj 111 143 cnv 5 32 9 empty empty ON/OFF 2 5 0 8 -1 -262144 0;
+#X obj 82 201 spigot;
+#X msg 15 430 \; zsamp-canvas color 12 12 12;
+#X msg 32 396 \; zsamp-canvas color 16 12 12;
+#X obj 58 60 spigot;
+#X connect 3 0 2 0;
+#X connect 4 0 6 0;
+#X connect 5 0 15 0;
+#X connect 5 1 16 0;
+#X connect 6 0 5 0;
+#X connect 7 0 15 0;
+#X connect 8 0 3 0;
+#X connect 9 0 14 0;
+#X connect 10 0 17 0;
+#X connect 11 0 2 0;
+#X connect 12 0 11 0;
+#X connect 12 0 14 1;
+#X connect 12 0 17 1;
+#X connect 14 0 8 0;
+#X connect 17 0 9 0;
+#X coords 0 -1 1 1 100 60 1 100 100;

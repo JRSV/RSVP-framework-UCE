@@ -1,0 +1,3 @@
+#N canvas 1016 395 450 300 12;
+#X declare -path FFT-dynamic-filter;
+#X obj 75 31 declare -path FFT-dynamic-filter;

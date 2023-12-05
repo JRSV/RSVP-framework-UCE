@@ -1,0 +1,4286 @@
+#N canvas 611 31 584 672 10;
+#X declare -path ../;
+#X declare -path ./pd_extrn/UTILITIES/;
+#X declare -path ../../;
+#X declare -path ../pd_extrn/UTILITIES/;
+#X declare -path ../sys.comunication;
+#X obj 100 100 cnv 15 160 200 empty empty empty 20 12 0 14 #202020
+#404040 0;
+#X obj 105 105 cnv 15 150 190 empty empty empty 12 11 0 14 #e0e0e0
+#404040 0;
+#N canvas 1920 0 1366 712 PTCH_01 0;
+#X obj 96 22 sel 1 0;
+#X msg 115 63 color 18;
+#X msg 96 42 color 43;
+#X obj 96 1 r TURN-ON-PEDAL-1;
+#X text 971 73 here we process data to trigger processings inside the
+modules with simple custom algorithms that come into action when the
+piece reaches the cue;
+#X text 969 20 this is a place where I can patch in realtime the triggering
+of processes based on the GUI (e.g. tunr on a metro to trigger and
+play back samples), f 59;
+#X obj 1120 404 cnv 5 200 5 empty empty LFO 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 1110 166 cnv 5 200 5 empty empty ANALYSIS 0 -10 0 20 #fcc4c4
+#404040 0;
+#X obj 1 0 bng 16 250 50 0 empty empty empty 17 7 0 10 #3c50fc #9c00fc
+#000000;
+#X obj 535 46 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 627 71 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 1181 183 r p-fund-\$1;
+#X obj 1181 209 r MASTER_ATTACK-\$1;
+#X obj 1181 236 r MASTER_SILENCE-\$1;
+#X obj 1180 262 r TIMBRE-ID-\$1;
+#X obj 1132 202 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 1132 255 cnv 5 95 5 empty empty empty 5 6 0 10 #fc8000 #dcdcdc
+0;
+#X obj 1132 304 cnv 5 95 5 empty empty empty 5 6 0 10 #f8fc00 #dcdcdc
+0;
+#X obj 1180 326 r HARMONICITY-\$1;
+#X obj 1135 345 cnv 5 95 5 empty empty empty 5 6 0 10 #9c9c9c #dcdcdc
+0;
+#X obj 1133 229 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 1185 546 cnv 5 95 5 empty empty empty 5 6 0 10 #fc0400 #dcdcdc
+0;
+#N canvas 1316 531 450 470 play-rhythms 0;
+#X floatatom 70 96 5 0 0 0 - - - 0;
+#X obj 108 122 list split 1;
+#X obj 145 310 list-idx;
+#X obj 184 266 t b f;
+#X obj 145 291 list;
+#X obj 184 223 f;
+#X obj 210 223 + 1;
+#X obj 251 188 list length;
+#X obj 184 244 mod 100;
+#X obj 166 146 t a b a;
+#X obj 184 189 metro 100;
+#X obj 185 170 1;
+#X obj 108 80 random 10;
+#X floatatom 171 82 5 0 0 0 - - - 0;
+#X obj 253 265 sel 0;
+#X obj 253 284 0;
+#X obj 188 73 cnv 5 95 5 empty empty empty 5 6 0 10 #9c00fc #dcdcdc
+0;
+#X obj 108 38 t b b;
+#X obj 108 17 r end-off-rthm-array-\$1;
+#X obj 145 341 outlet;
+#X obj 159 55 text size \$0-phrases-play;
+#X obj 108 101 text get \$0-phrases-play;
+#X connect 1 1 9 0;
+#X connect 2 0 19 0;
+#X connect 3 0 4 0;
+#X connect 3 1 2 1;
+#X connect 4 0 2 0;
+#X connect 5 0 6 0;
+#X connect 5 0 8 0;
+#X connect 6 0 5 1;
+#X connect 7 0 8 1;
+#X connect 8 0 3 0;
+#X connect 8 0 14 0;
+#X connect 9 0 4 1;
+#X connect 9 1 11 0;
+#X connect 9 2 7 0;
+#X connect 10 0 5 0;
+#X connect 11 0 10 0;
+#X connect 12 0 0 0;
+#X connect 12 0 21 0;
+#X connect 14 0 15 0;
+#X connect 15 0 10 0;
+#X connect 17 0 12 0;
+#X connect 17 1 20 0;
+#X connect 18 0 17 0;
+#X connect 20 0 12 1;
+#X connect 20 0 13 0;
+#X connect 21 0 1 0;
+#X restore 1185 605 pd play-rhythms;
+#X obj 1185 652 cnv 5 95 5 empty empty empty 5 6 0 10 #9c00fc #dcdcdc
+0;
+#X obj 1185 634 s play-attacks-\$1;
+#N canvas 149 433 620 439 record-rhythms 0;
+#X obj 208 131 tabdump rthm-phrase;
+#X obj 219 104 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 405 131 text define \$0-phrases;
+#X obj 208 289 text set \$0-phrases;
+#X obj 245 269 f;
+#X obj 270 269 + 1;
+#X obj 208 249 t a b;
+#X obj 208 229 list prepend;
+#X obj 277 209 symbol;
+#X obj 380 131 0;
+#X obj 361 94 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 310 188 makefilename phrase-%d;
+#X obj 310 167 f;
+#X obj 335 167 + 1;
+#X obj 208 149 t a b b;
+#X msg 361 151 \; rthm-phrase const 0;
+#X obj 361 110 t b b b;
+#X obj 170 86 t b b b;
+#X obj 211 125 cnv 5 95 5 empty empty empty 5 6 0 10 #0400fc #dcdcdc
+0;
+#X obj 170 65 r end-off-rthm-array-\$1;
+#X obj 361 44 inlet;
+#X obj 409 45 inlet;
+#X obj 380 270 outlet;
+#X obj 481 50 inlet;
+#X connect 0 0 14 0;
+#X connect 4 0 5 0;
+#X connect 4 0 3 1;
+#X connect 5 0 4 1;
+#X connect 6 0 3 0;
+#X connect 6 1 4 0;
+#X connect 7 0 6 0;
+#X connect 8 0 7 1;
+#X connect 9 0 4 1;
+#X connect 9 0 12 1;
+#X connect 9 0 22 0;
+#X connect 10 0 16 0;
+#X connect 11 0 8 1;
+#X connect 12 0 13 0;
+#X connect 12 0 11 0;
+#X connect 13 0 12 1;
+#X connect 14 0 7 0;
+#X connect 14 1 8 0;
+#X connect 14 2 12 0;
+#X connect 16 0 15 0;
+#X connect 16 1 9 0;
+#X connect 16 2 2 0;
+#X connect 17 1 15 0;
+#X connect 17 2 1 0;
+#X connect 17 2 0 0;
+#X connect 19 0 17 0;
+#X connect 20 0 10 0;
+#X connect 21 0 2 0;
+#X connect 23 0 2 0;
+#X restore 1187 583 pd record-rhythms;
+#X msg 1236 557 clear;
+#X obj 1187 561 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 1187 625 cnv 5 95 5 empty empty empty 5 6 0 10 #0400fc #dcdcdc
+0;
+#N canvas 67 496 676 582 detect-rhythms 0;
+#X obj 303 268 0;
+#X obj 303 243 1;
+#X obj 373 336 f;
+#X obj 400 336 + 1;
+#X obj 256 380 tabwrite rthm-phrase;
+#X obj 191 337 sel 0 1;
+#X obj 191 388 f;
+#X obj 217 388 + 1;
+#X obj 120 427 sel 1;
+#X obj 303 183 t b b;
+#X obj 237 222 1;
+#X obj 221 427 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 210 366 0;
+#X obj 237 243 metro 100;
+#X obj 373 357 mod 100;
+#X obj 330 204 onebang;
+#X obj 457 117 loadbang;
+#X obj 237 284 i;
+#X obj 237 307 t b a b;
+#X obj 434 375 sel 99;
+#X obj 409 391 0;
+#X obj 191 409 > 20;
+#X obj 356 171 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 369 105 t b b b;
+#X obj 311 82 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 159 173 0;
+#X obj 367 83 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 121 446 s pause-phrase-\$0;
+#X obj 159 89 r pause-phrase-\$0;
+#X obj 434 415 s end-off-rthm-array-\$1;
+#X obj 281 397 cnv 5 95 5 empty empty empty 5 6 0 10 #fc0400 #dcdcdc
+0;
+#X obj 488 167 inlet;
+#X obj 304 63 inlet;
+#X connect 0 0 17 1;
+#X connect 1 0 17 1;
+#X connect 2 0 3 0;
+#X connect 2 0 14 0;
+#X connect 3 0 2 1;
+#X connect 5 0 6 0;
+#X connect 5 1 12 0;
+#X connect 6 0 7 0;
+#X connect 6 0 21 0;
+#X connect 7 0 6 1;
+#X connect 8 0 12 0;
+#X connect 8 0 27 0;
+#X connect 9 0 1 0;
+#X connect 9 1 15 0;
+#X connect 10 0 13 0;
+#X connect 12 0 6 1;
+#X connect 13 0 17 0;
+#X connect 14 0 4 1;
+#X connect 14 0 19 0;
+#X connect 15 0 10 0;
+#X connect 16 0 15 1;
+#X connect 17 0 18 0;
+#X connect 18 0 0 0;
+#X connect 18 1 4 0;
+#X connect 18 1 5 0;
+#X connect 18 2 2 0;
+#X connect 19 0 20 0;
+#X connect 19 0 29 0;
+#X connect 19 0 15 1;
+#X connect 20 0 13 0;
+#X connect 21 0 8 0;
+#X connect 21 0 11 0;
+#X connect 22 0 15 1;
+#X connect 23 0 15 1;
+#X connect 25 0 13 0;
+#X connect 26 0 23 0;
+#X connect 28 0 25 0;
+#X connect 28 0 23 0;
+#X connect 31 0 2 1;
+#X connect 31 0 22 0;
+#X connect 32 0 9 0;
+#X connect 32 0 24 0;
+#X restore 1185 528 pd detect-rhythms;
+#X msg 1286 561 click 1;
+#X obj 1134 371 cnv 5 95 5 empty empty empty 5 6 0 10 #00f8fc #dcdcdc
+0;
+#X text 324 58 every pedal needs the pedal router;
+#X obj 1179 352 s RSVP-value-from-outside;
+#X obj 1180 284 unpack f f;
+#X obj 1 21 canvasargs;
+#X obj 1 41 route list;
+#X obj 1 61 list split 1;
+#X msg 1 81 \; pd-\$1 vis 1;
+#X obj 1177 428 r LFO-triggers-\$1;
+#X obj 1177 452 r LFO-MIDI-\$1;
+#X obj 1177 478 r LFO-values-\$1;
+#X text 208 7 <-- Change to the number of pedal wanted;
+#X obj 550 70 open-pedal 1;
+#X text 369 93 Change to the number of pedal wanted ----A;
+#X obj 156 30 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 551 22 r CURRENT-PATCH-NUMBER;
+#X obj 17 1 cnv 10 40 10 empty \$0-label PTCH_01 3 6 0 8 #000000 #00f8fc
+0;
+#X obj 1122 517 cnv 5 200 5 empty empty MSC 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 14 151 r TURN-ON-PEDAL-1;
+#X obj 190 173 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 113 171 open-pedal 1;
+#X obj 113 194 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 551 45 route-pedal 1;
+#X obj 14 223 metro 1000;
+#X obj 14 266 f;
+#X obj 42 266 + 1;
+#X msg 94 240 0;
+#X obj 14 176 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 94 218 sel 0;
+#X obj 94 263 send reset-scene-1;
+#X msg 161 204 24;
+#X floatatom 1126 563 5 0 0 0 - - - 0;
+#N canvas 2209 195 782 366 SECTION-BAR 0;
+#X obj 86 293 send \$1-section-BAR;
+#X msg 113 115 color 18 0;
+#X msg 99 90 color 43 0;
+#X text 175 92 red;
+#X msg 689 253 color \$1 0;
+#X floatatom 688 230 5 0 0 0 - - - 0;
+#X msg 127 139 color 16 12;
+#X text 191 115 blue;
+#X text 209 142 green;
+#X msg 141 168 color 17 12;
+#X text 220 168 light blue;
+#X msg 155 196 color 19 12;
+#X msg 169 226 color 22 12;
+#X text 245 223 black;
+#X text 228 193 pink;
+#X msg 183 252 color 44 12;
+#X text 261 253 orange;
+#X text 384 100 sets de color of the section bar in the pedal display
+of cues. it can also set the range of the slider according to the length
+in msec of the section;
+#X obj 86 4 r CURRENT-PATCH-NUMBER;
+#X obj 86 31 sel 0 1 2 3 4 5 6 7 8 9 10;
+#X msg 86 60 color 15 12;
+#X text 162 62 yellow;
+#X msg 632 202 range 0 \$1;
+#X obj 632 177 inlet;
+#X obj 408 35 inlet metro-tick;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 4 0 0 0;
+#X connect 5 0 4 0;
+#X connect 6 0 0 0;
+#X connect 9 0 0 0;
+#X connect 11 0 0 0;
+#X connect 12 0 0 0;
+#X connect 15 0 0 0;
+#X connect 18 0 19 0;
+#X connect 19 0 20 0;
+#X connect 19 1 2 0;
+#X connect 19 2 1 0;
+#X connect 19 3 6 0;
+#X connect 19 4 9 0;
+#X connect 19 5 11 0;
+#X connect 19 6 12 0;
+#X connect 19 7 15 0;
+#X connect 20 0 0 0;
+#X connect 22 0 0 0;
+#X connect 23 0 22 0;
+#X connect 24 0 0 0;
+#X restore 14 346 pd SECTION-BAR;
+#X obj 14 197 t a b a;
+#X text 121 308 length of scene;
+#X obj 95 307 120;
+#X obj 34 372 s metro-scene-1;
+#X obj 266 479 list-idx;
+#X obj 266 437 t b f;
+#X floatatom 266 418 5 0 0 0 - - - 0;
+#X msg 266 458 32 34 62.93 68.56 72;
+#X obj 266 398 random 5;
+#X obj 266 356 metro;
+#X floatatom 412 366 10 0 0 0 - - - 0;
+#X obj 266 326 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 266 376 t a b;
+#X floatatom 293 324 5 0 0 0 - - - 0;
+#X obj 266 563 t a b;
+#X obj 266 541 - 12;
+#X obj 266 608 s \$1-SFM2-MIDI;
+#X obj 388 608 s \$1-SFM2/L/duration-nbx;
+#X obj 266 586 pack f 60;
+#X obj 388 540 / 1000;
+#X obj 388 583 *;
+#X obj 266 502 t a b b;
+#X floatatom 474 541 5 0 0 0 - - - 0;
+#X floatatom 543 601 5 0 0 0 - - - 0;
+#X obj 264 137 hsl 600 15 0 120 0 0 empty empty empty -2 -8 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 261 157 5 0 0 0 - - - 0;
+#X obj 261 110 r metro-scene-1;
+#X obj 317 532 random 80;
+#X obj 317 555 + 47;
+#X floatatom 335 578 5 0 0 0 - - - 0;
+#X obj 388 520 random 500;
+#X obj 388 563 + 0.5;
+#X obj 379 417 + 5000;
+#X obj 908 535 r metro-scene-1;
+#X obj 908 599 line;
+#X obj 908 555 sel 45;
+#X obj 908 622 s Cosmos_&_Galatea/GRN1/volfader-vsl;
+#X msg 908 576 50 30000;
+#X obj 379 394 random 1000;
+#N canvas 2752 337 200 273 ringMod 0;
+#X obj 30 119 unpack f f f f f f f;
+#X obj 106 95 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 30 93 open-pedal 1;
+#X obj 30 60 r LFO-values-\$1;
+#X obj 69 183 s Cosmos_&_Galatea-MLT1/L/fmod-nbx;
+#X obj 108 161 s Cosmos_&_Galatea-MLT1/L/amod-nbx;
+#X obj 108 140 / 127;
+#X obj 69 162 / 8;
+#X connect 0 2 7 0;
+#X connect 0 4 6 0;
+#X connect 2 0 0 0;
+#X connect 3 0 2 0;
+#X connect 6 0 5 0;
+#X connect 7 0 4 0;
+#X restore 833 211 pd ringMod;
+#N canvas 2422 217 200 237 mult2-vol-up-30sec 0;
+#X obj 30 60 r metro-scene-1;
+#X obj 30 80 sel 30;
+#X msg 30 101 50 10000;
+#X obj 30 124 line;
+#X obj 30 147 s Cosmos_&_Galatea/MLT1/volfader-vsl;
+#X msg 105 103 0 0;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 5 0 3 0;
+#X restore 502 259 pd mult2-vol-up-30sec;
+#X obj 672 357 s Cosmos_&_Galatea/S.FM/l.prst-nbx;
+#X obj 674 205 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 699 237 0;
+#X obj 674 281 / 10;
+#X obj 679 306 + 1;
+#X floatatom 703 327 5 0 0 0 - - - 0;
+#X floatatom 714 309 5 0 0 0 - - - 0;
+#X floatatom 721 284 5 0 0 0 - - - 0;
+#X obj 676 259 f;
+#X obj 709 259 + 1;
+#X msg 856 549 0 0;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 8 0;
+#X connect 2 0 8 0;
+#X connect 3 0 0 0;
+#X connect 3 0 45 0;
+#X connect 8 0 35 0;
+#X connect 14 0 34 0;
+#X connect 22 0 24 0;
+#X connect 25 0 29 1;
+#X connect 26 0 25 1;
+#X connect 27 0 25 0;
+#X connect 30 0 25 2;
+#X connect 35 0 36 0;
+#X connect 36 0 37 0;
+#X connect 37 0 38 0;
+#X connect 49 0 51 0;
+#X connect 49 0 58 0;
+#X connect 51 0 52 0;
+#X connect 54 0 55 0;
+#X connect 55 0 56 0;
+#X connect 55 0 63 0;
+#X connect 55 0 67 0;
+#X connect 56 0 55 1;
+#X connect 57 0 55 1;
+#X connect 57 0 60 0;
+#X connect 58 0 64 0;
+#X connect 58 0 75 0;
+#X connect 59 0 57 0;
+#X connect 61 0 55 1;
+#X connect 64 0 54 0;
+#X connect 64 1 66 0;
+#X connect 64 2 59 0;
+#X connect 66 0 63 1;
+#X connect 68 0 85 0;
+#X connect 69 0 71 0;
+#X connect 69 1 68 1;
+#X connect 70 0 69 0;
+#X connect 71 0 68 0;
+#X connect 72 0 70 0;
+#X connect 73 0 76 0;
+#X connect 74 0 102 1;
+#X connect 75 0 73 0;
+#X connect 76 0 72 0;
+#X connect 76 1 102 0;
+#X connect 77 0 73 1;
+#X connect 78 0 82 0;
+#X connect 79 0 78 0;
+#X connect 82 0 80 0;
+#X connect 83 0 95 0;
+#X connect 84 0 81 0;
+#X connect 84 0 87 0;
+#X connect 85 0 79 0;
+#X connect 85 1 91 0;
+#X connect 85 2 94 0;
+#X connect 86 0 84 1;
+#X connect 88 0 89 0;
+#X connect 90 0 88 0;
+#X connect 91 0 92 0;
+#X connect 92 0 82 1;
+#X connect 92 0 93 0;
+#X connect 94 0 83 0;
+#X connect 95 0 84 0;
+#X connect 96 0 86 0;
+#X connect 96 0 77 0;
+#X connect 97 0 99 0;
+#X connect 98 0 100 0;
+#X connect 99 0 101 0;
+#X connect 101 0 98 0;
+#X connect 102 0 96 0;
+#X connect 106 0 113 0;
+#X connect 107 0 113 1;
+#X connect 108 0 109 0;
+#X connect 108 0 111 0;
+#X connect 109 0 105 0;
+#X connect 109 0 110 0;
+#X connect 113 0 108 0;
+#X connect 113 0 112 0;
+#X connect 113 0 114 0;
+#X connect 114 0 113 1;
+#X connect 115 0 98 0;
+#X coords 0 -1 1 1 57 17 2 0 0;
+#X restore 116 125 pd PTCH_01 \$1;
+#N canvas 1920 0 1366 712 PTCH_00 0;
+#X obj 96 22 sel 1 0;
+#X msg 115 63 color 18;
+#X msg 96 42 color 43;
+#X text 971 73 here we process data to trigger processings inside the
+modules with simple custom algorithms that come into action when the
+piece reaches the cue;
+#X text 969 20 this is a place where I can patch in realtime the triggering
+of processes based on the GUI (e.g. tunr on a metro to trigger and
+play back samples), f 59;
+#X obj 1120 404 cnv 5 200 5 empty empty LFO 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 1110 166 cnv 5 200 5 empty empty ANALYSIS 0 -10 0 20 #fcc4c4
+#404040 0;
+#X obj 1 0 bng 16 250 50 0 empty empty empty 17 7 0 10 #fc2828 #9c00fc
+#000000;
+#X obj 475 26 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 567 51 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 1181 183 r p-fund-\$1;
+#X obj 1181 209 r MASTER_ATTACK-\$1;
+#X obj 1181 236 r MASTER_SILENCE-\$1;
+#X obj 1180 262 r TIMBRE-ID-\$1;
+#X obj 1132 202 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 1132 255 cnv 5 95 5 empty empty empty 5 6 0 10 #fc8000 #dcdcdc
+0;
+#X obj 1132 304 cnv 5 95 5 empty empty empty 5 6 0 10 #f8fc00 #dcdcdc
+0;
+#X obj 1180 326 r HARMONICITY-\$1;
+#X obj 1135 345 cnv 5 95 5 empty empty empty 5 6 0 10 #9c9c9c #dcdcdc
+0;
+#X obj 1133 229 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 1185 546 cnv 5 95 5 empty empty empty 5 6 0 10 #fc0400 #dcdcdc
+0;
+#N canvas 1316 531 450 470 play-rhythms 0;
+#X floatatom 70 96 5 0 0 0 - - - 0;
+#X obj 108 122 list split 1;
+#X obj 145 310 list-idx;
+#X obj 184 266 t b f;
+#X obj 145 291 list;
+#X obj 184 223 f;
+#X obj 210 223 + 1;
+#X obj 251 188 list length;
+#X obj 184 244 mod 100;
+#X obj 166 146 t a b a;
+#X obj 184 189 metro 100;
+#X obj 185 170 1;
+#X obj 108 80 random 10;
+#X floatatom 171 82 5 0 0 0 - - - 0;
+#X obj 253 265 sel 0;
+#X obj 253 284 0;
+#X obj 188 73 cnv 5 95 5 empty empty empty 5 6 0 10 #9c00fc #dcdcdc
+0;
+#X obj 108 38 t b b;
+#X obj 108 17 r end-off-rthm-array-\$1;
+#X obj 145 341 outlet;
+#X obj 159 55 text size \$0-phrases-play;
+#X obj 108 101 text get \$0-phrases-play;
+#X connect 1 1 9 0;
+#X connect 2 0 19 0;
+#X connect 3 0 4 0;
+#X connect 3 1 2 1;
+#X connect 4 0 2 0;
+#X connect 5 0 6 0;
+#X connect 5 0 8 0;
+#X connect 6 0 5 1;
+#X connect 7 0 8 1;
+#X connect 8 0 3 0;
+#X connect 8 0 14 0;
+#X connect 9 0 4 1;
+#X connect 9 1 11 0;
+#X connect 9 2 7 0;
+#X connect 10 0 5 0;
+#X connect 11 0 10 0;
+#X connect 12 0 0 0;
+#X connect 12 0 21 0;
+#X connect 14 0 15 0;
+#X connect 15 0 10 0;
+#X connect 17 0 12 0;
+#X connect 17 1 20 0;
+#X connect 18 0 17 0;
+#X connect 20 0 12 1;
+#X connect 20 0 13 0;
+#X connect 21 0 1 0;
+#X restore 1185 605 pd play-rhythms;
+#X obj 1185 652 cnv 5 95 5 empty empty empty 5 6 0 10 #9c00fc #dcdcdc
+0;
+#X obj 1185 634 s play-attacks-\$1;
+#N canvas 149 433 620 439 record-rhythms 0;
+#X obj 208 131 tabdump rthm-phrase;
+#X obj 219 104 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 405 131 text define \$0-phrases;
+#X obj 208 289 text set \$0-phrases;
+#X obj 245 269 f;
+#X obj 270 269 + 1;
+#X obj 208 249 t a b;
+#X obj 208 229 list prepend;
+#X obj 277 209 symbol;
+#X obj 380 131 0;
+#X obj 361 94 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 310 188 makefilename phrase-%d;
+#X obj 310 167 f;
+#X obj 335 167 + 1;
+#X obj 208 149 t a b b;
+#X msg 361 151 \; rthm-phrase const 0;
+#X obj 361 110 t b b b;
+#X obj 170 86 t b b b;
+#X obj 211 125 cnv 5 95 5 empty empty empty 5 6 0 10 #0400fc #dcdcdc
+0;
+#X obj 170 65 r end-off-rthm-array-\$1;
+#X obj 361 44 inlet;
+#X obj 409 45 inlet;
+#X obj 380 270 outlet;
+#X obj 481 50 inlet;
+#X connect 0 0 14 0;
+#X connect 4 0 5 0;
+#X connect 4 0 3 1;
+#X connect 5 0 4 1;
+#X connect 6 0 3 0;
+#X connect 6 1 4 0;
+#X connect 7 0 6 0;
+#X connect 8 0 7 1;
+#X connect 9 0 4 1;
+#X connect 9 0 12 1;
+#X connect 9 0 22 0;
+#X connect 10 0 16 0;
+#X connect 11 0 8 1;
+#X connect 12 0 13 0;
+#X connect 12 0 11 0;
+#X connect 13 0 12 1;
+#X connect 14 0 7 0;
+#X connect 14 1 8 0;
+#X connect 14 2 12 0;
+#X connect 16 0 15 0;
+#X connect 16 1 9 0;
+#X connect 16 2 2 0;
+#X connect 17 1 15 0;
+#X connect 17 2 1 0;
+#X connect 17 2 0 0;
+#X connect 19 0 17 0;
+#X connect 20 0 10 0;
+#X connect 21 0 2 0;
+#X connect 23 0 2 0;
+#X restore 1187 583 pd record-rhythms;
+#X msg 1236 557 clear;
+#X obj 1187 561 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 1187 625 cnv 5 95 5 empty empty empty 5 6 0 10 #0400fc #dcdcdc
+0;
+#N canvas 115 145 676 582 detect-rhythms 0;
+#X obj 303 268 0;
+#X obj 303 243 1;
+#X obj 373 336 f;
+#X obj 400 336 + 1;
+#X obj 256 380 tabwrite rthm-phrase;
+#X obj 191 337 sel 0 1;
+#X obj 191 388 f;
+#X obj 217 388 + 1;
+#X obj 120 427 sel 1;
+#X obj 303 183 t b b;
+#X obj 237 222 1;
+#X obj 221 427 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 210 366 0;
+#X obj 237 243 metro 100;
+#X obj 373 357 mod 100;
+#X obj 330 204 onebang;
+#X obj 457 117 loadbang;
+#X obj 237 284 i;
+#X obj 237 307 t b a b;
+#X obj 434 375 sel 99;
+#X obj 409 391 0;
+#X obj 191 409 > 20;
+#X obj 356 171 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 369 105 t b b b;
+#X obj 311 82 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 159 173 0;
+#X obj 367 83 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 121 446 s pause-phrase-\$0;
+#X obj 159 89 r pause-phrase-\$0;
+#X obj 434 415 s end-off-rthm-array-\$1;
+#X obj 281 397 cnv 5 95 5 empty empty empty 5 6 0 10 #fc0400 #dcdcdc
+0;
+#X obj 488 167 inlet;
+#X obj 304 63 inlet;
+#X connect 0 0 17 1;
+#X connect 1 0 17 1;
+#X connect 2 0 3 0;
+#X connect 2 0 14 0;
+#X connect 3 0 2 1;
+#X connect 5 0 6 0;
+#X connect 5 1 12 0;
+#X connect 6 0 7 0;
+#X connect 6 0 21 0;
+#X connect 7 0 6 1;
+#X connect 8 0 12 0;
+#X connect 8 0 27 0;
+#X connect 9 0 1 0;
+#X connect 9 1 15 0;
+#X connect 10 0 13 0;
+#X connect 12 0 6 1;
+#X connect 13 0 17 0;
+#X connect 14 0 4 1;
+#X connect 14 0 19 0;
+#X connect 15 0 10 0;
+#X connect 16 0 15 1;
+#X connect 17 0 18 0;
+#X connect 18 0 0 0;
+#X connect 18 1 4 0;
+#X connect 18 1 5 0;
+#X connect 18 2 2 0;
+#X connect 19 0 20 0;
+#X connect 19 0 29 0;
+#X connect 19 0 15 1;
+#X connect 20 0 13 0;
+#X connect 21 0 8 0;
+#X connect 21 0 11 0;
+#X connect 22 0 15 1;
+#X connect 23 0 15 1;
+#X connect 25 0 13 0;
+#X connect 26 0 23 0;
+#X connect 28 0 25 0;
+#X connect 28 0 23 0;
+#X connect 31 0 2 1;
+#X connect 31 0 22 0;
+#X connect 32 0 9 0;
+#X connect 32 0 24 0;
+#X restore 1185 528 pd detect-rhythms;
+#X msg 1286 561 click 1;
+#X obj 1134 371 cnv 5 95 5 empty empty empty 5 6 0 10 #00f8fc #dcdcdc
+0;
+#X text 264 38 every pedal needs the pedal router;
+#X obj 1179 352 s RSVP-value-from-outside;
+#X obj 1180 284 unpack f f;
+#X obj 1 21 canvasargs;
+#X obj 1 41 route list;
+#X obj 1 61 list split 1;
+#X msg 1 81 \; pd-\$1 vis 1;
+#X obj 1177 428 r LFO-triggers-\$1;
+#X obj 1177 452 r LFO-MIDI-\$1;
+#X obj 1177 478 r LFO-values-\$1;
+#X text 208 7 <-- Change to the number of pedal wanted;
+#X text 309 73 Change to the number of pedal wanted ----A;
+#X obj 156 30 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 491 2 r CURRENT-PATCH-NUMBER;
+#X obj 17 1 cnv 10 40 10 empty \$0-label PTCH_01 3 6 0 8 #000000 #00f8fc
+0;
+#X obj 1122 517 cnv 5 200 5 empty empty MSC 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 190 173 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 113 194 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 14 223 metro 1000;
+#X obj 14 266 f;
+#X obj 42 266 + 1;
+#X msg 94 240 0;
+#X obj 14 176 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 94 218 sel 0;
+#X msg 161 204 24;
+#N canvas 2209 195 782 366 SECTION-BAR 0;
+#X obj 86 293 send \$1-section-BAR;
+#X msg 113 115 color 18 0;
+#X msg 99 90 color 43 0;
+#X text 175 92 red;
+#X msg 689 253 color \$1 0;
+#X floatatom 688 230 5 0 0 0 - - - 0;
+#X msg 127 139 color 16 12;
+#X text 191 115 blue;
+#X text 209 142 green;
+#X msg 141 168 color 17 12;
+#X text 220 168 light blue;
+#X msg 155 196 color 19 12;
+#X msg 169 226 color 22 12;
+#X text 245 223 black;
+#X text 228 193 pink;
+#X msg 183 252 color 44 12;
+#X text 261 253 orange;
+#X text 384 100 sets de color of the section bar in the pedal display
+of cues. it can also set the range of the slider according to the length
+in msec of the section;
+#X obj 86 4 r CURRENT-PATCH-NUMBER;
+#X obj 86 31 sel 0 1 2 3 4 5 6 7 8 9 10;
+#X msg 86 60 color 15 12;
+#X text 162 62 yellow;
+#X msg 632 202 range 0 \$1;
+#X obj 632 177 inlet;
+#X obj 408 35 inlet metro-tick;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 4 0 0 0;
+#X connect 5 0 4 0;
+#X connect 6 0 0 0;
+#X connect 9 0 0 0;
+#X connect 11 0 0 0;
+#X connect 12 0 0 0;
+#X connect 15 0 0 0;
+#X connect 18 0 19 0;
+#X connect 19 0 20 0;
+#X connect 19 1 2 0;
+#X connect 19 2 1 0;
+#X connect 19 3 6 0;
+#X connect 19 4 9 0;
+#X connect 19 5 11 0;
+#X connect 19 6 12 0;
+#X connect 19 7 15 0;
+#X connect 20 0 0 0;
+#X connect 22 0 0 0;
+#X connect 23 0 22 0;
+#X connect 24 0 0 0;
+#X restore 14 346 pd SECTION-BAR;
+#X obj 14 197 t a b a;
+#X text 92 289 length of scene;
+#X obj 95 307 120;
+#X obj 96 1 r TURN-ON-PEDAL-0;
+#X obj 14 151 r TURN-ON-PEDAL-0;
+#X obj 113 171 open-pedal 0;
+#X obj 490 26 route-pedal 0;
+#X obj 490 50 open-pedal 0;
+#X obj 94 266 send reset-scene-0;
+#X obj 34 372 s metro-scene-0;
+#X obj 719 19 declare -path ../;
+#X obj 714 48 declare -path ./pd_extrn/UTILITIES/;
+#X obj 280 627 noteout;
+#X obj 280 604 makenote 60 100;
+#X obj 280 287 ./pd_extrn/UTILITIES/MIDI-PCS-Gesture \$1 \$2 PCS-seq
+;
+#X msg 381 237 fire 1;
+#X obj 280 101 ./pd_extrn/UTILITIES/MIDI-CARTER-Seq \$1 Carter scene-1
+;
+#X obj 897 337 sel 0 1 2 3 4;
+#N canvas 2506 195 271 320 piece-chord-2-PCS 0;
+#X obj 20 20 inlet;
+#X obj 191 292 outlet;
+#X obj 30 102 text search chords 0;
+#X obj 30 81 symbol;
+#X obj 30 124 text get chords;
+#X obj 30 145 list split 1;
+#X msg 30 60 chrd-\$1;
+#X obj 64 167 list-apply int;
+#X obj 64 209 pcs_pf;
+#X obj 64 189 list-apply mod 12;
+#X obj 64 230 pcs_read, f 26;
+#X obj 166 269 outlet;
+#X connect 0 0 6 0;
+#X connect 2 0 4 0;
+#X connect 3 0 2 0;
+#X connect 4 0 5 0;
+#X connect 5 1 7 0;
+#X connect 6 0 3 0;
+#X connect 7 0 9 0;
+#X connect 8 0 10 0;
+#X connect 9 0 8 0;
+#X connect 10 4 11 0;
+#X connect 10 5 1 0;
+#X restore 739 313 pd piece-chord-2-PCS;
+#X floatatom 739 288 5 0 0 0 - - - 0;
+#X obj 856 348 print;
+#X obj 739 270 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 718 416 list-apply +;
+#X obj 718 333 list;
+#X obj 897 380 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 912 402 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 927 423 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 942 446 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 957 464 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 718 460 list-drip;
+#X obj 793 255 f;
+#X obj 817 255 + 1;
+#X obj 718 489 t a b;
+#X obj 280 558 pack f f;
+#X obj 280 496 t a b;
+#X obj 325 514 random 30;
+#X obj 718 555 pack f f f;
+#X obj 834 507 random 1000;
+#X floatatom 897 483 5 0 0 0 - - - 0;
+#X floatatom 376 494 5 0 0 0 - - - 0;
+#X msg 483 235 ON/OFF 1;
+#X msg 280 237 ON/OFF 0;
+#X msg 587 235 CHRD \$1;
+#X obj 746 534 + 10;
+#X obj 723 216 t b b b;
+#X obj 897 317 random 5;
+#X obj 325 537 + 40;
+#X obj 834 530 + 200;
+#N canvas 119 87 631 492 PCS_operations 0;
+#X obj 352 333 pcs_ttos;
+#X msg 69 237 T;
+#X msg 98 237 I;
+#X msg 127 237 M;
+#X obj 374 191 pcs_pf;
+#X msg 157 237 MI;
+#X obj 140 92 random 3;
+#X obj 140 17 inlet;
+#X obj 140 40 t b a b;
+#X obj 397 95 random 12;
+#X obj 69 159 sel 0 1 2 3;
+#X obj 352 395 outlet;
+#X obj 352 356 pcs_read;
+#X obj 426 129 f;
+#X obj 454 132 + 1;
+#X obj 426 152 mod 12;
+#X connect 0 0 12 0;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 3 0 0 0;
+#X connect 4 0 0 1;
+#X connect 5 0 0 0;
+#X connect 6 0 10 0;
+#X connect 7 0 8 0;
+#X connect 8 0 6 0;
+#X connect 8 1 4 0;
+#X connect 8 2 9 0;
+#X connect 8 2 13 0;
+#X connect 10 0 1 0;
+#X connect 10 1 2 0;
+#X connect 10 2 3 0;
+#X connect 10 3 5 0;
+#X connect 12 0 11 0;
+#X connect 13 0 14 0;
+#X connect 13 0 15 0;
+#X connect 14 0 13 1;
+#X connect 15 0 0 2;
+#X restore 718 364 pd PCS_operations;
+#X obj 732 150 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 897 359 12;
+#X obj 912 381 -12;
+#X obj 927 403 24;
+#X obj 957 446 36;
+#X obj 718 617 s \$1-S.FM-MIDI;
+#X obj 523 619 s \$1-S.FM/L/duration-nbx;
+#X obj 942 425 -0;
+#X obj 934 257 random 5;
+#X obj 664 265 f;
+#X obj 688 265 + 1;
+#X obj 664 288 mod 5;
+#X floatatom 678 168 5 0 0 0 - - - 0;
+#X obj 664 311 sel 0;
+#X obj 666 339 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X floatatom 630 328 5 0 0 0 - - - 0;
+#X obj 575 147 f;
+#X obj 599 147 + 1;
+#X obj 575 193 sel 0;
+#X obj 569 216 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X floatatom 621 190 5 0 0 0 - - - 0;
+#X floatatom 643 157 5 0 0 0 - - - 0;
+#X obj 575 170 mod 7;
+#X obj 718 437 list-apply + 48;
+#X obj 793 278 mod 5;
+#X floatatom 818 298 5 0 0 0 - - - 0;
+#X obj 897 296 t b;
+#X obj 810 126 f;
+#X obj 834 126 + 1;
+#X obj 810 172 sel 0;
+#X obj 810 149 mod 23;
+#X obj 810 203 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 374 580 s \$1-SFM2-MIDI;
+#X obj 746 511 random 80;
+#X obj 411 261 spigot;
+#X obj 449 239 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 7 0;
+#X connect 2 0 7 0;
+#X connect 7 0 34 0;
+#X connect 13 0 33 0;
+#X connect 21 0 23 0;
+#X connect 24 0 28 1;
+#X connect 25 0 24 1;
+#X connect 26 0 24 0;
+#X connect 29 0 24 2;
+#X connect 34 0 35 0;
+#X connect 35 0 36 0;
+#X connect 36 0 37 0;
+#X connect 49 0 50 0;
+#X connect 50 0 51 0;
+#X connect 50 0 56 0;
+#X connect 50 0 66 0;
+#X connect 51 0 50 1;
+#X connect 52 0 50 1;
+#X connect 52 0 65 0;
+#X connect 53 0 57 0;
+#X connect 54 0 52 0;
+#X connect 55 0 50 1;
+#X connect 57 0 49 0;
+#X connect 57 1 59 0;
+#X connect 57 2 54 0;
+#X connect 59 0 56 1;
+#X connect 60 0 0 0;
+#X connect 60 0 43 0;
+#X connect 61 0 53 0;
+#X connect 61 0 62 0;
+#X connect 62 0 48 0;
+#X connect 70 0 69 0;
+#X connect 70 1 69 1;
+#X connect 71 0 91 0;
+#X connect 72 0 140 0;
+#X connect 73 0 98 0;
+#X connect 73 0 122 0;
+#X connect 73 1 72 0;
+#X connect 73 1 133 0;
+#X connect 73 2 97 0;
+#X connect 73 2 115 0;
+#X connect 74 0 107 0;
+#X connect 74 1 108 0;
+#X connect 74 2 109 0;
+#X connect 74 3 113 0;
+#X connect 74 4 110 0;
+#X connect 75 0 80 1;
+#X connect 75 1 77 0;
+#X connect 76 0 75 0;
+#X connect 76 0 99 0;
+#X connect 78 0 76 0;
+#X connect 79 0 129 0;
+#X connect 80 0 105 0;
+#X connect 81 0 114 0;
+#X connect 82 0 114 0;
+#X connect 83 0 114 0;
+#X connect 84 0 114 0;
+#X connect 85 0 114 0;
+#X connect 86 0 89 0;
+#X connect 87 0 88 0;
+#X connect 87 0 130 0;
+#X connect 88 0 87 1;
+#X connect 89 0 93 0;
+#X connect 89 1 94 0;
+#X connect 89 1 139 0;
+#X connect 90 0 70 0;
+#X connect 91 0 90 0;
+#X connect 91 1 92 0;
+#X connect 92 0 103 0;
+#X connect 93 0 70 0;
+#X connect 94 0 104 0;
+#X connect 95 0 94 1;
+#X connect 96 0 92 1;
+#X connect 98 0 71 0;
+#X connect 99 0 71 0;
+#X connect 100 0 93 1;
+#X connect 101 0 80 0;
+#X connect 101 1 87 0;
+#X connect 101 2 114 0;
+#X connect 102 0 74 0;
+#X connect 103 0 90 1;
+#X connect 104 0 93 2;
+#X connect 105 0 79 0;
+#X connect 106 0 101 0;
+#X connect 107 0 79 2;
+#X connect 107 0 81 0;
+#X connect 108 0 79 2;
+#X connect 108 0 82 0;
+#X connect 109 0 79 2;
+#X connect 109 0 83 0;
+#X connect 110 0 79 2;
+#X connect 110 0 85 0;
+#X connect 113 0 79 2;
+#X connect 113 0 84 0;
+#X connect 114 0 76 0;
+#X connect 115 0 116 0;
+#X connect 115 0 117 0;
+#X connect 116 0 115 1;
+#X connect 117 0 119 0;
+#X connect 117 0 121 0;
+#X connect 118 0 117 1;
+#X connect 119 0 120 0;
+#X connect 119 0 101 0;
+#X connect 122 0 123 0;
+#X connect 122 0 128 0;
+#X connect 123 0 122 1;
+#X connect 124 0 101 0;
+#X connect 124 0 125 0;
+#X connect 127 0 128 1;
+#X connect 128 0 124 0;
+#X connect 128 0 126 0;
+#X connect 129 0 86 0;
+#X connect 130 0 131 0;
+#X connect 130 0 132 0;
+#X connect 132 0 102 0;
+#X connect 133 0 134 0;
+#X connect 133 0 136 0;
+#X connect 134 0 133 1;
+#X connect 135 0 101 0;
+#X connect 135 0 137 0;
+#X connect 136 0 135 0;
+#X connect 139 0 100 0;
+#X connect 140 0 71 0;
+#X connect 141 0 140 1;
+#X coords 0 -1 1 1 58 17 2 0 0;
+#X restore 146 277 pd PTCH_00 \$1;
+#N canvas 484 96 916 804 PTC.H_00 0;
+#X text 160 26 here we process data to trigger processings inside the
+modules with simple custom algorithms that come into action when the
+piece reaches the cue;
+#X text 529 24 this is a place where I can patch in realtime the triggering
+of processes based on the GUI (e.g. tunr on a metro to trigger and
+play back samples);
+#X obj 26 461 cnv 5 800 5 empty empty LFO 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 34 551 unpack f f f f f f f;
+#X obj 173 532 unpack f f f f f f f;
+#X obj 311 533 unpack f f f f f f f;
+#X obj 315 780 s RSVP-value-from-outside;
+#X obj 34 580 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 53 580 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 73 580 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 92 580 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 112 580 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 131 580 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 151 580 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 34 532 list-apply + 1;
+#X obj 33 155 cnv 5 800 5 empty empty ANALYSIS 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 132 195 r MASTER_ATTACK-\$1;
+#X obj 34 492 r LFO-triggers-\$1;
+#X obj 173 493 r LFO-MIDI-\$1;
+#X obj 311 492 r LFO-values-\$1;
+#X obj 1 0 bng 16 250 50 0 empty empty empty 17 7 0 10 #3c50fc #9c00fc
+#000000;
+#X msg 350 644 /GRNS-dur-0 \$1;
+#X msg 408 578 /GRNS-shp-0 \$1;
+#X msg 330 691 /GRNS-pan-0 \$1;
+#X msg 507 633 /GRNS-iot-0 \$1;
+#X msg 532 585 /GRNS-fbk-0 \$1;
+#X obj 350 621 clip 20 100;
+#X obj 507 549 wrap 10 100;
+#X obj 29 413 s RSVP-value-from-outside;
+#X msg 311 712 /GRNS-trn-0 \$1;
+#X obj 687 87 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 765 112 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 287 192 r MASTER_SILENCE-\$1;
+#X obj 420 218 r TIMBRE-ID-\$1;
+#X obj 711 183 r p-fund-\$1;
+#X obj 711 209 r MASTER_ATTACK-\$1;
+#X obj 711 236 r MASTER_SILENCE-\$1;
+#X obj 710 262 r TIMBRE-ID-\$1;
+#X obj 662 202 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 662 255 cnv 5 95 5 empty empty empty 5 6 0 10 #fc8000 #dcdcdc
+0;
+#X obj 662 304 cnv 5 95 5 empty empty empty 5 6 0 10 #f8fc00 #dcdcdc
+0;
+#X obj 710 326 r HARMONICITY-\$1;
+#X obj 665 345 cnv 5 95 5 empty empty empty 5 6 0 10 #9c9c9c #dcdcdc
+0;
+#X obj 663 229 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 664 371 cnv 5 95 5 empty empty empty 5 6 0 10 #00f8fc #dcdcdc
+0;
+#X text 626 67 every pedal needs the pedal router;
+#X obj 709 352 s RSVP-value-from-outside;
+#X obj 710 284 unpack f f;
+#X obj 1 21 canvasargs;
+#X obj 1 41 route list;
+#X obj 1 61 list split 1;
+#X msg 1 81 \; pd-\$1 vis 1;
+#X obj 710 474 r LFO-triggers-\$1;
+#X obj 710 498 r LFO-MIDI-\$1;
+#X obj 710 524 r LFO-values-\$1;
+#X obj 683 111 open-pedal 0;
+#X obj 703 86 route-pedal 0;
+#X obj 29 195 r p-fund-\$1-ANLZ;
+#X connect 3 0 7 0;
+#X connect 3 1 8 0;
+#X connect 3 2 9 0;
+#X connect 3 3 10 0;
+#X connect 3 4 11 0;
+#X connect 3 5 12 0;
+#X connect 3 6 13 0;
+#X connect 5 0 29 0;
+#X connect 5 1 23 0;
+#X connect 5 2 26 0;
+#X connect 5 5 22 0;
+#X connect 5 6 27 0;
+#X connect 14 0 3 0;
+#X connect 20 0 48 0;
+#X connect 26 0 21 0;
+#X connect 27 0 25 0;
+#X connect 27 0 24 0;
+#X connect 37 0 47 0;
+#X connect 48 0 49 0;
+#X connect 49 0 50 0;
+#X connect 50 0 51 0;
+#X coords 0 -1 1 1 50 12 1 0 0;
+#X restore 112 364 pd PTC.H_00 0;
+#X text 125 340 template;
+#X text 286 121 empty ptch 0 for live patching or testing;
+#N canvas 1920 0 1366 712 PTCH_04 0;
+#X obj 96 22 sel 1 0;
+#X msg 115 63 color 18;
+#X msg 96 42 color 43;
+#X obj 1130 424 cnv 5 200 5 empty empty LFO 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 1120 166 cnv 5 200 5 empty empty ANALYSIS 0 -10 0 20 #fcc4c4
+#404040 0;
+#X obj 1 0 bng 16 250 50 0 empty empty empty 17 7 0 10 #3c50fc #9c00fc
+#000000;
+#X obj 362 85 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 454 110 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 1191 183 r p-fund-\$1;
+#X obj 1191 209 r MASTER_ATTACK-\$1;
+#X obj 1191 236 r MASTER_SILENCE-\$1;
+#X obj 1190 262 r TIMBRE-ID-\$1;
+#X obj 1142 202 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 1142 255 cnv 5 95 5 empty empty empty 5 6 0 10 #fc8000 #dcdcdc
+0;
+#X obj 1142 304 cnv 5 95 5 empty empty empty 5 6 0 10 #f8fc00 #dcdcdc
+0;
+#X obj 1190 326 r HARMONICITY-\$1;
+#X obj 1145 345 cnv 5 95 5 empty empty empty 5 6 0 10 #9c9c9c #dcdcdc
+0;
+#X obj 1143 229 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 1144 371 cnv 5 95 5 empty empty empty 5 6 0 10 #00f8fc #dcdcdc
+0;
+#X text 151 97 every pedal needs the pedal router;
+#X obj 1189 352 s RSVP-value-from-outside;
+#X obj 1190 284 unpack f f;
+#X obj 1 21 canvasargs;
+#X obj 1 41 route list;
+#X obj 1 61 list split 1;
+#X msg 1 81 \; pd-\$1 vis 1;
+#X obj 1187 448 r LFO-triggers-\$1;
+#X obj 1187 472 r LFO-MIDI-\$1;
+#X obj 1187 498 r LFO-values-\$1;
+#X text 208 7 <-- Change to the number of pedal wanted;
+#X text 196 132 Change to the number of pedal wanted ----A;
+#X obj 156 30 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 378 61 r CURRENT-PATCH-NUMBER;
+#X obj 16 1 cnv 10 40 10 empty \$0-label PTCH_04 3 6 0 8 #000000 #00f8fc
+0;
+#X obj 1132 601 cnv 5 200 5 empty empty MSC 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 96 1 r TURN-ON-PEDAL-4;
+#X obj 378 84 route-pedal 4;
+#X obj 377 109 open-pedal 4;
+#X obj 190 203 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 113 224 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 14 253 metro 1000;
+#X obj 14 296 f;
+#X obj 42 296 + 1;
+#X msg 94 270 0;
+#X obj 14 206 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 94 248 sel 0;
+#X obj 261 179 hsl 600 15 0 120 0 0 empty empty empty -2 -8 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 258 199 5 0 0 0 - - - 0;
+#X msg 161 234 24;
+#N canvas 2209 195 782 366 SECTION-BAR 0;
+#X obj 86 293 send \$1-section-BAR;
+#X msg 113 115 color 18 0;
+#X msg 99 90 color 43 0;
+#X text 175 92 red;
+#X msg 689 253 color \$1 0;
+#X floatatom 688 230 5 0 0 0 - - - 0;
+#X msg 127 139 color 16 12;
+#X text 191 115 blue;
+#X text 209 142 green;
+#X msg 141 168 color 17 12;
+#X text 220 168 light blue;
+#X msg 155 196 color 19 12;
+#X msg 169 226 color 22 12;
+#X text 245 223 black;
+#X text 228 193 pink;
+#X msg 183 252 color 44 12;
+#X text 261 253 orange;
+#X text 384 100 sets de color of the section bar in the pedal display
+of cues. it can also set the range of the slider according to the length
+in msec of the section;
+#X obj 86 4 r CURRENT-PATCH-NUMBER;
+#X obj 86 31 sel 0 1 2 3 4 5 6 7 8 9 10;
+#X msg 86 60 color 15 12;
+#X text 162 62 yellow;
+#X msg 632 202 range 0 \$1;
+#X obj 632 177 inlet;
+#X obj 408 35 inlet metro-tick;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 4 0 0 0;
+#X connect 5 0 4 0;
+#X connect 6 0 0 0;
+#X connect 9 0 0 0;
+#X connect 11 0 0 0;
+#X connect 12 0 0 0;
+#X connect 15 0 0 0;
+#X connect 18 0 19 0;
+#X connect 19 0 20 0;
+#X connect 19 1 2 0;
+#X connect 19 2 1 0;
+#X connect 19 3 6 0;
+#X connect 19 4 9 0;
+#X connect 19 5 11 0;
+#X connect 19 6 12 0;
+#X connect 19 7 15 0;
+#X connect 20 0 0 0;
+#X connect 22 0 0 0;
+#X connect 23 0 22 0;
+#X connect 24 0 0 0;
+#X restore 14 376 pd SECTION-BAR;
+#X obj 14 227 t a b a;
+#X text 121 338 length of scene;
+#X obj 266 489 list-idx;
+#X obj 266 447 t b f;
+#X floatatom 266 428 5 0 0 0 - - - 0;
+#X msg 266 468 32 34 62.93 68.56 72;
+#X obj 266 408 random 5;
+#X obj 266 366 metro;
+#X floatatom 411 376 10 0 0 0 - - - 0;
+#X obj 266 336 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 379 404 random;
+#X obj 266 386 t a b;
+#X floatatom 293 334 5 0 0 0 - - - 0;
+#X obj 266 573 t a b;
+#X obj 266 551 - 12;
+#X obj 266 596 pack f 60;
+#X obj 388 593 *;
+#X obj 266 512 t a b b;
+#X floatatom 474 551 5 0 0 0 - - - 0;
+#X floatatom 543 611 5 0 0 0 - - - 0;
+#X obj 317 542 random 80;
+#X obj 317 565 + 47;
+#X floatatom 335 588 5 0 0 0 - - - 0;
+#X obj 388 573 + 0.5;
+#X obj 379 427 + 5000;
+#X obj 389 670 s \$1-S.FM-MIDI;
+#X obj 388 618 s \$1-S.FM/L/duration-nbx;
+#X floatatom 450 434 5 0 0 0 - - - 0;
+#X obj 388 530 random 0;
+#X obj 388 550 / 1;
+#X obj 243 655 s \$1-SFM2-MIDI;
+#N canvas 983 552 450 300 PCS-rndwalk 0;
+#X obj 124 44 random 3;
+#X restore 620 305 pd PCS-rndwalk;
+#X obj 560 380 r Cosmos_&_Galatea-S.FM-MIDI;
+#X floatatom 535 550 5 0 0 0 - - - 0;
+#X obj 258 152 r metro-scene-4;
+#X obj 14 181 r TURN-ON-PEDAL-4;
+#X obj 113 201 open-pedal 4;
+#X obj 94 293 send reset-scene-4;
+#X obj 34 402 s metro-scene-4;
+#X obj 95 337 139;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 5 0;
+#X connect 2 0 5 0;
+#X connect 5 0 22 0;
+#X connect 11 0 21 0;
+#X connect 22 0 23 0;
+#X connect 23 0 24 0;
+#X connect 24 0 25 0;
+#X connect 35 0 0 0;
+#X connect 35 0 31 0;
+#X connect 40 0 41 0;
+#X connect 41 0 42 0;
+#X connect 41 0 49 0;
+#X connect 41 0 88 0;
+#X connect 42 0 41 1;
+#X connect 43 0 41 1;
+#X connect 43 0 87 0;
+#X connect 44 0 50 0;
+#X connect 44 0 57 0;
+#X connect 45 0 43 0;
+#X connect 46 0 47 0;
+#X connect 48 0 41 1;
+#X connect 50 0 40 0;
+#X connect 50 1 89 0;
+#X connect 50 2 45 0;
+#X connect 52 0 67 0;
+#X connect 53 0 55 0;
+#X connect 53 1 52 1;
+#X connect 54 0 53 0;
+#X connect 55 0 52 0;
+#X connect 56 0 54 0;
+#X connect 57 0 61 0;
+#X connect 58 0 60 1;
+#X connect 58 0 74 1;
+#X connect 59 0 57 0;
+#X connect 60 0 74 0;
+#X connect 61 0 56 0;
+#X connect 61 1 60 0;
+#X connect 62 0 57 1;
+#X connect 63 0 65 0;
+#X connect 64 0 63 0;
+#X connect 65 0 75 0;
+#X connect 66 0 69 0;
+#X connect 66 0 76 0;
+#X connect 67 0 64 0;
+#X connect 67 1 70 0;
+#X connect 67 2 78 0;
+#X connect 68 0 66 1;
+#X connect 70 0 71 0;
+#X connect 71 0 65 1;
+#X connect 71 0 72 0;
+#X connect 73 0 66 0;
+#X connect 74 0 68 0;
+#X connect 74 0 62 0;
+#X connect 77 0 64 1;
+#X connect 78 0 79 0;
+#X connect 79 0 73 0;
+#X connect 83 0 76 0;
+#X connect 84 0 46 0;
+#X connect 85 0 44 0;
+#X connect 85 0 86 0;
+#X connect 86 0 39 0;
+#X connect 89 0 49 1;
+#X coords 0 -1 1 1 57 17 2 0 0;
+#X restore 116 182 pd PTCH_04 \$1;
+#N canvas 1920 0 1366 712 PTCH_02 0;
+#X obj 96 22 sel 1 0;
+#X msg 115 63 color 18;
+#X msg 96 42 color 43;
+#X obj 1070 344 cnv 5 200 5 empty empty LFO 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 1060 86 cnv 5 200 5 empty empty ANALYSIS 0 -10 0 20 #fcc4c4
+#404040 0;
+#X obj 1 0 bng 16 250 50 0 empty empty empty 17 7 0 10 #3c50fc #9c00fc
+#000000;
+#X obj 362 85 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 454 110 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 1131 103 r p-fund-\$1;
+#X obj 1131 129 r MASTER_ATTACK-\$1;
+#X obj 1131 156 r MASTER_SILENCE-\$1;
+#X obj 1130 182 r TIMBRE-ID-\$1;
+#X obj 1082 122 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 1082 175 cnv 5 95 5 empty empty empty 5 6 0 10 #fc8000 #dcdcdc
+0;
+#X obj 1082 224 cnv 5 95 5 empty empty empty 5 6 0 10 #f8fc00 #dcdcdc
+0;
+#X obj 1130 246 r HARMONICITY-\$1;
+#X obj 1085 265 cnv 5 95 5 empty empty empty 5 6 0 10 #9c9c9c #dcdcdc
+0;
+#X obj 1083 149 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 1135 550 cnv 5 95 5 empty empty empty 5 6 0 10 #fc0400 #dcdcdc
+0;
+#N canvas 249 369 450 470 play-rhythms 0;
+#X obj 108 101 text get \$0-phrases;
+#X floatatom 70 96 5 0 0 0 - - - 0;
+#X obj 108 122 list split 1;
+#X obj 145 310 list-idx;
+#X obj 184 266 t b f;
+#X obj 145 291 list;
+#X obj 184 223 f;
+#X obj 210 223 + 1;
+#X obj 251 188 list length;
+#X obj 184 244 mod 100;
+#X obj 166 146 t a b a;
+#X obj 184 189 metro 100;
+#X obj 185 170 1;
+#X obj 108 80 random 10;
+#X floatatom 171 82 5 0 0 0 - - - 0;
+#X obj 159 56 text size \$0-phrases;
+#X obj 253 265 sel 0;
+#X obj 253 284 0;
+#X obj 188 73 cnv 5 95 5 empty empty empty 5 6 0 10 #9c00fc #dcdcdc
+0;
+#X obj 108 38 t b b;
+#X obj 108 17 r end-off-rthm-array-\$1;
+#X obj 145 341 outlet;
+#X connect 0 0 2 0;
+#X connect 2 1 10 0;
+#X connect 3 0 21 0;
+#X connect 4 0 5 0;
+#X connect 4 1 3 1;
+#X connect 5 0 3 0;
+#X connect 6 0 7 0;
+#X connect 6 0 9 0;
+#X connect 7 0 6 1;
+#X connect 8 0 9 1;
+#X connect 9 0 4 0;
+#X connect 9 0 16 0;
+#X connect 10 0 5 1;
+#X connect 10 1 12 0;
+#X connect 10 2 8 0;
+#X connect 11 0 6 0;
+#X connect 12 0 11 0;
+#X connect 13 0 0 0;
+#X connect 13 0 1 0;
+#X connect 15 0 13 1;
+#X connect 15 0 14 0;
+#X connect 16 0 17 0;
+#X connect 17 0 11 0;
+#X connect 19 0 13 0;
+#X connect 19 1 15 0;
+#X connect 20 0 19 0;
+#X restore 1135 617 pd play-rhythms;
+#X obj 1133 666 cnv 5 95 5 empty empty empty 5 6 0 10 #9c00fc #dcdcdc
+0;
+#X obj 1135 640 s play-attacks-\$1;
+#N canvas 149 433 620 439 record-rhythms 0;
+#X obj 208 131 tabdump rthm-phrase;
+#X obj 219 104 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 405 131 text define \$0-phrases;
+#X obj 208 289 text set \$0-phrases;
+#X obj 245 269 f;
+#X obj 270 269 + 1;
+#X obj 208 249 t a b;
+#X obj 208 229 list prepend;
+#X obj 277 209 symbol;
+#X obj 380 131 0;
+#X obj 361 94 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 310 188 makefilename phrase-%d;
+#X obj 310 167 f;
+#X obj 335 167 + 1;
+#X obj 208 149 t a b b;
+#X msg 361 151 \; rthm-phrase const 0;
+#X obj 361 110 t b b b;
+#X obj 170 86 t b b b;
+#X obj 211 125 cnv 5 95 5 empty empty empty 5 6 0 10 #0400fc #dcdcdc
+0;
+#X obj 170 65 r end-off-rthm-array-\$1;
+#X obj 361 44 inlet;
+#X obj 409 45 inlet;
+#X obj 380 270 outlet;
+#X obj 481 50 inlet;
+#X connect 0 0 14 0;
+#X connect 4 0 5 0;
+#X connect 4 0 3 1;
+#X connect 5 0 4 1;
+#X connect 6 0 3 0;
+#X connect 6 1 4 0;
+#X connect 7 0 6 0;
+#X connect 8 0 7 1;
+#X connect 9 0 4 1;
+#X connect 9 0 12 1;
+#X connect 9 0 22 0;
+#X connect 10 0 16 0;
+#X connect 11 0 8 1;
+#X connect 12 0 13 0;
+#X connect 12 0 11 0;
+#X connect 13 0 12 1;
+#X connect 14 0 7 0;
+#X connect 14 1 8 0;
+#X connect 14 2 12 0;
+#X connect 16 0 15 0;
+#X connect 16 1 9 0;
+#X connect 16 2 2 0;
+#X connect 17 1 15 0;
+#X connect 17 2 1 0;
+#X connect 17 2 0 0;
+#X connect 19 0 17 0;
+#X connect 20 0 10 0;
+#X connect 21 0 2 0;
+#X connect 23 0 2 0;
+#X restore 1137 592 pd record-rhythms;
+#X msg 1186 568 clear;
+#X obj 1137 572 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 1137 609 cnv 5 95 5 empty empty empty 5 6 0 10 #0400fc #dcdcdc
+0;
+#N canvas 67 498 676 582 detect-rhythms 0;
+#X obj 303 268 0;
+#X obj 303 243 1;
+#X obj 373 336 f;
+#X obj 400 336 + 1;
+#X obj 256 380 tabwrite rthm-phrase;
+#X obj 191 337 sel 0 1;
+#X obj 191 388 f;
+#X obj 217 388 + 1;
+#X obj 120 427 sel 1;
+#X obj 303 183 t b b;
+#X obj 237 222 1;
+#X obj 221 427 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 210 366 0;
+#X obj 237 243 metro 100;
+#X obj 373 357 mod 100;
+#X obj 330 204 onebang;
+#X obj 457 117 loadbang;
+#X obj 237 284 i;
+#X obj 237 307 t b a b;
+#X obj 434 375 sel 99;
+#X obj 409 391 0;
+#X obj 191 409 > 20;
+#X obj 356 171 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 369 105 t b b b;
+#X obj 311 82 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 159 173 0;
+#X obj 367 83 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 121 446 s pause-phrase-\$0;
+#X obj 159 89 r pause-phrase-\$0;
+#X obj 434 415 s end-off-rthm-array-\$1;
+#X obj 281 397 cnv 5 95 5 empty empty empty 5 6 0 10 #fc0400 #dcdcdc
+0;
+#X obj 488 167 inlet;
+#X obj 304 63 inlet;
+#X connect 0 0 17 1;
+#X connect 1 0 17 1;
+#X connect 2 0 3 0;
+#X connect 2 0 14 0;
+#X connect 3 0 2 1;
+#X connect 5 0 6 0;
+#X connect 5 1 12 0;
+#X connect 6 0 7 0;
+#X connect 6 0 21 0;
+#X connect 7 0 6 1;
+#X connect 8 0 12 0;
+#X connect 8 0 27 0;
+#X connect 9 0 1 0;
+#X connect 9 1 15 0;
+#X connect 10 0 13 0;
+#X connect 12 0 6 1;
+#X connect 13 0 17 0;
+#X connect 14 0 4 1;
+#X connect 14 0 19 0;
+#X connect 15 0 10 0;
+#X connect 16 0 15 1;
+#X connect 17 0 18 0;
+#X connect 18 0 0 0;
+#X connect 18 1 4 0;
+#X connect 18 1 5 0;
+#X connect 18 2 2 0;
+#X connect 19 0 20 0;
+#X connect 19 0 29 0;
+#X connect 19 0 15 1;
+#X connect 20 0 13 0;
+#X connect 21 0 8 0;
+#X connect 21 0 11 0;
+#X connect 22 0 15 1;
+#X connect 23 0 15 1;
+#X connect 25 0 13 0;
+#X connect 26 0 23 0;
+#X connect 28 0 25 0;
+#X connect 28 0 23 0;
+#X connect 31 0 2 1;
+#X connect 31 0 22 0;
+#X connect 32 0 9 0;
+#X connect 32 0 24 0;
+#X restore 1135 532 pd detect-rhythms;
+#X msg 1236 568 click 1;
+#X obj 1084 291 cnv 5 95 5 empty empty empty 5 6 0 10 #00f8fc #dcdcdc
+0;
+#X text 151 97 every pedal needs the pedal router;
+#X obj 1129 272 s RSVP-value-from-outside;
+#X obj 1130 204 unpack f f;
+#X obj 1 21 canvasargs;
+#X obj 1 41 route list;
+#X obj 1 61 list split 1;
+#X msg 1 81 \; pd-\$1 vis 1;
+#X obj 1127 368 r LFO-triggers-\$1;
+#X obj 1127 392 r LFO-MIDI-\$1;
+#X obj 1127 418 r LFO-values-\$1;
+#X text 208 7 <-- Change to the number of pedal wanted;
+#X text 196 132 Change to the number of pedal wanted ----A;
+#X obj 156 30 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 378 61 r CURRENT-PATCH-NUMBER;
+#X obj 16 1 cnv 10 40 10 empty \$0-label PTCH_02 3 6 0 8 #000000 #00f8fc
+0;
+#X obj 1072 521 cnv 5 200 5 empty empty MSC 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 96 1 r TURN-ON-PEDAL-2;
+#X obj 378 84 route-pedal 2;
+#X obj 377 109 open-pedal 2;
+#X obj 190 173 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 113 194 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 14 223 metro 1000;
+#X obj 14 266 f;
+#X obj 42 266 + 1;
+#X msg 94 240 0;
+#X obj 14 176 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 94 218 sel 0;
+#X obj 290 198 hsl 600 15 0 120 0 0 empty empty empty -2 -8 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 287 218 5 0 0 0 - - - 0;
+#X msg 161 204 24;
+#N canvas 2209 195 782 366 SECTION-BAR 0;
+#X obj 86 293 send \$1-section-BAR;
+#X msg 113 115 color 18 0;
+#X msg 99 90 color 43 0;
+#X text 175 92 red;
+#X msg 689 253 color \$1 0;
+#X floatatom 688 230 5 0 0 0 - - - 0;
+#X msg 127 139 color 16 12;
+#X text 191 115 blue;
+#X text 209 142 green;
+#X msg 141 168 color 17 12;
+#X text 220 168 light blue;
+#X msg 155 196 color 19 12;
+#X msg 169 226 color 22 12;
+#X text 245 223 black;
+#X text 228 193 pink;
+#X msg 183 252 color 44 12;
+#X text 261 253 orange;
+#X text 384 100 sets de color of the section bar in the pedal display
+of cues. it can also set the range of the slider according to the length
+in msec of the section;
+#X obj 86 4 r CURRENT-PATCH-NUMBER;
+#X obj 86 31 sel 0 1 2 3 4 5 6 7 8 9 10;
+#X msg 86 60 color 15 12;
+#X text 162 62 yellow;
+#X msg 632 202 range 0 \$1;
+#X obj 632 177 inlet;
+#X obj 408 35 inlet metro-tick;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 4 0 0 0;
+#X connect 5 0 4 0;
+#X connect 6 0 0 0;
+#X connect 9 0 0 0;
+#X connect 11 0 0 0;
+#X connect 12 0 0 0;
+#X connect 15 0 0 0;
+#X connect 18 0 19 0;
+#X connect 19 0 20 0;
+#X connect 19 1 2 0;
+#X connect 19 2 1 0;
+#X connect 19 3 6 0;
+#X connect 19 4 9 0;
+#X connect 19 5 11 0;
+#X connect 19 6 12 0;
+#X connect 19 7 15 0;
+#X connect 20 0 0 0;
+#X connect 22 0 0 0;
+#X connect 23 0 22 0;
+#X connect 24 0 0 0;
+#X restore 14 346 pd SECTION-BAR;
+#X obj 14 197 t a b a;
+#X text 121 308 length of scene;
+#X obj 35 372 s metro-scene-2;
+#X obj 14 151 r TURN-ON-PEDAL-2;
+#X obj 113 171 open-pedal 2;
+#X obj 287 171 r metro-scene-2;
+#X obj 94 263 send reset-scene-2;
+#X obj 95 307 77;
+#X obj 266 479 list-idx;
+#X obj 266 437 t b f;
+#X floatatom 266 418 5 0 0 0 - - - 0;
+#X msg 266 458 32 34 62.93 68.56 72;
+#X obj 266 398 random 5;
+#X obj 266 356 metro;
+#X floatatom 412 354 10 0 0 0 - - - 0;
+#X obj 266 326 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 266 376 t a b;
+#X floatatom 293 324 5 0 0 0 - - - 0;
+#X obj 266 563 t a b;
+#X obj 266 541 - 12;
+#X obj 266 586 pack f 60;
+#X obj 388 583 *;
+#X obj 266 502 t a b b;
+#X floatatom 474 541 5 0 0 0 - - - 0;
+#X floatatom 543 601 5 0 0 0 - - - 0;
+#X floatatom 335 578 5 0 0 0 - - - 0;
+#X obj 388 563 + 0.5;
+#X obj 379 417 + 5000;
+#X obj 266 608 s \$1-S.FM-MIDI;
+#X obj 388 608 s \$1-S.FM/L/duration-nbx;
+#X floatatom 450 424 5 0 0 0 - - - 0;
+#X obj 642 307 unpack f f f f f f f;
+#X obj 718 283 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 642 248 r LFO-values-\$1;
+#X obj 681 371 s Cosmos_&_Galatea-MLT1/L/fmod-nbx;
+#X obj 720 349 s Cosmos_&_Galatea-MLT1/L/amod-nbx;
+#X obj 720 328 / 127;
+#X obj 681 350 / 8;
+#X obj 642 281 open-pedal 2;
+#X msg 97 455 32 \, 34 \, 62.93 \, 68.56 \, 72;
+#X obj 388 520 random 0;
+#X obj 388 540 / 1;
+#X obj 98 412 r metro-scene-2;
+#X obj 98 432 sel 0;
+#X obj 243 645 s \$1-SFM2-MIDI;
+#X obj 620 631 s \$1-SFM2/L/duration-nbx;
+#X msg 630 594 10000;
+#X obj 317 555 + 27;
+#X obj 317 532 random 60;
+#X obj 379 394 random 1000;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 5 0;
+#X connect 2 0 5 0;
+#X connect 5 0 32 0;
+#X connect 11 0 31 0;
+#X connect 19 0 21 0;
+#X connect 22 0 26 1;
+#X connect 23 0 22 1;
+#X connect 24 0 22 0;
+#X connect 27 0 22 2;
+#X connect 32 0 33 0;
+#X connect 33 0 34 0;
+#X connect 34 0 35 0;
+#X connect 45 0 0 0;
+#X connect 45 0 41 0;
+#X connect 50 0 51 0;
+#X connect 51 0 52 0;
+#X connect 51 0 59 0;
+#X connect 51 0 62 0;
+#X connect 52 0 51 1;
+#X connect 53 0 51 1;
+#X connect 53 0 66 0;
+#X connect 54 0 60 0;
+#X connect 54 0 75 0;
+#X connect 55 0 53 0;
+#X connect 56 0 57 0;
+#X connect 58 0 51 1;
+#X connect 60 0 50 0;
+#X connect 60 1 67 0;
+#X connect 60 2 55 0;
+#X connect 63 0 54 0;
+#X connect 63 0 64 0;
+#X connect 64 0 49 0;
+#X connect 65 0 56 0;
+#X connect 67 0 59 1;
+#X connect 68 0 82 0;
+#X connect 69 0 71 0;
+#X connect 69 1 68 1;
+#X connect 70 0 69 0;
+#X connect 71 0 68 0;
+#X connect 72 0 70 0;
+#X connect 73 0 76 0;
+#X connect 74 0 87 1;
+#X connect 75 0 73 0;
+#X connect 76 0 72 0;
+#X connect 76 1 109 0;
+#X connect 77 0 73 1;
+#X connect 78 0 80 0;
+#X connect 79 0 78 0;
+#X connect 80 0 88 0;
+#X connect 80 0 104 0;
+#X connect 81 0 84 0;
+#X connect 81 0 89 0;
+#X connect 82 0 79 0;
+#X connect 82 1 108 0;
+#X connect 82 2 100 0;
+#X connect 83 0 81 1;
+#X connect 86 0 81 0;
+#X connect 87 0 83 0;
+#X connect 87 0 77 0;
+#X connect 90 0 79 1;
+#X connect 91 2 97 0;
+#X connect 91 4 96 0;
+#X connect 93 0 98 0;
+#X connect 96 0 95 0;
+#X connect 97 0 94 0;
+#X connect 98 0 91 0;
+#X connect 99 0 82 0;
+#X connect 100 0 101 0;
+#X connect 101 0 86 0;
+#X connect 102 0 103 0;
+#X connect 103 0 99 0;
+#X connect 103 0 75 0;
+#X connect 106 0 105 0;
+#X connect 107 0 80 1;
+#X connect 107 0 85 0;
+#X connect 108 0 107 0;
+#X connect 109 0 87 0;
+#X coords 0 -1 1 1 57 17 2 0 0;
+#X restore 116 144 pd PTCH_02 \$1;
+#N canvas 1920 0 1366 712 PTCH_03 0;
+#X obj 96 22 sel 1 0;
+#X msg 115 63 color 18;
+#X msg 96 42 color 43;
+#X obj 1100 304 cnv 5 200 5 empty empty LFO 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 1090 46 cnv 5 200 5 empty empty ANALYSIS 0 -10 0 20 #fcc4c4
+#404040 0;
+#X obj 1 0 bng 16 250 50 0 empty empty empty 17 7 0 10 #3c50fc #9c00fc
+#000000;
+#X obj 870 36 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 962 61 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 1161 63 r p-fund-\$1;
+#X obj 1161 89 r MASTER_ATTACK-\$1;
+#X obj 1161 116 r MASTER_SILENCE-\$1;
+#X obj 1160 142 r TIMBRE-ID-\$1;
+#X obj 1112 82 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 1112 135 cnv 5 95 5 empty empty empty 5 6 0 10 #fc8000 #dcdcdc
+0;
+#X obj 1112 184 cnv 5 95 5 empty empty empty 5 6 0 10 #f8fc00 #dcdcdc
+0;
+#X obj 1160 206 r HARMONICITY-\$1;
+#X obj 1115 225 cnv 5 95 5 empty empty empty 5 6 0 10 #9c9c9c #dcdcdc
+0;
+#X obj 1113 109 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 1165 510 cnv 5 95 5 empty empty empty 5 6 0 10 #fc0400 #dcdcdc
+0;
+#N canvas 249 369 450 470 play-rhythms 0;
+#X obj 108 101 text get \$0-phrases;
+#X floatatom 70 96 5 0 0 0 - - - 0;
+#X obj 108 122 list split 1;
+#X obj 145 310 list-idx;
+#X obj 184 266 t b f;
+#X obj 145 291 list;
+#X obj 184 223 f;
+#X obj 210 223 + 1;
+#X obj 251 188 list length;
+#X obj 184 244 mod 100;
+#X obj 166 146 t a b a;
+#X obj 184 189 metro 100;
+#X obj 185 170 1;
+#X obj 108 80 random 10;
+#X floatatom 171 82 5 0 0 0 - - - 0;
+#X obj 159 56 text size \$0-phrases;
+#X obj 253 265 sel 0;
+#X obj 253 284 0;
+#X obj 188 73 cnv 5 95 5 empty empty empty 5 6 0 10 #9c00fc #dcdcdc
+0;
+#X obj 108 38 t b b;
+#X obj 108 17 r end-off-rthm-array-\$1;
+#X obj 145 341 outlet;
+#X connect 0 0 2 0;
+#X connect 2 1 10 0;
+#X connect 3 0 21 0;
+#X connect 4 0 5 0;
+#X connect 4 1 3 1;
+#X connect 5 0 3 0;
+#X connect 6 0 7 0;
+#X connect 6 0 9 0;
+#X connect 7 0 6 1;
+#X connect 8 0 9 1;
+#X connect 9 0 4 0;
+#X connect 9 0 16 0;
+#X connect 10 0 5 1;
+#X connect 10 1 12 0;
+#X connect 10 2 8 0;
+#X connect 11 0 6 0;
+#X connect 12 0 11 0;
+#X connect 13 0 0 0;
+#X connect 13 0 1 0;
+#X connect 15 0 13 1;
+#X connect 15 0 14 0;
+#X connect 16 0 17 0;
+#X connect 17 0 11 0;
+#X connect 19 0 13 0;
+#X connect 19 1 15 0;
+#X connect 20 0 19 0;
+#X restore 1165 577 pd play-rhythms;
+#X obj 1165 594 cnv 5 95 5 empty empty empty 5 6 0 10 #9c00fc #dcdcdc
+0;
+#X obj 1165 600 s play-attacks-\$1;
+#N canvas 149 433 620 439 record-rhythms 0;
+#X obj 208 131 tabdump rthm-phrase;
+#X obj 219 104 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 405 131 text define \$0-phrases;
+#X obj 208 289 text set \$0-phrases;
+#X obj 245 269 f;
+#X obj 270 269 + 1;
+#X obj 208 249 t a b;
+#X obj 208 229 list prepend;
+#X obj 277 209 symbol;
+#X obj 380 131 0;
+#X obj 361 94 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 310 188 makefilename phrase-%d;
+#X obj 310 167 f;
+#X obj 335 167 + 1;
+#X obj 208 149 t a b b;
+#X msg 361 151 \; rthm-phrase const 0;
+#X obj 361 110 t b b b;
+#X obj 170 86 t b b b;
+#X obj 211 125 cnv 5 95 5 empty empty empty 5 6 0 10 #0400fc #dcdcdc
+0;
+#X obj 170 65 r end-off-rthm-array-\$1;
+#X obj 361 44 inlet;
+#X obj 409 45 inlet;
+#X obj 380 270 outlet;
+#X obj 481 50 inlet;
+#X connect 0 0 14 0;
+#X connect 4 0 5 0;
+#X connect 4 0 3 1;
+#X connect 5 0 4 1;
+#X connect 6 0 3 0;
+#X connect 6 1 4 0;
+#X connect 7 0 6 0;
+#X connect 8 0 7 1;
+#X connect 9 0 4 1;
+#X connect 9 0 12 1;
+#X connect 9 0 22 0;
+#X connect 10 0 16 0;
+#X connect 11 0 8 1;
+#X connect 12 0 13 0;
+#X connect 12 0 11 0;
+#X connect 13 0 12 1;
+#X connect 14 0 7 0;
+#X connect 14 1 8 0;
+#X connect 14 2 12 0;
+#X connect 16 0 15 0;
+#X connect 16 1 9 0;
+#X connect 16 2 2 0;
+#X connect 17 1 15 0;
+#X connect 17 2 1 0;
+#X connect 17 2 0 0;
+#X connect 19 0 17 0;
+#X connect 20 0 10 0;
+#X connect 21 0 2 0;
+#X connect 23 0 2 0;
+#X restore 1167 552 pd record-rhythms;
+#X msg 1216 528 clear;
+#X obj 1167 532 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 1167 569 cnv 5 95 5 empty empty empty 5 6 0 10 #0400fc #dcdcdc
+0;
+#N canvas 67 498 676 582 detect-rhythms 0;
+#X obj 303 268 0;
+#X obj 303 243 1;
+#X obj 373 336 f;
+#X obj 400 336 + 1;
+#X obj 256 380 tabwrite rthm-phrase;
+#X obj 191 337 sel 0 1;
+#X obj 191 388 f;
+#X obj 217 388 + 1;
+#X obj 120 427 sel 1;
+#X obj 303 183 t b b;
+#X obj 237 222 1;
+#X obj 221 427 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 210 366 0;
+#X obj 237 243 metro 100;
+#X obj 373 357 mod 100;
+#X obj 330 204 onebang;
+#X obj 457 117 loadbang;
+#X obj 237 284 i;
+#X obj 237 307 t b a b;
+#X obj 434 375 sel 99;
+#X obj 409 391 0;
+#X obj 191 409 > 20;
+#X obj 356 171 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 369 105 t b b b;
+#X obj 311 82 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 159 173 0;
+#X obj 367 83 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 121 446 s pause-phrase-\$0;
+#X obj 159 89 r pause-phrase-\$0;
+#X obj 434 415 s end-off-rthm-array-\$1;
+#X obj 281 397 cnv 5 95 5 empty empty empty 5 6 0 10 #fc0400 #dcdcdc
+0;
+#X obj 488 167 inlet;
+#X obj 304 63 inlet;
+#X connect 0 0 17 1;
+#X connect 1 0 17 1;
+#X connect 2 0 3 0;
+#X connect 2 0 14 0;
+#X connect 3 0 2 1;
+#X connect 5 0 6 0;
+#X connect 5 1 12 0;
+#X connect 6 0 7 0;
+#X connect 6 0 21 0;
+#X connect 7 0 6 1;
+#X connect 8 0 12 0;
+#X connect 8 0 27 0;
+#X connect 9 0 1 0;
+#X connect 9 1 15 0;
+#X connect 10 0 13 0;
+#X connect 12 0 6 1;
+#X connect 13 0 17 0;
+#X connect 14 0 4 1;
+#X connect 14 0 19 0;
+#X connect 15 0 10 0;
+#X connect 16 0 15 1;
+#X connect 17 0 18 0;
+#X connect 18 0 0 0;
+#X connect 18 1 4 0;
+#X connect 18 1 5 0;
+#X connect 18 2 2 0;
+#X connect 19 0 20 0;
+#X connect 19 0 29 0;
+#X connect 19 0 15 1;
+#X connect 20 0 13 0;
+#X connect 21 0 8 0;
+#X connect 21 0 11 0;
+#X connect 22 0 15 1;
+#X connect 23 0 15 1;
+#X connect 25 0 13 0;
+#X connect 26 0 23 0;
+#X connect 28 0 25 0;
+#X connect 28 0 23 0;
+#X connect 31 0 2 1;
+#X connect 31 0 22 0;
+#X connect 32 0 9 0;
+#X connect 32 0 24 0;
+#X restore 1165 492 pd detect-rhythms;
+#X msg 1266 528 click 1;
+#X obj 1114 251 cnv 5 95 5 empty empty empty 5 6 0 10 #00f8fc #dcdcdc
+0;
+#X text 659 48 every pedal needs the pedal router;
+#X obj 1159 232 s RSVP-value-from-outside;
+#X obj 1160 164 unpack f f;
+#X obj 1 21 canvasargs;
+#X obj 1 41 route list;
+#X obj 1 61 list split 1;
+#X msg 1 81 \; pd-\$1 vis 1;
+#X obj 1157 328 r LFO-triggers-\$1;
+#X obj 1157 352 r LFO-MIDI-\$1;
+#X obj 1157 378 r LFO-values-\$1;
+#X text 208 7 <-- Change to the number of pedal wanted;
+#X text 704 83 Change to the number of pedal wanted ----A;
+#X obj 156 30 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 886 12 r CURRENT-PATCH-NUMBER;
+#X obj 16 1 cnv 10 40 10 empty \$0-label PTCH_03 3 6 0 8 #000000 #00f8fc
+0;
+#X obj 1102 481 cnv 5 200 5 empty empty MSC 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 96 1 r TURN-ON-PEDAL-3;
+#X obj 886 35 route-pedal 3;
+#X obj 885 60 open-pedal 3;
+#X obj 190 193 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 113 214 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 14 243 metro 1000;
+#X obj 14 286 f;
+#X obj 42 286 + 1;
+#X msg 94 260 0;
+#X obj 14 196 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 94 238 sel 0;
+#X obj 261 169 hsl 600 15 0 120 0 0 empty empty empty -2 -8 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 258 189 5 0 0 0 - - - 0;
+#X msg 161 224 24;
+#N canvas 2209 195 782 366 SECTION-BAR 0;
+#X obj 86 293 send \$1-section-BAR;
+#X msg 113 115 color 18 0;
+#X msg 99 90 color 43 0;
+#X text 175 92 red;
+#X msg 689 253 color \$1 0;
+#X floatatom 688 230 5 0 0 0 - - - 0;
+#X msg 127 139 color 16 12;
+#X text 191 115 blue;
+#X text 209 142 green;
+#X msg 141 168 color 17 12;
+#X text 220 168 light blue;
+#X msg 155 196 color 19 12;
+#X msg 169 226 color 22 12;
+#X text 245 223 black;
+#X text 228 193 pink;
+#X msg 183 252 color 44 12;
+#X text 261 253 orange;
+#X text 384 100 sets de color of the section bar in the pedal display
+of cues. it can also set the range of the slider according to the length
+in msec of the section;
+#X obj 86 4 r CURRENT-PATCH-NUMBER;
+#X obj 86 31 sel 0 1 2 3 4 5 6 7 8 9 10;
+#X msg 86 60 color 15 12;
+#X text 162 62 yellow;
+#X msg 632 202 range 0 \$1;
+#X obj 632 177 inlet;
+#X obj 408 35 inlet metro-tick;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 4 0 0 0;
+#X connect 5 0 4 0;
+#X connect 6 0 0 0;
+#X connect 9 0 0 0;
+#X connect 11 0 0 0;
+#X connect 12 0 0 0;
+#X connect 15 0 0 0;
+#X connect 18 0 19 0;
+#X connect 19 0 20 0;
+#X connect 19 1 2 0;
+#X connect 19 2 1 0;
+#X connect 19 3 6 0;
+#X connect 19 4 9 0;
+#X connect 19 5 11 0;
+#X connect 19 6 12 0;
+#X connect 19 7 15 0;
+#X connect 20 0 0 0;
+#X connect 22 0 0 0;
+#X connect 23 0 22 0;
+#X connect 24 0 0 0;
+#X restore 14 366 pd SECTION-BAR;
+#X obj 14 217 t a b a;
+#X text 121 328 length of scene;
+#X obj 258 142 r metro-scene-3;
+#X obj 94 283 send reset-scene-3;
+#X obj 14 171 r TURN-ON-PEDAL-3;
+#X obj 113 191 open-pedal 3;
+#X obj 34 392 s metro-scene-3;
+#X obj 95 327 134;
+#X obj 266 479 list-idx;
+#X obj 266 437 t b f;
+#X floatatom 266 418 5 0 0 0 - - - 0;
+#X msg 266 458 32 34 62.93 68.56 72;
+#X obj 266 398 random 5;
+#X obj 266 356 metro;
+#X floatatom 411 366 10 0 0 0 - - - 0;
+#X obj 266 326 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 379 394 random;
+#X obj 266 376 t a b;
+#X floatatom 293 324 5 0 0 0 - - - 0;
+#X obj 266 563 t a b;
+#X obj 266 541 - 12;
+#X obj 266 586 pack f 60;
+#X obj 388 583 *;
+#X obj 266 502 t a b b;
+#X floatatom 474 541 5 0 0 0 - - - 0;
+#X floatatom 543 601 5 0 0 0 - - - 0;
+#X obj 317 532 random 80;
+#X obj 317 555 + 47;
+#X floatatom 335 578 5 0 0 0 - - - 0;
+#X obj 388 563 + 0.5;
+#X obj 379 417 + 5000;
+#X obj 389 660 s \$1-S.FM-MIDI;
+#X obj 388 608 s \$1-S.FM/L/duration-nbx;
+#X floatatom 450 424 5 0 0 0 - - - 0;
+#X obj 388 520 random 0;
+#X obj 388 540 / 1;
+#X obj 243 645 s \$1-SFM2-MIDI;
+#N canvas 983 552 450 300 PCS-rndwalk 0;
+#X obj 124 44 random 3;
+#X restore 620 295 pd PCS-rndwalk;
+#X obj 560 370 r Cosmos_&_Galatea-S.FM-MIDI;
+#X floatatom 535 540 5 0 0 0 - - - 0;
+#X obj 885 484 list split;
+#X floatatom 885 384 5 0 0 0 - - - 0;
+#X floatatom 918 544 5 0 0 0 - - - 0;
+#X obj 918 509 list split 1;
+#X obj 885 335 f;
+#X obj 914 335 + 1;
+#X obj 862 290 metro 100;
+#X obj 862 313 t b b b;
+#X obj 862 266 1;
+#X text 928 407 intervalo;
+#X obj 885 360 mod 7;
+#X obj 1023 391 r estr-intervalica;
+#X floatatom 922 267 5 0 0 0 - - - 0;
+#X obj 904 457 list;
+#X obj 866 237 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 885 406 t a b b;
+#X msg 923 435 1 3 5;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 5 0;
+#X connect 2 0 5 0;
+#X connect 5 0 32 0;
+#X connect 11 0 31 0;
+#X connect 19 0 21 0;
+#X connect 22 0 26 1;
+#X connect 23 0 22 1;
+#X connect 24 0 22 0;
+#X connect 27 0 22 2;
+#X connect 32 0 33 0;
+#X connect 33 0 34 0;
+#X connect 34 0 35 0;
+#X connect 45 0 0 0;
+#X connect 45 0 41 0;
+#X connect 50 0 51 0;
+#X connect 51 0 52 0;
+#X connect 51 0 59 0;
+#X connect 51 0 66 0;
+#X connect 52 0 51 1;
+#X connect 53 0 51 1;
+#X connect 53 0 63 0;
+#X connect 54 0 60 0;
+#X connect 54 0 73 0;
+#X connect 55 0 53 0;
+#X connect 56 0 57 0;
+#X connect 58 0 51 1;
+#X connect 60 0 50 0;
+#X connect 60 1 67 0;
+#X connect 60 2 55 0;
+#X connect 62 0 56 0;
+#X connect 64 0 54 0;
+#X connect 64 0 65 0;
+#X connect 65 0 49 0;
+#X connect 67 0 59 1;
+#X connect 68 0 83 0;
+#X connect 69 0 71 0;
+#X connect 69 1 68 1;
+#X connect 70 0 69 0;
+#X connect 71 0 68 0;
+#X connect 72 0 70 0;
+#X connect 73 0 77 0;
+#X connect 74 0 76 1;
+#X connect 74 0 90 1;
+#X connect 75 0 73 0;
+#X connect 76 0 90 0;
+#X connect 77 0 72 0;
+#X connect 77 1 76 0;
+#X connect 78 0 73 1;
+#X connect 79 0 81 0;
+#X connect 80 0 79 0;
+#X connect 81 0 91 0;
+#X connect 82 0 85 0;
+#X connect 82 0 92 0;
+#X connect 83 0 80 0;
+#X connect 83 1 86 0;
+#X connect 83 2 94 0;
+#X connect 84 0 82 1;
+#X connect 86 0 87 0;
+#X connect 87 0 81 1;
+#X connect 87 0 88 0;
+#X connect 89 0 82 0;
+#X connect 90 0 84 0;
+#X connect 90 0 78 0;
+#X connect 93 0 80 1;
+#X connect 94 0 95 0;
+#X connect 95 0 89 0;
+#X connect 99 0 92 0;
+#X connect 100 1 103 0;
+#X connect 101 0 115 0;
+#X connect 103 0 102 0;
+#X connect 104 0 105 0;
+#X connect 104 0 110 0;
+#X connect 105 0 104 1;
+#X connect 106 0 107 0;
+#X connect 107 1 104 0;
+#X connect 108 0 106 0;
+#X connect 110 0 101 0;
+#X connect 111 0 113 1;
+#X connect 112 0 106 1;
+#X connect 113 0 100 0;
+#X connect 114 0 106 0;
+#X connect 115 0 100 1;
+#X connect 115 1 113 0;
+#X connect 115 2 116 0;
+#X connect 116 0 113 1;
+#X coords 0 -1 1 1 57 17 2 0 0;
+#X restore 116 163 pd PTCH_03 \$1;
+#N canvas 368 96 933 804 PTCH_05 0;
+#X obj 96 22 sel 1 0;
+#X msg 115 63 color 18;
+#X msg 96 42 color 43;
+#X text 538 87 here we process data to trigger processings inside the
+modules with simple custom algorithms that come into action when the
+piece reaches the cue;
+#X text 529 24 this is a place where I can patch in realtime the triggering
+of processes based on the GUI (e.g. tunr on a metro to trigger and
+play back samples);
+#X obj 650 424 cnv 5 200 5 empty empty LFO 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 640 166 cnv 5 200 5 empty empty ANALYSIS 0 -10 0 20 #fcc4c4
+#404040 0;
+#X obj 1 0 bng 16 250 50 0 empty empty empty 17 7 0 10 #3c50fc #9c00fc
+#000000;
+#X obj 362 85 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 454 110 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 711 183 r p-fund-\$1;
+#X obj 711 209 r MASTER_ATTACK-\$1;
+#X obj 711 236 r MASTER_SILENCE-\$1;
+#X obj 710 262 r TIMBRE-ID-\$1;
+#X obj 662 202 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 662 255 cnv 5 95 5 empty empty empty 5 6 0 10 #fc8000 #dcdcdc
+0;
+#X obj 662 304 cnv 5 95 5 empty empty empty 5 6 0 10 #f8fc00 #dcdcdc
+0;
+#X obj 710 326 r HARMONICITY-\$1;
+#X obj 665 345 cnv 5 95 5 empty empty empty 5 6 0 10 #9c9c9c #dcdcdc
+0;
+#X obj 663 229 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 664 371 cnv 5 95 5 empty empty empty 5 6 0 10 #00f8fc #dcdcdc
+0;
+#X text 151 97 every pedal needs the pedal router;
+#X obj 709 352 s RSVP-value-from-outside;
+#X obj 710 284 unpack f f;
+#X obj 1 21 canvasargs;
+#X obj 1 41 route list;
+#X obj 1 61 list split 1;
+#X msg 1 81 \; pd-\$1 vis 1;
+#X obj 707 448 r LFO-triggers-\$1;
+#X obj 707 472 r LFO-MIDI-\$1;
+#X obj 707 498 r LFO-values-\$1;
+#X text 208 7 <-- Change to the number of pedal wanted;
+#X text 196 132 Change to the number of pedal wanted ----A;
+#X obj 568 196 s SAMP-play;
+#X obj 568 178 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 156 30 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 378 61 r CURRENT-PATCH-NUMBER;
+#X obj 17 1 cnv 10 40 10 empty \$0-label PTCH_05 3 6 0 8 #000000 #00f8fc
+0;
+#X obj 652 601 cnv 5 200 5 empty empty MSC 0 -10 0 20 #fcc4c4 #404040
+0;
+#X text 132 184 Gives me the beggning of the scene \, usefull to reset
+the scene by sncronizing everything, f 32;
+#X obj 89 431 s RSVP-value-from-outside;
+#X msg 89 377 /RMOD-fmod-1 \$1;
+#X obj 31 318 unpack f f f f f f f;
+#X obj 31 249 r LFO-values-\$1;
+#X obj 111 281 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 89 340 / 10;
+#X obj 378 84 route-pedal 5;
+#X obj 377 109 open-pedal 5;
+#X obj 31 279 open-pedal 5;
+#X obj 96 1 r TURN-ON-PEDAL-5;
+#X obj 22 184 r TURN-ON-PEDAL-5;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 7 0;
+#X connect 2 0 7 0;
+#X connect 7 0 24 0;
+#X connect 13 0 23 0;
+#X connect 24 0 25 0;
+#X connect 25 0 26 0;
+#X connect 26 0 27 0;
+#X connect 34 0 33 0;
+#X connect 41 0 40 0;
+#X connect 42 3 45 0;
+#X connect 43 0 48 0;
+#X connect 45 0 41 0;
+#X connect 48 0 42 0;
+#X connect 49 0 0 0;
+#X connect 49 0 35 0;
+#X coords 0 -1 1 1 57 17 2 0 0;
+#X restore 116 201 pd PTCH_05 \$1;
+#N canvas 485 203 933 804 PTCH_06 0;
+#X obj 96 22 sel 1 0;
+#X msg 115 63 color 18;
+#X msg 96 42 color 43;
+#X text 538 87 here we process data to trigger processings inside the
+modules with simple custom algorithms that come into action when the
+piece reaches the cue;
+#X text 529 24 this is a place where I can patch in realtime the triggering
+of processes based on the GUI (e.g. tunr on a metro to trigger and
+play back samples);
+#X obj 650 424 cnv 5 200 5 empty empty LFO 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 640 166 cnv 5 200 5 empty empty ANALYSIS 0 -10 0 20 #fcc4c4
+#404040 0;
+#X obj 1 0 bng 16 250 50 0 empty empty empty 17 7 0 10 #3c50fc #9c00fc
+#000000;
+#X obj 362 85 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 454 110 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 711 183 r p-fund-\$1;
+#X obj 711 209 r MASTER_ATTACK-\$1;
+#X obj 711 236 r MASTER_SILENCE-\$1;
+#X obj 710 262 r TIMBRE-ID-\$1;
+#X obj 662 202 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 662 255 cnv 5 95 5 empty empty empty 5 6 0 10 #fc8000 #dcdcdc
+0;
+#X obj 662 304 cnv 5 95 5 empty empty empty 5 6 0 10 #f8fc00 #dcdcdc
+0;
+#X obj 710 326 r HARMONICITY-\$1;
+#X obj 665 345 cnv 5 95 5 empty empty empty 5 6 0 10 #9c9c9c #dcdcdc
+0;
+#X obj 663 229 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 664 371 cnv 5 95 5 empty empty empty 5 6 0 10 #00f8fc #dcdcdc
+0;
+#X text 151 97 every pedal needs the pedal router;
+#X obj 709 352 s RSVP-value-from-outside;
+#X obj 710 284 unpack f f;
+#X obj 1 21 canvasargs;
+#X obj 1 41 route list;
+#X obj 1 61 list split 1;
+#X msg 1 81 \; pd-\$1 vis 1;
+#X obj 707 448 r LFO-triggers-\$1;
+#X obj 707 472 r LFO-MIDI-\$1;
+#X obj 707 498 r LFO-values-\$1;
+#X text 208 7 <-- Change to the number of pedal wanted;
+#X text 196 132 Change to the number of pedal wanted ----A;
+#X obj 156 30 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 378 61 r CURRENT-PATCH-NUMBER;
+#X obj 17 1 cnv 10 40 10 empty \$0-label PTCH_06 3 6 0 8 #000000 #00f8fc
+0;
+#X obj 652 601 cnv 5 200 5 empty empty MSC 0 -10 0 20 #fcc4c4 #404040
+0;
+#X text 132 184 Gives me the beggning of the scene \, usefull to reset
+the scene by sncronizing everything, f 32;
+#X obj 90 452 s RSVP-value-from-outside;
+#X msg 91 421 /RMOD-fmod-1 \$1;
+#X obj 31 318 unpack f f f f f f f;
+#X obj 31 249 r LFO-values-\$1;
+#X obj 111 281 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 96 1 r TURN-ON-PEDAL-6;
+#X obj 377 109 open-pedal 6;
+#X obj 31 279 open-pedal 6;
+#X obj 378 84 route-pedal 6;
+#X obj 22 184 r TURN-ON-PEDAL-6;
+#X obj 404 625 r LFO-triggers-\$1;
+#X obj 34 571 unpack f f f f f f f;
+#X obj 173 552 unpack f f f f f f f;
+#X obj 34 551 list-apply + 1;
+#X obj 34 492 r LFO-triggers-\$1;
+#X obj 173 493 r LFO-MIDI-\$1;
+#X obj 110 528 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 34 526 open-pedal 6;
+#X obj 173 526 open-pedal 6;
+#X obj 362 339 s SAMP-play;
+#X obj 24 604 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 43 604 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 63 604 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 82 604 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 102 604 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 121 604 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 141 604 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 363 312 b;
+#X obj 361 264 r MASTER_ATTACK-\$1;
+#X floatatom 172 345 5 0 0 0 - - - 0;
+#X obj 255 344 / 127;
+#X floatatom 173 393 5 0 0 0 - - - 0;
+#X msg 257 422 /VCDR-sens-1 \$1;
+#X obj 265 389 + 0.2;
+#X obj 265 366 / 4;
+#X obj 442 290 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 362 288 open-pedal 6;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 7 0;
+#X connect 2 0 7 0;
+#X connect 7 0 24 0;
+#X connect 13 0 23 0;
+#X connect 24 0 25 0;
+#X connect 25 0 26 0;
+#X connect 26 0 27 0;
+#X connect 39 0 38 0;
+#X connect 40 1 68 0;
+#X connect 41 0 45 0;
+#X connect 43 0 0 0;
+#X connect 43 0 33 0;
+#X connect 45 0 40 0;
+#X connect 49 0 58 0;
+#X connect 49 1 59 0;
+#X connect 49 2 60 0;
+#X connect 49 3 61 0;
+#X connect 49 4 62 0;
+#X connect 49 5 63 0;
+#X connect 49 6 64 0;
+#X connect 51 0 49 0;
+#X connect 52 0 55 0;
+#X connect 53 0 56 0;
+#X connect 55 0 51 0;
+#X connect 56 0 50 0;
+#X connect 65 0 57 0;
+#X connect 66 0 74 0;
+#X connect 68 0 72 0;
+#X connect 69 0 70 0;
+#X connect 70 0 38 0;
+#X connect 71 0 70 0;
+#X connect 72 0 71 0;
+#X connect 74 0 65 0;
+#X coords 0 -1 1 1 57 17 2 0 0;
+#X restore 116 220 pd PTCH_06 \$1;
+#N canvas 287 158 933 804 PTCH_07 0;
+#X obj 96 22 sel 1 0;
+#X msg 115 63 color 18;
+#X msg 96 42 color 43;
+#X text 538 87 here we process data to trigger processings inside the
+modules with simple custom algorithms that come into action when the
+piece reaches the cue;
+#X text 529 24 this is a place where I can patch in realtime the triggering
+of processes based on the GUI (e.g. tunr on a metro to trigger and
+play back samples);
+#X obj 650 424 cnv 5 200 5 empty empty LFO 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 640 166 cnv 5 200 5 empty empty ANALYSIS 0 -10 0 20 #fcc4c4
+#404040 0;
+#X obj 1 0 bng 16 250 50 0 empty empty empty 17 7 0 10 #3c50fc #9c00fc
+#000000;
+#X obj 362 85 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 454 110 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 711 183 r p-fund-\$1;
+#X obj 711 209 r MASTER_ATTACK-\$1;
+#X obj 711 236 r MASTER_SILENCE-\$1;
+#X obj 710 262 r TIMBRE-ID-\$1;
+#X obj 662 202 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 662 255 cnv 5 95 5 empty empty empty 5 6 0 10 #fc8000 #dcdcdc
+0;
+#X obj 662 304 cnv 5 95 5 empty empty empty 5 6 0 10 #f8fc00 #dcdcdc
+0;
+#X obj 710 326 r HARMONICITY-\$1;
+#X obj 665 345 cnv 5 95 5 empty empty empty 5 6 0 10 #9c9c9c #dcdcdc
+0;
+#X obj 663 229 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 664 371 cnv 5 95 5 empty empty empty 5 6 0 10 #00f8fc #dcdcdc
+0;
+#X text 151 97 every pedal needs the pedal router;
+#X obj 709 352 s RSVP-value-from-outside;
+#X obj 710 284 unpack f f;
+#X obj 1 21 canvasargs;
+#X obj 1 41 route list;
+#X obj 1 61 list split 1;
+#X msg 1 81 \; pd-\$1 vis 1;
+#X obj 707 448 r LFO-triggers-\$1;
+#X obj 707 472 r LFO-MIDI-\$1;
+#X obj 707 498 r LFO-values-\$1;
+#X text 208 7 <-- Change to the number of pedal wanted;
+#X text 196 132 Change to the number of pedal wanted ----A;
+#X obj 568 196 s SAMP-play;
+#X obj 568 178 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 156 30 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 378 61 r CURRENT-PATCH-NUMBER;
+#X obj 17 1 cnv 10 40 10 empty \$0-label PTCH_07 3 6 0 8 #000000 #00f8fc
+0;
+#X obj 652 601 cnv 5 200 5 empty empty MSC 0 -10 0 20 #fcc4c4 #404040
+0;
+#X text 132 184 Gives me the beggning of the scene \, usefull to reset
+the scene by sncronizing everything, f 32;
+#X obj 327 640 s RSVP-value-from-outside;
+#X msg 89 377 /RMOD-fmod-1 \$1;
+#X obj 31 318 unpack f f f f f f f;
+#X obj 31 249 r LFO-values-\$1;
+#X obj 111 281 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 89 340 / 10;
+#X obj 378 84 route-pedal 7;
+#X obj 377 109 open-pedal 7;
+#X obj 22 184 r TURN-ON-PEDAL-7;
+#X obj 31 279 open-pedal 7;
+#X obj 96 1 r TURN-ON-PEDAL-7;
+#X obj 34 571 unpack f f f f f f f;
+#X obj 34 600 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 53 600 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 73 600 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 92 600 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 112 600 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 131 600 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 151 600 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 34 551 list-apply + 1;
+#X obj 34 492 r LFO-triggers-\$1;
+#X obj 110 528 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 34 525 open-pedal 7;
+#X obj 489 473 -;
+#X obj 489 451 127;
+#X obj 489 427 t b a;
+#X obj 489 501 / 127;
+#X msg 306 574 /TDEL-tdelay-1 \$1;
+#X obj 306 487 *;
+#X obj 321 437 / 127;
+#X obj 474 527 *;
+#X floatatom 354 462 5 0 0 0 - - - 0;
+#X msg 474 583 /TDEL-tdelay-2 \$1;
+#X floatatom 512 553 5 0 0 0 - - - 0;
+#X obj 308 522 / 10;
+#X obj 474 553 / 10;
+#X msg 200 560 /RMOD-amod-1 \$1;
+#X obj 223 494 / 127;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 7 0;
+#X connect 2 0 7 0;
+#X connect 7 0 24 0;
+#X connect 13 0 23 0;
+#X connect 24 0 25 0;
+#X connect 25 0 26 0;
+#X connect 26 0 27 0;
+#X connect 34 0 33 0;
+#X connect 41 0 40 0;
+#X connect 42 1 68 0;
+#X connect 42 3 45 0;
+#X connect 42 4 69 0;
+#X connect 42 4 65 0;
+#X connect 42 4 77 0;
+#X connect 42 5 70 0;
+#X connect 43 0 49 0;
+#X connect 45 0 41 0;
+#X connect 49 0 42 0;
+#X connect 50 0 0 0;
+#X connect 50 0 35 0;
+#X connect 51 0 52 0;
+#X connect 51 1 53 0;
+#X connect 51 2 54 0;
+#X connect 51 3 55 0;
+#X connect 51 4 56 0;
+#X connect 51 5 57 0;
+#X connect 51 6 58 0;
+#X connect 59 0 51 0;
+#X connect 60 0 62 0;
+#X connect 62 0 59 0;
+#X connect 63 0 66 0;
+#X connect 64 0 63 0;
+#X connect 65 0 64 0;
+#X connect 65 1 63 1;
+#X connect 66 0 70 1;
+#X connect 66 0 73 0;
+#X connect 67 0 40 0;
+#X connect 68 0 74 0;
+#X connect 69 0 68 1;
+#X connect 69 0 71 0;
+#X connect 70 0 75 0;
+#X connect 72 0 40 0;
+#X connect 74 0 67 0;
+#X connect 75 0 72 0;
+#X connect 76 0 40 0;
+#X connect 77 0 76 0;
+#X coords 0 -1 1 1 57 17 2 0 0;
+#X restore 116 239 pd PTCH_07 \$1;
+#N canvas 623 113 933 804 PTCH_08 0;
+#X obj 96 22 sel 1 0;
+#X msg 115 63 color 18;
+#X msg 96 42 color 43;
+#X text 538 87 here we process data to trigger processings inside the
+modules with simple custom algorithms that come into action when the
+piece reaches the cue;
+#X text 529 24 this is a place where I can patch in realtime the triggering
+of processes based on the GUI (e.g. tunr on a metro to trigger and
+play back samples);
+#X obj 650 424 cnv 5 200 5 empty empty LFO 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 640 166 cnv 5 200 5 empty empty ANALYSIS 0 -10 0 20 #fcc4c4
+#404040 0;
+#X obj 1 0 bng 16 250 50 0 empty empty empty 17 7 0 10 #3c50fc #9c00fc
+#000000;
+#X obj 362 85 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 454 110 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 711 183 r p-fund-\$1;
+#X obj 711 209 r MASTER_ATTACK-\$1;
+#X obj 711 236 r MASTER_SILENCE-\$1;
+#X obj 710 262 r TIMBRE-ID-\$1;
+#X obj 662 202 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 662 255 cnv 5 95 5 empty empty empty 5 6 0 10 #fc8000 #dcdcdc
+0;
+#X obj 662 304 cnv 5 95 5 empty empty empty 5 6 0 10 #f8fc00 #dcdcdc
+0;
+#X obj 710 326 r HARMONICITY-\$1;
+#X obj 665 345 cnv 5 95 5 empty empty empty 5 6 0 10 #9c9c9c #dcdcdc
+0;
+#X obj 663 229 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 664 371 cnv 5 95 5 empty empty empty 5 6 0 10 #00f8fc #dcdcdc
+0;
+#X text 151 97 every pedal needs the pedal router;
+#X obj 709 352 s RSVP-value-from-outside;
+#X obj 710 284 unpack f f;
+#X obj 1 21 canvasargs;
+#X obj 1 41 route list;
+#X obj 1 61 list split 1;
+#X msg 1 81 \; pd-\$1 vis 1;
+#X obj 707 448 r LFO-triggers-\$1;
+#X obj 707 472 r LFO-MIDI-\$1;
+#X obj 707 498 r LFO-values-\$1;
+#X text 208 7 <-- Change to the number of pedal wanted;
+#X text 196 132 Change to the number of pedal wanted ----A;
+#X obj 568 196 s SAMP-play;
+#X obj 568 178 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 156 30 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 378 61 r CURRENT-PATCH-NUMBER;
+#X obj 17 1 cnv 10 40 10 empty \$0-label PTCH_08 3 6 0 8 #000000 #00f8fc
+0;
+#X obj 652 601 cnv 5 200 5 empty empty MSC 0 -10 0 20 #fcc4c4 #404040
+0;
+#X text 132 184 Gives me the beggning of the scene \, usefull to reset
+the scene by sncronizing everything, f 32;
+#X obj 89 740 s RSVP-value-from-outside;
+#X msg 89 398 /RMOD-fmod-1 \$1;
+#X obj 31 318 unpack f f f f f f f;
+#X obj 31 249 r LFO-values-\$1;
+#X obj 111 281 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 89 361 / 10;
+#X obj 378 84 route-pedal 8;
+#X obj 377 109 open-pedal 8;
+#X obj 22 184 r TURN-ON-PEDAL-8;
+#X obj 31 279 open-pedal 8;
+#X obj 96 1 r TURN-ON-PEDAL-8;
+#X obj 453 494 unpack f f f f f f f;
+#X obj 453 523 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 472 523 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 492 523 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 511 523 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 531 523 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 550 524 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 570 524 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 453 474 list-apply + 1;
+#X obj 453 415 r LFO-triggers-\$1;
+#X obj 529 451 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 409 340 b;
+#X obj 453 448 open-pedal 8;
+#X obj 409 197 r MASTER_ATTACK-\$1;
+#X obj 489 223 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 409 221 open-pedal 8;
+#X obj 409 365 s CHPR-fire;
+#X msg 108 666 /TDEL-tdelay-1 \$1;
+#X obj 113 563 *;
+#X obj 128 513 / 127;
+#X obj 255 571 *;
+#X obj 289 507 -;
+#X obj 289 485 127;
+#X obj 289 461 t b a;
+#X floatatom 311 567 5 0 0 0 - - - 0;
+#X floatatom 161 538 5 0 0 0 - - - 0;
+#X msg 258 679 /TDEL-tdelay-2 \$1;
+#X floatatom 286 600 5 0 0 0 - - - 0;
+#X floatatom 330 504 5 0 0 0 - - - 0;
+#X obj 289 535 / 127;
+#X obj 255 526 / 5;
+#X msg 448 735 /VCDR-release-1 \$1;
+#X obj 456 617 sel 0 1 2;
+#X obj 515 689 + 250;
+#X obj 422 693 + 3000;
+#X obj 422 673 random 7000;
+#X obj 515 669 random 500;
+#X obj 594 668 random 10;
+#X obj 594 688 + 20;
+#X obj 453 572 change;
+#X floatatom 412 618 5 0 0 0 - - - 0;
+#X obj 497 572 change;
+#X obj 467 593 change;
+#X obj 511 593 change;
+#X obj 542 573 change;
+#X obj 555 592 change;
+#X obj 584 572 change;
+#X obj 475 280 random 500;
+#X obj 448 260 t b b;
+#X obj 448 296 del;
+#X obj 409 317 onebang;
+#X obj 409 242 t b b;
+#X obj 267 643 + 10;
+#X obj 137 637 + 15;
+#X msg 30 467 /RMOD-amod-1 \$1;
+#X obj 26 432 / 127;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 7 0;
+#X connect 2 0 7 0;
+#X connect 7 0 24 0;
+#X connect 13 0 23 0;
+#X connect 24 0 25 0;
+#X connect 25 0 26 0;
+#X connect 26 0 27 0;
+#X connect 34 0 33 0;
+#X connect 41 0 40 0;
+#X connect 42 2 106 0;
+#X connect 42 3 45 0;
+#X connect 42 4 74 0;
+#X connect 42 5 70 0;
+#X connect 42 5 81 0;
+#X connect 43 0 49 0;
+#X connect 45 0 41 0;
+#X connect 45 0 69 0;
+#X connect 49 0 42 0;
+#X connect 50 0 0 0;
+#X connect 50 0 35 0;
+#X connect 51 0 52 0;
+#X connect 51 1 53 0;
+#X connect 51 2 54 0;
+#X connect 51 3 55 0;
+#X connect 51 4 56 0;
+#X connect 51 5 57 0;
+#X connect 51 6 58 0;
+#X connect 53 0 93 0;
+#X connect 54 0 92 0;
+#X connect 55 0 94 0;
+#X connect 56 0 95 0;
+#X connect 57 0 96 0;
+#X connect 58 0 97 0;
+#X connect 59 0 51 0;
+#X connect 60 0 63 0;
+#X connect 62 0 67 0;
+#X connect 63 0 59 0;
+#X connect 64 0 66 0;
+#X connect 66 0 102 0;
+#X connect 68 0 40 0;
+#X connect 69 0 104 0;
+#X connect 70 0 69 1;
+#X connect 70 0 76 0;
+#X connect 71 0 78 0;
+#X connect 71 0 103 0;
+#X connect 72 0 75 0;
+#X connect 72 0 80 0;
+#X connect 73 0 72 0;
+#X connect 74 0 73 0;
+#X connect 74 1 72 1;
+#X connect 74 1 79 0;
+#X connect 77 0 40 0;
+#X connect 80 0 71 1;
+#X connect 81 0 71 0;
+#X connect 83 0 86 0;
+#X connect 83 1 88 0;
+#X connect 83 2 87 0;
+#X connect 84 0 82 0;
+#X connect 85 0 82 0;
+#X connect 86 0 85 0;
+#X connect 87 0 84 0;
+#X connect 88 0 89 0;
+#X connect 89 0 82 0;
+#X connect 90 0 83 0;
+#X connect 90 0 91 0;
+#X connect 92 0 83 0;
+#X connect 93 0 83 0;
+#X connect 94 0 83 0;
+#X connect 95 0 83 0;
+#X connect 96 0 83 0;
+#X connect 97 0 83 0;
+#X connect 98 0 100 1;
+#X connect 99 0 100 0;
+#X connect 99 1 98 0;
+#X connect 100 0 101 1;
+#X connect 101 0 62 0;
+#X connect 102 0 101 0;
+#X connect 102 1 99 0;
+#X connect 103 0 77 0;
+#X connect 104 0 68 0;
+#X connect 105 0 40 0;
+#X connect 106 0 105 0;
+#X coords 0 -1 1 1 57 17 2 0 0;
+#X restore 116 258 pd PTCH_08 \$1;
+#N canvas 881 242 933 804 PTCH_09 0;
+#X obj 96 22 sel 1 0;
+#X msg 115 63 color 18;
+#X msg 96 42 color 43;
+#X text 538 87 here we process data to trigger processings inside the
+modules with simple custom algorithms that come into action when the
+piece reaches the cue;
+#X text 529 24 this is a place where I can patch in realtime the triggering
+of processes based on the GUI (e.g. tunr on a metro to trigger and
+play back samples);
+#X obj 650 424 cnv 5 200 5 empty empty LFO 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 640 166 cnv 5 200 5 empty empty ANALYSIS 0 -10 0 20 #fcc4c4
+#404040 0;
+#X obj 1 0 bng 16 250 50 0 empty empty empty 17 7 0 10 #3c50fc #9c00fc
+#000000;
+#X obj 362 85 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 454 110 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 711 183 r p-fund-\$1;
+#X obj 711 209 r MASTER_ATTACK-\$1;
+#X obj 711 236 r MASTER_SILENCE-\$1;
+#X obj 710 262 r TIMBRE-ID-\$1;
+#X obj 662 202 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 662 255 cnv 5 95 5 empty empty empty 5 6 0 10 #fc8000 #dcdcdc
+0;
+#X obj 662 304 cnv 5 95 5 empty empty empty 5 6 0 10 #f8fc00 #dcdcdc
+0;
+#X obj 710 326 r HARMONICITY-\$1;
+#X obj 665 345 cnv 5 95 5 empty empty empty 5 6 0 10 #9c9c9c #dcdcdc
+0;
+#X obj 663 229 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 664 371 cnv 5 95 5 empty empty empty 5 6 0 10 #00f8fc #dcdcdc
+0;
+#X text 151 97 every pedal needs the pedal router;
+#X obj 709 352 s RSVP-value-from-outside;
+#X obj 710 284 unpack f f;
+#X obj 1 21 canvasargs;
+#X obj 1 41 route list;
+#X obj 1 61 list split 1;
+#X msg 1 81 \; pd-\$1 vis 1;
+#X obj 707 448 r LFO-triggers-\$1;
+#X obj 707 472 r LFO-MIDI-\$1;
+#X obj 707 498 r LFO-values-\$1;
+#X text 208 7 <-- Change to the number of pedal wanted;
+#X text 196 132 Change to the number of pedal wanted ----A;
+#X obj 383 362 s SAMP-play;
+#X obj 383 344 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 156 30 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 378 61 r CURRENT-PATCH-NUMBER;
+#X obj 17 1 cnv 10 40 10 empty \$0-label PTCH_09 3 6 0 8 #000000 #00f8fc
+0;
+#X obj 652 601 cnv 5 200 5 empty empty MSC 0 -10 0 20 #fcc4c4 #404040
+0;
+#X text 132 184 Gives me the beggning of the scene \, usefull to reset
+the scene by sncronizing everything, f 32;
+#X obj 89 431 s RSVP-value-from-outside;
+#X msg 89 377 /RMOD-fmod-1 \$1;
+#X obj 31 318 unpack f f f f f f f;
+#X obj 31 249 r LFO-values-\$1;
+#X obj 111 281 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 89 340 / 10;
+#X obj 96 1 r TURN-ON-PEDAL-9;
+#X obj 378 84 route-pedal 9;
+#X obj 377 109 open-pedal 9;
+#X obj 23 184 r TURN-ON-PEDAL-9;
+#X obj 31 279 open-pedal 9;
+#X obj 261 713 s SAMP-play;
+#X obj 34 571 unpack f f f f f f f;
+#X obj 34 600 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 53 600 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 73 600 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 92 600 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 112 600 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 131 600 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 151 600 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 34 551 list-apply + 1;
+#X obj 34 492 r LFO-triggers-\$1;
+#X obj 110 528 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 84 681 b;
+#X obj 262 642 del;
+#X obj 256 573 t b b;
+#X obj 281 597 random 200;
+#X obj 382 260 r MASTER_ATTACK-\$1;
+#X obj 465 301 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 385 299 open-pedal 9;
+#X obj 34 525 open-pedal 9;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 7 0;
+#X connect 2 0 7 0;
+#X connect 7 0 24 0;
+#X connect 13 0 23 0;
+#X connect 24 0 25 0;
+#X connect 25 0 26 0;
+#X connect 26 0 27 0;
+#X connect 34 0 33 0;
+#X connect 41 0 40 0;
+#X connect 42 3 45 0;
+#X connect 43 0 50 0;
+#X connect 45 0 41 0;
+#X connect 46 0 0 0;
+#X connect 46 0 35 0;
+#X connect 50 0 42 0;
+#X connect 52 0 53 0;
+#X connect 52 1 54 0;
+#X connect 52 2 55 0;
+#X connect 52 3 56 0;
+#X connect 52 4 57 0;
+#X connect 52 5 58 0;
+#X connect 52 6 59 0;
+#X connect 53 0 63 0;
+#X connect 54 0 63 0;
+#X connect 55 0 63 0;
+#X connect 56 0 63 0;
+#X connect 57 0 63 0;
+#X connect 58 0 63 0;
+#X connect 59 0 63 0;
+#X connect 60 0 52 0;
+#X connect 61 0 70 0;
+#X connect 63 0 65 0;
+#X connect 64 0 51 0;
+#X connect 65 0 64 0;
+#X connect 65 1 66 0;
+#X connect 66 0 64 1;
+#X connect 67 0 69 0;
+#X connect 69 0 34 0;
+#X connect 70 0 60 0;
+#X coords 0 -1 1 1 57 17 2 0 0;
+#X restore 186 125 pd PTCH_09 \$1;
+#N canvas 2064 56 933 710 PTCH_10 0;
+#X obj 96 22 sel 1 0;
+#X msg 115 63 color 18;
+#X msg 96 42 color 43;
+#X text 538 87 here we process data to trigger processings inside the
+modules with simple custom algorithms that come into action when the
+piece reaches the cue;
+#X text 529 24 this is a place where I can patch in realtime the triggering
+of processes based on the GUI (e.g. tunr on a metro to trigger and
+play back samples);
+#X obj 650 424 cnv 5 200 5 empty empty LFO 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 640 166 cnv 5 200 5 empty empty ANALYSIS 0 -10 0 20 #fcc4c4
+#404040 0;
+#X obj 1 0 bng 16 250 50 0 empty empty empty 17 7 0 10 #3c50fc #9c00fc
+#000000;
+#X obj 362 85 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 468 110 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 711 183 r p-fund-\$1;
+#X obj 711 209 r MASTER_ATTACK-\$1;
+#X obj 711 236 r MASTER_SILENCE-\$1;
+#X obj 710 262 r TIMBRE-ID-\$1;
+#X obj 662 202 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 662 255 cnv 5 95 5 empty empty empty 5 6 0 10 #fc8000 #dcdcdc
+0;
+#X obj 662 304 cnv 5 95 5 empty empty empty 5 6 0 10 #f8fc00 #dcdcdc
+0;
+#X obj 710 326 r HARMONICITY-\$1;
+#X obj 665 345 cnv 5 95 5 empty empty empty 5 6 0 10 #9c9c9c #dcdcdc
+0;
+#X obj 663 229 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 664 371 cnv 5 95 5 empty empty empty 5 6 0 10 #00f8fc #dcdcdc
+0;
+#X text 151 97 every pedal needs the pedal router;
+#X obj 709 352 s RSVP-value-from-outside;
+#X obj 710 284 unpack f f;
+#X obj 1 21 canvasargs;
+#X obj 1 41 route list;
+#X obj 1 61 list split 1;
+#X msg 1 81 \; pd-\$1 vis 1;
+#X obj 707 448 r LFO-triggers-\$1;
+#X obj 707 472 r LFO-MIDI-\$1;
+#X obj 707 498 r LFO-values-\$1, f 14;
+#X text 208 7 <-- Change to the number of pedal wanted;
+#X text 196 132 Change to the number of pedal wanted ----A;
+#X obj 568 196 s SAMP-play;
+#X obj 568 178 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 156 30 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 378 47 r CURRENT-PATCH-NUMBER;
+#X obj 17 1 cnv 10 40 10 empty \$0-label PTCH_10 3 6 0 8 #000000 #00f8fc
+0;
+#X obj 652 601 cnv 5 200 5 empty empty MSC 0 -10 0 20 #fcc4c4 #404040
+0;
+#X text 312 184 Gives me the beggning of the scene \, usefull to reset
+the scene by sncronizing everything, f 32;
+#X obj 144 417 s RSVP-value-from-outside;
+#X msg 214 371 /RMOD-fmod-1 \$1;
+#X obj 31 311 unpack f f f f f f f;
+#X obj 31 246 r LFO-values-\$1;
+#X obj 111 281 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 96 1 r TURN-ON-PEDAL-10;
+#X obj 378 84 route-pedal 10;
+#X obj 377 109 open-pedal 10;
+#X obj 22 136 r TURN-ON-PEDAL-10;
+#X obj 31 279 open-pedal 10;
+#X floatatom 486 84 5 0 0 0 - - - 0;
+#X msg 332 50 10;
+#X obj 196 55 s TURN-ON-PEDAL-10;
+#X obj 200 37 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 203 231 r p-fund-\$1;
+#X obj 289 272 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 209 270 open-pedal 10;
+#X obj 213 291 mtof;
+#X obj 215 343 line;
+#X obj 219 318 pack f 20, f 11;
+#X obj 76 341 / 127;
+#X floatatom 44 457 5 0 0 0 - - - 0;
+#X msg 75 369 /RMOD-amod-1 \$1;
+#X obj 22 180 b;
+#X obj 22 203 s PERC-LFO-rst;
+#X obj 22 159 sel 1;
+#X obj 571 291 r \$1-sig-IN;
+#X obj 564 267 r \$1-sig-IN-PEAK;
+#X obj 498 390 r \$1-sig-IN, f 13;
+#X obj 434 604 s RSVP-value-from-outside;
+#X msg 449 570 /VCDR-osc-noise-1 \$1;
+#X obj 537 484 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 457 482 open-pedal 10;
+#X obj 487 439 * 0.5;
+#X obj 455 539 line;
+#X obj 458 515 pack f 500;
+#X floatatom 487 462 5 0 0 0 - - - 0;
+#X obj 366 391 b;
+#X obj 367 248 r MASTER_ATTACK-\$1;
+#X obj 494 275 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 361 452 s CHPR-fire;
+#X obj 406 311 t b b;
+#X obj 406 347 del;
+#X obj 367 368 onebang;
+#X obj 367 293 t b b;
+#X obj 367 272 open-pedal 10;
+#X obj 360 417 s SAMP-play;
+#X obj 433 331 random 1000;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 7 0;
+#X connect 2 0 7 0;
+#X connect 7 0 24 0;
+#X connect 13 0 23 0;
+#X connect 24 0 25 0;
+#X connect 25 0 26 0;
+#X connect 26 0 27 0;
+#X connect 34 0 33 0;
+#X connect 36 0 50 0;
+#X connect 41 0 40 0;
+#X connect 42 2 60 0;
+#X connect 43 0 49 0;
+#X connect 45 0 0 0;
+#X connect 45 0 35 0;
+#X connect 48 0 65 0;
+#X connect 49 0 42 0;
+#X connect 53 0 52 0;
+#X connect 54 0 56 0;
+#X connect 56 0 57 0;
+#X connect 57 0 59 0;
+#X connect 58 0 41 0;
+#X connect 59 0 58 0;
+#X connect 60 0 62 0;
+#X connect 60 0 61 0;
+#X connect 62 0 40 0;
+#X connect 63 0 64 0;
+#X connect 65 0 63 0;
+#X connect 68 0 73 0;
+#X connect 72 0 75 0;
+#X connect 73 0 72 0;
+#X connect 73 0 76 0;
+#X connect 74 0 70 0;
+#X connect 75 0 74 0;
+#X connect 77 0 86 0;
+#X connect 78 0 85 0;
+#X connect 81 0 82 0;
+#X connect 81 1 87 0;
+#X connect 82 0 83 1;
+#X connect 83 0 77 0;
+#X connect 84 0 83 0;
+#X connect 84 1 81 0;
+#X connect 85 0 84 0;
+#X connect 87 0 82 1;
+#X coords 0 -1 1 1 57 17 2 0 0;
+#X restore 186 144 pd PTCH_10 \$1;
+#N canvas 736 98 933 804 PTCH_11 0;
+#X obj 96 22 sel 1 0;
+#X msg 115 63 color 18;
+#X msg 96 42 color 43;
+#X text 538 87 here we process data to trigger processings inside the
+modules with simple custom algorithms that come into action when the
+piece reaches the cue;
+#X text 529 24 this is a place where I can patch in realtime the triggering
+of processes based on the GUI (e.g. tunr on a metro to trigger and
+play back samples);
+#X obj 650 424 cnv 5 200 5 empty empty LFO 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 640 166 cnv 5 200 5 empty empty ANALYSIS 0 -10 0 20 #fcc4c4
+#404040 0;
+#X obj 1 0 bng 16 250 50 0 empty empty empty 17 7 0 10 #3c50fc #9c00fc
+#000000;
+#X obj 362 85 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 454 110 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 711 183 r p-fund-\$1;
+#X obj 711 209 r MASTER_ATTACK-\$1;
+#X obj 711 236 r MASTER_SILENCE-\$1;
+#X obj 710 262 r TIMBRE-ID-\$1;
+#X obj 662 202 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 662 255 cnv 5 95 5 empty empty empty 5 6 0 10 #fc8000 #dcdcdc
+0;
+#X obj 662 304 cnv 5 95 5 empty empty empty 5 6 0 10 #f8fc00 #dcdcdc
+0;
+#X obj 710 326 r HARMONICITY-\$1;
+#X obj 665 345 cnv 5 95 5 empty empty empty 5 6 0 10 #9c9c9c #dcdcdc
+0;
+#X obj 663 229 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 664 371 cnv 5 95 5 empty empty empty 5 6 0 10 #00f8fc #dcdcdc
+0;
+#X text 151 97 every pedal needs the pedal router;
+#X obj 709 352 s RSVP-value-from-outside;
+#X obj 710 284 unpack f f;
+#X obj 1 21 canvasargs;
+#X obj 1 41 route list;
+#X obj 1 61 list split 1;
+#X msg 1 81 \; pd-\$1 vis 1;
+#X obj 707 448 r LFO-triggers-\$1;
+#X obj 707 472 r LFO-MIDI-\$1;
+#X obj 707 498 r LFO-values-\$1;
+#X text 208 7 <-- Change to the number of pedal wanted;
+#X text 196 132 Change to the number of pedal wanted ----A;
+#X obj 568 196 s SAMP-play;
+#X obj 568 178 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 156 30 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 378 61 r CURRENT-PATCH-NUMBER;
+#X obj 17 1 cnv 10 40 10 empty \$0-label PTCH_11 3 6 0 8 #000000 #00f8fc
+0;
+#X obj 652 601 cnv 5 200 5 empty empty MSC 0 -10 0 20 #fcc4c4 #404040
+0;
+#X text 132 184 Gives me the beggning of the scene \, usefull to reset
+the scene by sncronizing everything, f 32;
+#X obj 59 575 s RSVP-value-from-outside;
+#X obj 50 319 unpack f f f f f f f;
+#X obj 31 249 r LFO-values-\$1;
+#X obj 111 281 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 378 84 route-pedal 11;
+#X obj 377 109 open-pedal 11;
+#X obj 23 184 r TURN-ON-PEDAL-11;
+#X obj 31 279 open-pedal 11;
+#X obj 96 1 r TURN-ON-PEDAL-11;
+#X msg 57 470 /TDEL-tdelay-1 \$1;
+#X floatatom 104 368 5 0 0 0 - - - 0;
+#X msg 119 517 /TDEL-tdelay-2 \$1;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 7 0;
+#X connect 2 0 7 0;
+#X connect 7 0 24 0;
+#X connect 13 0 23 0;
+#X connect 24 0 25 0;
+#X connect 25 0 26 0;
+#X connect 26 0 27 0;
+#X connect 34 0 33 0;
+#X connect 41 0 49 0;
+#X connect 41 2 50 0;
+#X connect 41 2 51 0;
+#X connect 42 0 47 0;
+#X connect 47 0 41 0;
+#X connect 48 0 0 0;
+#X connect 48 0 35 0;
+#X connect 49 0 40 0;
+#X connect 51 0 40 0;
+#X coords 0 -1 1 1 57 17 2 0 0;
+#X restore 186 163 pd PTCH_11 \$1;
+#N canvas 53 205 933 804 PTCH_12 0;
+#X obj 96 22 sel 1 0;
+#X msg 115 63 color 18;
+#X msg 96 42 color 43;
+#X text 538 87 here we process data to trigger processings inside the
+modules with simple custom algorithms that come into action when the
+piece reaches the cue;
+#X text 529 24 this is a place where I can patch in realtime the triggering
+of processes based on the GUI (e.g. tunr on a metro to trigger and
+play back samples);
+#X obj 650 424 cnv 5 200 5 empty empty LFO 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 640 166 cnv 5 200 5 empty empty ANALYSIS 0 -10 0 20 #fcc4c4
+#404040 0;
+#X obj 1 0 bng 16 250 50 0 empty empty empty 17 7 0 10 #3c50fc #9c00fc
+#000000;
+#X obj 362 85 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 454 110 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 711 183 r p-fund-\$1;
+#X obj 711 209 r MASTER_ATTACK-\$1;
+#X obj 711 236 r MASTER_SILENCE-\$1;
+#X obj 710 262 r TIMBRE-ID-\$1;
+#X obj 662 202 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 662 255 cnv 5 95 5 empty empty empty 5 6 0 10 #fc8000 #dcdcdc
+0;
+#X obj 662 304 cnv 5 95 5 empty empty empty 5 6 0 10 #f8fc00 #dcdcdc
+0;
+#X obj 710 326 r HARMONICITY-\$1;
+#X obj 665 345 cnv 5 95 5 empty empty empty 5 6 0 10 #9c9c9c #dcdcdc
+0;
+#X obj 663 229 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 664 371 cnv 5 95 5 empty empty empty 5 6 0 10 #00f8fc #dcdcdc
+0;
+#X text 151 97 every pedal needs the pedal router;
+#X obj 709 352 s RSVP-value-from-outside;
+#X obj 710 284 unpack f f;
+#X obj 1 21 canvasargs;
+#X obj 1 41 route list;
+#X obj 1 61 list split 1;
+#X msg 1 81 \; pd-\$1 vis 1;
+#X obj 707 448 r LFO-triggers-\$1;
+#X obj 707 472 r LFO-MIDI-\$1;
+#X obj 707 498 r LFO-values-\$1;
+#X text 208 7 <-- Change to the number of pedal wanted;
+#X text 196 132 Change to the number of pedal wanted ----A;
+#X obj 568 196 s SAMP-play;
+#X obj 568 178 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 156 30 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 378 61 r CURRENT-PATCH-NUMBER;
+#X obj 17 1 cnv 10 40 10 empty \$0-label PTCH_12 3 6 0 8 #000000 #00f8fc
+0;
+#X obj 652 601 cnv 5 200 5 empty empty MSC 0 -10 0 20 #fcc4c4 #404040
+0;
+#X text 132 184 Gives me the beggning of the scene \, usefull to reset
+the scene by sncronizing everything, f 32;
+#X obj 31 249 r LFO-values-\$1;
+#X obj 111 281 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 96 1 r TURN-ON-PEDAL-12;
+#X obj 378 84 route-pedal 12;
+#X obj 377 109 open-pedal 12;
+#X obj 23 184 r TURN-ON-PEDAL-12;
+#X obj 32 279 open-pedal 12;
+#X obj 59 575 s RSVP-value-from-outside;
+#X obj 50 319 unpack f f f f f f f;
+#X msg 57 470 /TDEL-tdelay-1 \$1;
+#X floatatom 104 368 5 0 0 0 - - - 0;
+#X msg 119 517 /TDEL-tdelay-2 \$1;
+#X msg 269 428 /GRNS-iot-0 \$1;
+#X msg 276 502 /GRNS-rdur-0 \$1;
+#X obj 398 408 b;
+#X obj 408 242 r MASTER_ATTACK-\$1;
+#X obj 488 268 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 414 436 s CHPR-fire;
+#X obj 474 325 random 500;
+#X obj 447 305 t b b;
+#X obj 447 341 del;
+#X obj 408 362 onebang;
+#X obj 408 287 t b b;
+#X obj 408 266 open-pedal 12;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 7 0;
+#X connect 2 0 7 0;
+#X connect 7 0 24 0;
+#X connect 13 0 23 0;
+#X connect 24 0 25 0;
+#X connect 25 0 26 0;
+#X connect 26 0 27 0;
+#X connect 34 0 33 0;
+#X connect 40 0 46 0;
+#X connect 42 0 0 0;
+#X connect 42 0 35 0;
+#X connect 46 0 48 0;
+#X connect 48 1 49 0;
+#X connect 48 2 50 0;
+#X connect 48 2 51 0;
+#X connect 48 3 52 0;
+#X connect 48 4 53 0;
+#X connect 49 0 47 0;
+#X connect 51 0 47 0;
+#X connect 52 0 47 0;
+#X connect 53 0 47 0;
+#X connect 54 0 57 0;
+#X connect 55 0 63 0;
+#X connect 58 0 60 1;
+#X connect 59 0 60 0;
+#X connect 59 1 58 0;
+#X connect 60 0 61 1;
+#X connect 61 0 54 0;
+#X connect 62 0 61 0;
+#X connect 62 1 59 0;
+#X connect 63 0 62 0;
+#X coords 0 -1 1 1 57 17 2 0 0;
+#X restore 186 182 pd PTCH_12 \$1;
+#N canvas 173 213 933 804 PTCH_13 0;
+#X obj 96 22 sel 1 0;
+#X msg 115 63 color 18;
+#X msg 96 42 color 43;
+#X text 538 87 here we process data to trigger processings inside the
+modules with simple custom algorithms that come into action when the
+piece reaches the cue;
+#X text 529 24 this is a place where I can patch in realtime the triggering
+of processes based on the GUI (e.g. tunr on a metro to trigger and
+play back samples);
+#X obj 650 424 cnv 5 200 5 empty empty LFO 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 640 166 cnv 5 200 5 empty empty ANALYSIS 0 -10 0 20 #fcc4c4
+#404040 0;
+#X obj 1 0 bng 16 250 50 0 empty empty empty 17 7 0 10 #3c50fc #9c00fc
+#000000;
+#X obj 362 85 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 454 110 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 711 183 r p-fund-\$1;
+#X obj 711 209 r MASTER_ATTACK-\$1;
+#X obj 711 236 r MASTER_SILENCE-\$1;
+#X obj 710 262 r TIMBRE-ID-\$1;
+#X obj 662 202 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 662 255 cnv 5 95 5 empty empty empty 5 6 0 10 #fc8000 #dcdcdc
+0;
+#X obj 662 304 cnv 5 95 5 empty empty empty 5 6 0 10 #f8fc00 #dcdcdc
+0;
+#X obj 710 326 r HARMONICITY-\$1;
+#X obj 665 345 cnv 5 95 5 empty empty empty 5 6 0 10 #9c9c9c #dcdcdc
+0;
+#X obj 663 229 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 664 371 cnv 5 95 5 empty empty empty 5 6 0 10 #00f8fc #dcdcdc
+0;
+#X text 151 97 every pedal needs the pedal router;
+#X obj 709 352 s RSVP-value-from-outside;
+#X obj 710 284 unpack f f;
+#X obj 1 21 canvasargs;
+#X obj 1 41 route list;
+#X obj 1 61 list split 1;
+#X msg 1 81 \; pd-\$1 vis 1;
+#X obj 707 448 r LFO-triggers-\$1;
+#X obj 707 472 r LFO-MIDI-\$1;
+#X obj 707 498 r LFO-values-\$1;
+#X text 208 7 <-- Change to the number of pedal wanted;
+#X text 196 132 Change to the number of pedal wanted ----A;
+#X obj 568 196 s SAMP-play;
+#X obj 568 178 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 156 30 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 378 61 r CURRENT-PATCH-NUMBER;
+#X obj 17 1 cnv 10 40 10 empty \$0-label PTCH_13 3 6 0 8 #000000 #00f8fc
+0;
+#X obj 652 601 cnv 5 200 5 empty empty MSC 0 -10 0 20 #fcc4c4 #404040
+0;
+#X text 132 184 Gives me the beggning of the scene \, usefull to reset
+the scene by sncronizing everything, f 32;
+#X obj 378 84 route-pedal 13;
+#X obj 377 109 open-pedal 13;
+#X obj 23 184 r TURN-ON-PEDAL-13;
+#X obj 96 1 r TURN-ON-PEDAL-13;
+#X obj 35 335 unpack f f f f f f f;
+#X obj 35 315 list-apply + 1;
+#X obj 25 368 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 44 368 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 64 368 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 83 368 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc #000000
+#000000 0;
+#X obj 103 368 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 122 368 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 142 368 vradio 15 1 0 3 empty empty empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0;
+#X obj 110 458 change;
+#X obj 116 498 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 147 501 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 217 254 r LFO-values-\$1;
+#X obj 297 286 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 245 580 s RSVP-value-from-outside;
+#X obj 236 324 unpack f f f f f f f;
+#X floatatom 290 373 5 0 0 0 - - - 0;
+#X msg 295 451 /GRNS-iot-0 \$1;
+#X msg 323 503 /GRNS-rdur-0 \$1;
+#X obj 218 284 open-pedal 13;
+#X msg 400 413 /RMOD-fmod-1 \$1;
+#X msg 506 374 /RMOD-amod-1 \$1;
+#X obj 507 348 / 127;
+#X obj 400 376 * 3;
+#X obj 504 591 b;
+#X obj 505 448 r MASTER_ATTACK-\$1;
+#X obj 499 652 s CHPR-fire;
+#X obj 544 511 t b b;
+#X obj 544 547 del;
+#X obj 505 568 onebang;
+#X obj 505 493 t b b;
+#X obj 498 617 s SAMP-play;
+#X obj 571 531 random 1000;
+#X obj 505 472 open-pedal 13;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 7 0;
+#X connect 2 0 7 0;
+#X connect 7 0 24 0;
+#X connect 13 0 23 0;
+#X connect 24 0 25 0;
+#X connect 25 0 26 0;
+#X connect 26 0 27 0;
+#X connect 34 0 33 0;
+#X connect 43 0 0 0;
+#X connect 43 0 35 0;
+#X connect 44 0 46 0;
+#X connect 44 1 47 0;
+#X connect 44 2 48 0;
+#X connect 44 3 49 0;
+#X connect 44 4 50 0;
+#X connect 44 5 51 0;
+#X connect 44 6 52 0;
+#X connect 45 0 44 0;
+#X connect 46 0 53 0;
+#X connect 47 0 53 0;
+#X connect 48 0 53 0;
+#X connect 49 0 53 0;
+#X connect 50 0 53 0;
+#X connect 51 0 53 0;
+#X connect 52 0 53 0;
+#X connect 53 0 54 0;
+#X connect 56 0 63 0;
+#X connect 59 2 60 0;
+#X connect 59 2 67 0;
+#X connect 59 4 66 0;
+#X connect 61 0 58 0;
+#X connect 62 0 58 0;
+#X connect 63 0 59 0;
+#X connect 64 0 58 0;
+#X connect 65 0 58 0;
+#X connect 66 0 65 0;
+#X connect 67 0 64 0;
+#X connect 68 0 75 0;
+#X connect 69 0 77 0;
+#X connect 71 0 72 0;
+#X connect 71 1 76 0;
+#X connect 72 0 73 1;
+#X connect 73 0 68 0;
+#X connect 74 0 73 0;
+#X connect 74 1 71 0;
+#X connect 76 0 72 1;
+#X connect 77 0 74 0;
+#X coords 0 -1 1 1 57 17 2 0 0;
+#X restore 186 201 pd PTCH_13 \$1;
+#N canvas 424 96 933 804 PTCH_14 0;
+#X obj 96 22 sel 1 0;
+#X msg 115 63 color 18;
+#X msg 96 42 color 43;
+#X text 538 87 here we process data to trigger processings inside the
+modules with simple custom algorithms that come into action when the
+piece reaches the cue;
+#X text 529 24 this is a place where I can patch in realtime the triggering
+of processes based on the GUI (e.g. tunr on a metro to trigger and
+play back samples);
+#X obj 650 424 cnv 5 200 5 empty empty LFO 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 640 166 cnv 5 200 5 empty empty ANALYSIS 0 -10 0 20 #fcc4c4
+#404040 0;
+#X obj 1 0 bng 16 250 50 0 empty empty empty 17 7 0 10 #3c50fc #9c00fc
+#000000;
+#X obj 362 85 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 454 110 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 711 183 r p-fund-\$1;
+#X obj 711 209 r MASTER_ATTACK-\$1;
+#X obj 711 236 r MASTER_SILENCE-\$1;
+#X obj 710 262 r TIMBRE-ID-\$1;
+#X obj 662 202 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 662 255 cnv 5 95 5 empty empty empty 5 6 0 10 #fc8000 #dcdcdc
+0;
+#X obj 662 304 cnv 5 95 5 empty empty empty 5 6 0 10 #f8fc00 #dcdcdc
+0;
+#X obj 710 326 r HARMONICITY-\$1;
+#X obj 665 345 cnv 5 95 5 empty empty empty 5 6 0 10 #9c9c9c #dcdcdc
+0;
+#X obj 663 229 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 664 371 cnv 5 95 5 empty empty empty 5 6 0 10 #00f8fc #dcdcdc
+0;
+#X text 151 97 every pedal needs the pedal router;
+#X obj 709 352 s RSVP-value-from-outside;
+#X obj 710 284 unpack f f;
+#X obj 1 21 canvasargs;
+#X obj 1 41 route list;
+#X obj 1 61 list split 1;
+#X msg 1 81 \; pd-\$1 vis 1;
+#X obj 707 448 r LFO-triggers-\$1;
+#X obj 707 472 r LFO-MIDI-\$1;
+#X obj 707 498 r LFO-values-\$1;
+#X text 208 7 <-- Change to the number of pedal wanted;
+#X text 196 132 Change to the number of pedal wanted ----A;
+#X obj 568 196 s SAMP-play;
+#X obj 568 178 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 156 30 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 378 61 r CURRENT-PATCH-NUMBER;
+#X obj 17 1 cnv 10 40 10 empty \$0-label PTCH_14 3 6 0 8 #000000 #00f8fc
+0;
+#X obj 652 601 cnv 5 200 5 empty empty MSC 0 -10 0 20 #fcc4c4 #404040
+0;
+#X text 132 184 Gives me the beggning of the scene \, usefull to reset
+the scene by sncronizing everything, f 32;
+#X obj 31 249 r LFO-values-\$1;
+#X obj 111 281 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 378 84 route-pedal 14;
+#X obj 377 109 open-pedal 14;
+#X obj 23 184 r TURN-ON-PEDAL-14;
+#X obj 31 279 open-pedal 14;
+#X obj 96 1 r TURN-ON-PEDAL-14;
+#X obj 45 616 s RSVP-value-from-outside;
+#X obj 36 360 unpack f f f f f f f;
+#X msg 43 511 /TDEL-tdelay-1 \$1;
+#X floatatom 90 409 5 0 0 0 - - - 0;
+#X msg 105 558 /TDEL-tdelay-2 \$1;
+#X obj 414 466 b;
+#X obj 415 323 r MASTER_ATTACK-\$1;
+#X obj 487 498 s CHPR-fire;
+#X obj 454 386 t b b;
+#X obj 454 422 del;
+#X obj 415 443 onebang;
+#X obj 415 368 t b b;
+#X obj 408 492 s SAMP-play;
+#X obj 481 406 random 1000;
+#X obj 415 347 open-pedal 14;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 7 0;
+#X connect 2 0 7 0;
+#X connect 7 0 24 0;
+#X connect 13 0 23 0;
+#X connect 24 0 25 0;
+#X connect 25 0 26 0;
+#X connect 26 0 27 0;
+#X connect 34 0 33 0;
+#X connect 40 0 45 0;
+#X connect 45 0 48 0;
+#X connect 46 0 0 0;
+#X connect 46 0 35 0;
+#X connect 48 0 49 0;
+#X connect 48 2 50 0;
+#X connect 48 2 51 0;
+#X connect 49 0 47 0;
+#X connect 51 0 47 0;
+#X connect 52 0 59 0;
+#X connect 52 0 54 0;
+#X connect 53 0 61 0;
+#X connect 55 0 56 0;
+#X connect 55 1 60 0;
+#X connect 56 0 57 1;
+#X connect 57 0 52 0;
+#X connect 58 0 57 0;
+#X connect 58 1 55 0;
+#X connect 60 0 56 1;
+#X connect 61 0 58 0;
+#X coords 0 -1 1 1 57 17 2 0 0;
+#X restore 186 220 pd PTCH_14 \$1;
+#N canvas 487 96 933 804 PTCH_15 0;
+#X obj 96 22 sel 1 0;
+#X msg 115 63 color 18;
+#X msg 96 42 color 43;
+#X text 538 87 here we process data to trigger processings inside the
+modules with simple custom algorithms that come into action when the
+piece reaches the cue;
+#X text 529 24 this is a place where I can patch in realtime the triggering
+of processes based on the GUI (e.g. tunr on a metro to trigger and
+play back samples);
+#X obj 650 424 cnv 5 200 5 empty empty LFO 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 640 166 cnv 5 200 5 empty empty ANALYSIS 0 -10 0 20 #fcc4c4
+#404040 0;
+#X obj 1 0 bng 16 250 50 0 empty empty empty 17 7 0 10 #3c50fc #9c00fc
+#000000;
+#X obj 362 85 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 459 110 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 711 183 r p-fund-\$1;
+#X obj 711 209 r MASTER_ATTACK-\$1;
+#X obj 711 236 r MASTER_SILENCE-\$1;
+#X obj 710 262 r TIMBRE-ID-\$1;
+#X obj 662 202 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 662 255 cnv 5 95 5 empty empty empty 5 6 0 10 #fc8000 #dcdcdc
+0;
+#X obj 662 304 cnv 5 95 5 empty empty empty 5 6 0 10 #f8fc00 #dcdcdc
+0;
+#X obj 710 326 r HARMONICITY-\$1;
+#X obj 665 345 cnv 5 95 5 empty empty empty 5 6 0 10 #9c9c9c #dcdcdc
+0;
+#X obj 663 229 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 664 371 cnv 5 95 5 empty empty empty 5 6 0 10 #00f8fc #dcdcdc
+0;
+#X text 151 97 every pedal needs the pedal router;
+#X obj 709 352 s RSVP-value-from-outside;
+#X obj 710 284 unpack f f;
+#X obj 1 21 canvasargs;
+#X obj 1 41 route list;
+#X obj 1 61 list split 1;
+#X msg 1 81 \; pd-\$1 vis 1;
+#X obj 707 448 r LFO-triggers-\$1;
+#X obj 707 472 r LFO-MIDI-\$1;
+#X obj 707 498 r LFO-values-\$1;
+#X text 208 7 <-- Change to the number of pedal wanted;
+#X text 196 132 Change to the number of pedal wanted ----A;
+#X obj 568 196 s SAMP-play;
+#X obj 568 178 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 156 30 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 378 61 r CURRENT-PATCH-NUMBER;
+#X obj 17 1 cnv 10 40 10 empty \$0-label PTCH_15 3 6 0 8 #000000 #00f8fc
+0;
+#X obj 652 601 cnv 5 200 5 empty empty MSC 0 -10 0 20 #fcc4c4 #404040
+0;
+#X text 132 184 Gives me the beggning of the scene \, usefull to reset
+the scene by sncronizing everything, f 32;
+#X obj 96 1 r TURN-ON-PEDAL-15;
+#X obj 13 187 r TURN-ON-PEDAL-15;
+#X obj 378 84 route-pedal 15;
+#X obj 377 109 open-pedal 15;
+#X obj 78 253 r LFO-values-\$1;
+#X obj 158 285 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 92 620 s RSVP-value-from-outside;
+#X obj 83 364 unpack f f f f f f f;
+#X msg 90 515 /TDEL-tdelay-1 \$1;
+#X msg 152 562 /TDEL-tdelay-2 \$1;
+#X obj 78 283 open-pedal 15;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 7 0;
+#X connect 2 0 7 0;
+#X connect 7 0 24 0;
+#X connect 13 0 23 0;
+#X connect 24 0 25 0;
+#X connect 25 0 26 0;
+#X connect 26 0 27 0;
+#X connect 34 0 33 0;
+#X connect 40 0 0 0;
+#X connect 40 0 35 0;
+#X connect 44 0 50 0;
+#X connect 47 1 48 0;
+#X connect 47 2 49 0;
+#X connect 48 0 46 0;
+#X connect 49 0 46 0;
+#X connect 50 0 47 0;
+#X coords 0 -1 1 1 57 17 2 0 0;
+#X restore 186 239 pd PTCH_15 \$1;
+#N canvas 1920 0 1366 712 PTCH_16 1;
+#X obj 96 22 sel 1 0;
+#X msg 115 63 color 18;
+#X msg 96 42 color 43;
+#X text 538 87 here we process data to trigger processings inside the
+modules with simple custom algorithms that come into action when the
+piece reaches the cue;
+#X text 529 24 this is a place where I can patch in realtime the triggering
+of processes based on the GUI (e.g. tunr on a metro to trigger and
+play back samples);
+#X obj 1120 294 cnv 5 200 5 empty empty LFO 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 1110 36 cnv 5 200 5 empty empty ANALYSIS 0 -10 0 20 #fcc4c4
+#404040 0;
+#X obj 1 0 bng 16 250 50 0 empty empty empty 17 7 0 10 #3c50fc #9c00fc
+#000000;
+#X obj 362 85 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 459 110 cnv 15 15 15 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 1181 53 r p-fund-\$1;
+#X obj 1181 79 r MASTER_ATTACK-\$1;
+#X obj 1181 106 r MASTER_SILENCE-\$1;
+#X obj 1180 132 r TIMBRE-ID-\$1;
+#X obj 1132 72 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 1132 125 cnv 5 95 5 empty empty empty 5 6 0 10 #fc8000 #dcdcdc
+0;
+#X obj 1132 174 cnv 5 95 5 empty empty empty 5 6 0 10 #f8fc00 #dcdcdc
+0;
+#X obj 1180 196 r HARMONICITY-\$1;
+#X obj 1135 215 cnv 5 95 5 empty empty empty 5 6 0 10 #9c9c9c #dcdcdc
+0;
+#X obj 1133 99 cnv 5 95 5 empty empty empty 5 6 0 10 #00fc04 #dcdcdc
+0;
+#X obj 1134 241 cnv 5 95 5 empty empty empty 5 6 0 10 #00f8fc #dcdcdc
+0;
+#X text 151 97 every pedal needs the pedal router;
+#X obj 1179 222 s RSVP-value-from-outside;
+#X obj 1180 154 unpack f f;
+#X obj 1 21 canvasargs;
+#X obj 1 41 route list;
+#X obj 1 61 list split 1;
+#X msg 1 81 \; pd-\$1 vis 1;
+#X obj 1177 318 r LFO-triggers-\$1;
+#X obj 1177 342 r LFO-MIDI-\$1;
+#X obj 1177 368 r LFO-values-\$1;
+#X text 208 7 <-- Change to the number of pedal wanted;
+#X text 196 132 Change to the number of pedal wanted ----A;
+#X obj 156 30 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 378 61 r CURRENT-PATCH-NUMBER;
+#X obj 17 1 cnv 10 40 10 empty \$0-label PTCH_16 3 6 0 8 #000000 #00f8fc
+0;
+#X obj 1119 410 cnv 5 200 5 empty empty MSC 0 -10 0 20 #fcc4c4 #404040
+0;
+#X obj 378 84 route-pedal 16;
+#X obj 377 109 open-pedal 16;
+#X obj 96 1 r TURN-ON-PEDAL-16;
+#X obj 313 633 makenote 60 100;
+#X obj 313 681 noteout;
+#X obj 904 32 declare -path ../../;
+#X obj 905 53 declare -path ../pd_extrn/UTILITIES/;
+#X obj 57 631 makenote 60 100;
+#X obj 398 654 spigot 0;
+#X obj 58 663 noteout 17;
+#X obj 419 674 noteout 17;
+#N canvas 1067 289 450 300 seq-1 0;
+#N canvas 172 267 630 601 rthm-808 0;
+#X obj 162 524 makenote 60 100;
+#X obj 162 572 noteout;
+#X obj 162 28 MIDI-CARTER-Seq \$1 RTM1 scene-16;
+#X obj 162 229 note-every-x \$1-RTM1 L A1;
+#X obj 162 306 note-every-x \$1-RTM1 L A2;
+#X obj 265 229 note-every-x \$1-RTM1 L B1;
+#X obj 265 306 note-every-x \$1-RTM1 L B2;
+#X obj 368 230 note-every-x \$1-RTM1 L B3;
+#X obj 368 307 note-every-x \$1-RTM1 L B4;
+#X obj 265 383 note-every-x \$1-RTM1 L B5;
+#X obj 368 384 note-every-x \$1-RTM1 L B6;
+#X obj 471 231 note-every-x \$1-RTM1 L C1;
+#X obj 471 308 note-every-x \$1-RTM1 L C2;
+#X obj 471 385 note-every-x \$1-RTM1 L C3;
+#X obj 368 461 note-every-x \$1-RTM1 L B7;
+#X obj 162 383 note-every-x \$1-RTM1 L A3;
+#X obj 162 6 r master-metro;
+#X obj 78 196 send primo;
+#X connect 0 0 1 0;
+#X connect 0 1 1 1;
+#X connect 2 0 4 0;
+#X connect 2 0 15 0;
+#X connect 2 0 3 0;
+#X connect 2 0 17 0;
+#X connect 2 1 5 0;
+#X connect 2 1 6 0;
+#X connect 2 1 7 0;
+#X connect 2 1 8 0;
+#X connect 2 1 9 0;
+#X connect 2 1 10 0;
+#X connect 2 1 14 0;
+#X connect 2 2 11 0;
+#X connect 2 2 12 0;
+#X connect 2 2 13 0;
+#X connect 3 0 0 0;
+#X connect 4 0 0 0;
+#X connect 5 0 0 0;
+#X connect 6 0 0 0;
+#X connect 7 0 0 0;
+#X connect 8 0 0 0;
+#X connect 9 0 0 0;
+#X connect 10 0 0 0;
+#X connect 11 0 0 0;
+#X connect 12 0 0 0;
+#X connect 13 0 0 0;
+#X connect 14 0 0 0;
+#X connect 15 0 0 0;
+#X connect 16 0 2 0;
+#X restore 96 229 pd rthm-808;
+#X obj 101 101 tgl 45 0 empty empty empty 17 7 0 10 #14e814 #14e814
+#202020 0 1;
+#X obj 189 85 sel 0 1;
+#X msg 189 111 color 13 13 42;
+#X msg 209 135 color 16 16 42;
+#X msg 101 173 \; pd-rthm-808 vis \$1;
+#X connect 1 0 2 0;
+#X connect 1 0 5 0;
+#X connect 2 0 3 0;
+#X connect 2 1 4 0;
+#X connect 3 0 1 0;
+#X connect 4 0 1 0;
+#X coords 0 -1 1 1 47 47 2 100 100;
+#X restore 147 206 pd seq-1;
+#X obj 151 163 tgl 15 0 master-metro empty empty 17 7 0 10 #fcfcfc
+#000000 #000000 0 1;
+#N canvas 1067 289 450 300 seq-1 0;
+#X obj 101 101 tgl 45 0 empty empty empty 17 7 0 10 #14e814 #14e814
+#202020 0 1;
+#X obj 189 85 sel 0 1;
+#X msg 189 111 color 13 13 42;
+#X msg 209 135 color 16 16 42;
+#N canvas 869 249 855 601 percussion 0;
+#X obj 162 524 makenote 60 100;
+#X obj 162 6 r master-metro;
+#X obj 162 28 MIDI-CARTER-Seq \$1 perc scene-16;
+#X msg 567 119 note-every-x \$1-perc L A1;
+#X msg 567 144 note-every-x \$1-perc L A2;
+#X obj 37 282 note-every-x \$1-perc L A2;
+#X obj 37 204 note-every-x \$1-perc L A1;
+#X obj 38 359 note-every-x \$1-perc L A3;
+#X obj 162 203 note-every-x \$1-perc L B1;
+#X obj 162 280 note-every-x \$1-perc L B2;
+#X obj 162 357 note-every-x \$1-perc L B3;
+#X obj 405 203 note-every-x \$1-perc L C1;
+#X msg 567 170 note-every-x \$1-perc L A2;
+#X obj 405 280 note-every-x \$1-perc L C2;
+#X obj 405 357 note-every-x \$1-perc L C3;
+#X obj 265 203 note-every-x \$1-perc L B4;
+#X obj 265 280 note-every-x \$1-perc L B5;
+#X obj 265 357 note-every-x \$1-perc L B6;
+#X obj 162 572 noteout 17;
+#X connect 0 0 18 0;
+#X connect 0 1 18 1;
+#X connect 1 0 2 0;
+#X connect 2 0 6 0;
+#X connect 2 0 7 0;
+#X connect 2 0 5 0;
+#X connect 2 1 8 0;
+#X connect 2 1 9 0;
+#X connect 2 1 10 0;
+#X connect 2 1 15 0;
+#X connect 2 1 16 0;
+#X connect 2 1 17 0;
+#X connect 2 2 11 0;
+#X connect 2 2 13 0;
+#X connect 2 2 14 0;
+#X connect 5 0 0 0;
+#X connect 6 0 0 0;
+#X connect 7 0 0 0;
+#X connect 8 0 0 0;
+#X connect 9 0 0 0;
+#X connect 10 0 0 0;
+#X connect 11 0 0 0;
+#X connect 13 0 0 0;
+#X connect 14 0 0 0;
+#X connect 15 0 0 0;
+#X connect 16 0 0 0;
+#X connect 17 0 0 0;
+#X restore 96 229 pd percussion;
+#X msg 101 173 \; pd-percussion vis \$1;
+#X connect 0 0 1 0;
+#X connect 0 0 5 0;
+#X connect 1 0 2 0;
+#X connect 1 1 3 0;
+#X connect 2 0 0 0;
+#X connect 3 0 0 0;
+#X coords 0 -1 1 1 47 47 2 100 100;
+#X restore 147 265 pd seq-1;
+#N canvas 1067 289 450 300 seq-1 0;
+#X obj 101 101 tgl 45 0 empty empty empty 17 7 0 10 #14e814 #14e814
+#202020 0 1;
+#X obj 189 85 sel 0 1;
+#X msg 189 111 color 13 13 42;
+#X msg 209 135 color 16 16 42;
+#N canvas 869 249 855 723 bass 0;
+#X obj 162 6 r master-metro;
+#X obj 102 60 MIDI-CARTER-Seq \$1 bass scene-16;
+#X msg 566 30 MIDI-CARTER-Seq \$1 XXX scene-16;
+#X msg 561 68 note-every-x \$1-XXX L A1;
+#X msg 567 144 note-every-x \$1-bass L A1;
+#X obj 69 221 note-every-x \$1-bass L A1;
+#X obj 281 662 noteout 49;
+#X msg 567 178 note-every-x \$1-bass L B1;
+#X obj 433 249 note-every-x \$1-bass L B1;
+#X obj 434 326 note-every-x \$1-bass L B2;
+#X obj 434 404 note-every-x \$1-bass L B3;
+#X obj 601 247 note-every-x \$1-bass L C1;
+#X obj 262 330 note-every-x \$1-bass L A2;
+#X obj 602 325 note-every-x \$1-bass L C2;
+#X obj 280 499 t a b;
+#X obj 280 636 makenote 60 100;
+#X obj 70 313 t a b b;
+#X obj 157 336 f;
+#X obj 185 336 + 1;
+#X obj 157 359 mod 4;
+#X obj 157 382 sel 0;
+#X floatatom 202 379 5 0 0 0 - - - 0;
+#X floatatom 157 429 5 0 0 0 - - - 0;
+#X obj 157 406 4000;
+#X obj 362 516 random 4;
+#X obj 362 539 sel 0 1 2 3;
+#X obj 357 564 100;
+#X obj 387 566 200;
+#X obj 417 565 300;
+#X obj 447 567 350;
+#X obj 71 547 noteout 49;
+#X obj 70 521 makenote 60 100;
+#X obj 173 452 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 198 203 0;
+#X msg 237 202 1;
+#X obj 200 242 spigot;
+#X obj 324 544 150;
+#X msg 414 159 0;
+#X msg 453 158 1;
+#X obj 416 198 spigot;
+#X obj 113 369 127;
+#X connect 0 0 1 0;
+#X connect 1 0 5 0;
+#X connect 1 0 12 0;
+#X connect 1 1 35 0;
+#X connect 1 2 39 0;
+#X connect 5 0 16 0;
+#X connect 8 0 14 0;
+#X connect 9 0 14 0;
+#X connect 10 0 14 0;
+#X connect 11 0 14 0;
+#X connect 12 0 14 0;
+#X connect 13 0 14 0;
+#X connect 14 0 15 0;
+#X connect 14 1 36 0;
+#X connect 15 0 6 0;
+#X connect 15 1 6 1;
+#X connect 16 0 31 0;
+#X connect 16 1 40 0;
+#X connect 16 2 17 0;
+#X connect 17 0 18 0;
+#X connect 17 0 19 0;
+#X connect 18 0 17 1;
+#X connect 19 0 20 0;
+#X connect 19 0 21 0;
+#X connect 20 0 23 0;
+#X connect 20 0 33 0;
+#X connect 20 0 37 0;
+#X connect 20 1 34 0;
+#X connect 20 1 38 0;
+#X connect 22 0 31 2;
+#X connect 22 0 32 0;
+#X connect 23 0 22 0;
+#X connect 24 0 25 0;
+#X connect 25 0 26 0;
+#X connect 25 1 27 0;
+#X connect 25 2 28 0;
+#X connect 25 3 29 0;
+#X connect 26 0 15 2;
+#X connect 27 0 15 2;
+#X connect 28 0 15 2;
+#X connect 29 0 15 2;
+#X connect 31 0 30 0;
+#X connect 31 1 30 1;
+#X connect 33 0 35 1;
+#X connect 34 0 35 1;
+#X connect 35 0 8 0;
+#X connect 35 0 9 0;
+#X connect 35 0 10 0;
+#X connect 36 0 15 2;
+#X connect 37 0 39 1;
+#X connect 38 0 39 1;
+#X connect 39 0 11 0;
+#X connect 39 0 13 0;
+#X connect 40 0 31 1;
+#X restore 96 229 pd bass;
+#X msg 101 173 \; pd-bass vis \$1;
+#X connect 0 0 1 0;
+#X connect 0 0 5 0;
+#X connect 1 0 2 0;
+#X connect 1 1 3 0;
+#X connect 2 0 0 0;
+#X connect 3 0 0 0;
+#X coords 0 -1 1 1 47 47 2 100 100;
+#X restore 147 373 pd seq-1;
+#N canvas 1067 289 450 300 seq-1 0;
+#X obj 101 101 tgl 45 0 empty empty empty 17 7 0 10 #fc2828 #fc2828
+#202020 0 1;
+#X obj 189 85 sel 0 1;
+#X msg 189 111 color 13 13 42;
+#X msg 209 135 color 16 16 42;
+#N canvas 37 262 855 601 chords 0;
+#X obj 162 6 r master-metro;
+#X msg 566 30 MIDI-CARTER-Seq \$1 XXX scene-16;
+#X msg 561 68 note-every-x \$1-XXX L A1;
+#X msg 567 144 note-every-x \$1-bass L A1;
+#X msg 567 178 note-every-x \$1-bass L B1;
+#X obj 162 27 MIDI-CARTER-Seq \$1 synt scene-16;
+#X msg 102 333 36 \, 48 \, 52;
+#X msg 285 342 48 \, 63 \, 72;
+#X msg 313 389 60 \, 65 \, 70;
+#X floatatom 384 392 5 0 0 0 - - - 0;
+#X obj 106 432 t a b;
+#X obj 147 311 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 102 356 spigot 0;
+#X obj 330 318 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 285 363 spigot 0;
+#X obj 358 364 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 313 409 spigot 0;
+#X obj 191 494 + 100;
+#X obj 111 548 noteout 33;
+#X obj 106 201 note-every-x \$1-synt L A1;
+#X obj 111 521 makenote 80 60;
+#X obj 191 471 random 5000;
+#X connect 0 0 5 0;
+#X connect 5 0 19 0;
+#X connect 6 0 12 0;
+#X connect 7 0 14 0;
+#X connect 8 0 16 0;
+#X connect 10 0 20 0;
+#X connect 10 1 21 0;
+#X connect 11 0 12 1;
+#X connect 12 0 10 0;
+#X connect 13 0 14 1;
+#X connect 14 0 10 0;
+#X connect 15 0 16 1;
+#X connect 16 0 10 0;
+#X connect 17 0 20 2;
+#X connect 19 1 6 0;
+#X connect 20 0 18 0;
+#X connect 20 1 18 1;
+#X connect 21 0 17 0;
+#X restore 96 229 pd chords;
+#X msg 101 173 \; pd-chords vis \$1;
+#X connect 0 0 1 0;
+#X connect 0 0 5 0;
+#X connect 1 0 2 0;
+#X connect 1 1 3 0;
+#X connect 2 0 0 0;
+#X connect 3 0 0 0;
+#X coords 0 -1 1 1 47 47 2 100 100;
+#X restore 147 320 pd seq-1;
+#X obj 738 187 r primo;
+#X obj 738 210 f;
+#X obj 768 212 + 1;
+#X obj 738 233 mod 4;
+#X obj 738 256 + 1;
+#X floatatom 738 279 5 0 0 0 - - - 0;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 7 0;
+#X connect 2 0 7 0;
+#X connect 7 0 24 0;
+#X connect 13 0 23 0;
+#X connect 24 0 25 0;
+#X connect 25 0 26 0;
+#X connect 26 0 27 0;
+#X connect 39 0 0 0;
+#X connect 39 0 33 0;
+#X connect 40 0 45 0;
+#X connect 40 0 41 0;
+#X connect 40 1 41 1;
+#X connect 40 1 47 1;
+#X connect 44 0 46 0;
+#X connect 44 1 46 1;
+#X connect 45 0 47 0;
+#X connect 53 0 54 0;
+#X connect 54 0 55 0;
+#X connect 54 0 56 0;
+#X connect 55 0 54 1;
+#X connect 56 0 57 0;
+#X connect 57 0 58 0;
+#X coords 0 -1 1 1 57 17 2 0 0;
+#X restore 186 258 pd PTCH_16 \$1;
+#X obj 301 187 declare -path ../sys.comunication;
+#X obj 128 108 cnv 5 100 15 empty empty DATA/PROCESSING 5 8 0 10 #000000
+#fcfcfc 0;
+#X coords 0 -1 1 1 160 200 2 100 100;

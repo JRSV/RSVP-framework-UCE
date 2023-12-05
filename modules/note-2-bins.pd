@@ -1,0 +1,191 @@
+#N canvas 35 119 1065 576 10;
+#X obj 116 302 /;
+#X obj 116 186 mtof;
+#X obj 116 373 t b a;
+#X obj 116 495 pack;
+#X obj 175 259 r sampF;
+#X obj 160 285 i;
+#X obj 116 211 t a b b;
+#X obj 162 237 s update_sampF;
+#X obj 69 14 inlet;
+#X msg 150 164 \; \$1-note const 0;
+#X obj 159 123 loadbang;
+#X msg 160 75 0;
+#X obj 150 101 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 69 36 spigot 1;
+#X text 204 304 bin number;
+#X msg 21 144 1;
+#X obj 70 58 t a b;
+#X obj 70 127 t b a b;
+#X obj 590 352 * 16;
+#X obj 708 356 * 32;
+#X obj 827 357 * 64;
+#X obj 946 359 * 128;
+#N canvas 0 50 450 278 (subpatch) 0;
+#X array \$2-note 1024 float 3;
+#A 0 0 0 0 0 0 0 0.428565 0.428565 0 0.428565 0 0 0 0.457137 0 0.457137
+0 0 0.457137 0 0 0 0 0 0 0 0.457137 0 0 0 0 0.457137 0 0 0 0 0 0.457137
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.528567 0 0 0 0 0 0 0 0 0 0.528567 0 0
+0 0 0 0 0 0 0 0 0 0.528567 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0.785714 0 0 0 0 0 0 0 0.714286 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0.714286 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.714286
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.785716 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0.785716 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.785716 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0.657142 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.657142 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.657142 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0.657142 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#A 1000 0 0 0 0 0.657142 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.657142
+;
+#X coords 0 1 1024 0 200 140 1 0 0;
+#X restore 392 42 graph;
+#X obj 116 325 t a a a a a a a a, f 119;
+#X obj 89 153 sel 0;
+#X obj 234 355 * 2;
+#X obj 353 354 * 4;
+#X obj 471 353 * 8;
+#X obj 234 377 t b a;
+#X obj 234 495 pack;
+#X obj 353 377 t b a;
+#X obj 353 495 pack;
+#X obj 471 376 t b a;
+#X obj 471 495 pack;
+#X obj 590 377 t b a;
+#X obj 590 495 pack;
+#X obj 708 380 t b a;
+#X obj 708 495 pack;
+#X obj 827 381 t b a;
+#X obj 827 495 pack;
+#X obj 946 384 t b a;
+#X obj 946 495 pack;
+#X msg 116 412 1;
+#X msg 234 412 2;
+#X msg 353 414 3;
+#X msg 471 414 4;
+#X msg 590 411 5;
+#X msg 708 411 6;
+#X msg 827 413 7;
+#X msg 946 413 8;
+#X obj 116 466 clip 0 1;
+#X obj 234 465 clip 0 1;
+#X obj 353 467 clip 0 1;
+#X obj 471 466 clip 0 1;
+#X obj 590 463 clip 0 1;
+#X obj 708 462 clip 0 1;
+#X obj 827 464 clip 0 1;
+#X obj 946 463 clip 0 1;
+#X obj 116 528 tabwrite \$2-note;
+#X obj 116 435 tabread CH-SPCT-\$1;
+#X obj 234 435 tabread CH-SPCT-\$1;
+#X obj 353 437 tabread CH-SPCT-\$1;
+#X obj 471 437 tabread CH-SPCT-\$1;
+#X obj 590 434 tabread CH-SPCT-\$1;
+#X obj 708 434 tabread CH-SPCT-\$1;
+#X obj 827 436 tabread CH-SPCT-\$1;
+#X obj 946 436 tabread CH-SPCT-\$1;
+#X obj 150 144 \$2;
+#X connect 0 0 23 0;
+#X connect 1 0 6 0;
+#X connect 2 0 42 0;
+#X connect 2 1 3 1;
+#X connect 3 0 58 0;
+#X connect 4 0 5 1;
+#X connect 5 0 0 1;
+#X connect 6 0 0 0;
+#X connect 6 1 5 0;
+#X connect 6 2 7 0;
+#X connect 8 0 13 0;
+#X connect 10 0 67 0;
+#X connect 11 0 13 1;
+#X connect 12 0 67 0;
+#X connect 13 0 16 0;
+#X connect 15 0 13 1;
+#X connect 16 0 17 0;
+#X connect 16 1 11 0;
+#X connect 17 0 15 0;
+#X connect 17 1 24 0;
+#X connect 17 2 67 0;
+#X connect 18 0 34 0;
+#X connect 19 0 36 0;
+#X connect 20 0 38 0;
+#X connect 21 0 40 0;
+#X connect 23 0 2 0;
+#X connect 23 1 25 0;
+#X connect 23 2 26 0;
+#X connect 23 3 27 0;
+#X connect 23 4 18 0;
+#X connect 23 5 19 0;
+#X connect 23 6 20 0;
+#X connect 23 7 21 0;
+#X connect 24 0 67 0;
+#X connect 24 1 1 0;
+#X connect 25 0 28 0;
+#X connect 26 0 30 0;
+#X connect 27 0 32 0;
+#X connect 28 0 43 0;
+#X connect 28 1 29 1;
+#X connect 29 0 58 0;
+#X connect 30 0 44 0;
+#X connect 30 1 31 1;
+#X connect 31 0 58 0;
+#X connect 32 0 45 0;
+#X connect 32 1 33 1;
+#X connect 33 0 58 0;
+#X connect 34 0 46 0;
+#X connect 34 1 35 1;
+#X connect 35 0 58 0;
+#X connect 36 0 47 0;
+#X connect 36 1 37 1;
+#X connect 37 0 58 0;
+#X connect 38 0 48 0;
+#X connect 38 1 39 1;
+#X connect 39 0 58 0;
+#X connect 40 0 49 0;
+#X connect 40 1 41 1;
+#X connect 41 0 58 0;
+#X connect 42 0 59 0;
+#X connect 43 0 60 0;
+#X connect 44 0 61 0;
+#X connect 45 0 62 0;
+#X connect 46 0 63 0;
+#X connect 47 0 64 0;
+#X connect 48 0 65 0;
+#X connect 49 0 66 0;
+#X connect 50 0 3 0;
+#X connect 51 0 29 0;
+#X connect 52 0 31 0;
+#X connect 53 0 33 0;
+#X connect 54 0 35 0;
+#X connect 55 0 37 0;
+#X connect 56 0 39 0;
+#X connect 57 0 41 0;
+#X connect 59 0 50 0;
+#X connect 60 0 51 0;
+#X connect 61 0 52 0;
+#X connect 62 0 53 0;
+#X connect 63 0 54 0;
+#X connect 64 0 55 0;
+#X connect 65 0 56 0;
+#X connect 66 0 57 0;
+#X connect 67 0 9 0;

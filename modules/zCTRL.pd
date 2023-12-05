@@ -1,0 +1,69 @@
+#N canvas 1879 214 529 311 10;
+#X declare -stdpath motex;
+#X declare -path RSVP;
+#X obj 100 100 cnv 15 120 120 empty empty empty 20 12 0 14 -1 -66577
+0;
+#X obj 105 105 cnv 15 110 110 empty empty CTRL 80 10 0 12 -233017 -66577
+0;
+#X obj 112 116 vsl 10 90 0 127 0 0 empty empty empty 0 -9 0 10 -260097
+-1 -1 0 1;
+#X obj 151 116 vsl 10 90 0 1 0 0 empty \$0-lineal empty 0 -9 0 10 -4160
+-204786 -1 0 1;
+#X obj 125 116 vsl 10 90 0 1 0 0 empty \$0-mirr-inv empty 0 -9 0 10
+-4160 -204800 -1 0 1;
+#X obj 112 26 ctlin;
+#X obj 186 192 tgl-but_pre DSP-ctrl;
+#X obj 164 116 vsl 10 90 0 1 0 0 empty \$0-inverse empty 0 -9 0 10
+-4160 -204786 -1 0 1;
+#X obj 138 116 vsl 10 90 -1 0 0 0 empty \$0-mirr-inv empty 0 -9 0 10
+-4160 -204800 -1 0 1;
+#N canvas 0 50 450 300 controlers 0;
+#X obj 150 110 / 127;
+#X obj 162 180 -;
+#X msg 162 160 1 \$1;
+#X obj 208 94 - 64;
+#X obj 208 127 / 64;
+#X obj 249 128 / -64;
+#X obj 150 54 t a a;
+#X obj 150 23 inlet;
+#X obj 306 273 s zCTRL-controls-\$1;
+#X msg 350 151 mirr \$1;
+#X msg 318 178 mirr-inv \$1;
+#X msg 257 205 inverse \$1;
+#X msg 127 250 lineal \$1;
+#X obj 249 149 send \$0-mirr;
+#X obj 208 171 send \$0-mirr-inv;
+#X obj 163 200 send \$0-inverse;
+#X obj 150 222 send \$0-lineal;
+#X connect 0 0 2 0;
+#X connect 0 0 12 0;
+#X connect 0 0 11 0;
+#X connect 0 0 16 0;
+#X connect 1 0 15 0;
+#X connect 2 0 1 0;
+#X connect 3 0 4 0;
+#X connect 3 0 5 0;
+#X connect 4 0 10 0;
+#X connect 4 0 14 0;
+#X connect 5 0 9 0;
+#X connect 5 0 13 0;
+#X connect 6 0 0 0;
+#X connect 6 1 3 0;
+#X connect 7 0 6 0;
+#X connect 9 0 8 0;
+#X connect 10 0 8 0;
+#X connect 11 0 8 0;
+#X connect 12 0 8 0;
+#X restore 131 70 pd controlers;
+#X obj 332 42 declare -stdpath motex;
+#X floatatom 188 128 3 0 0 3 sig. sig-in-ctrl -, f 3;
+#X obj 179 180 cnv 5 32 9 empty empty ON/OFF 2 5 0 8 -1 -262144 0;
+#X obj 332 60 declare -path RSVP;
+#X obj 186 271 s to_pd~_subprocess;
+#X obj 186 235 message-to-pd~ DSP \$1;
+#X connect 2 0 9 0;
+#X connect 5 0 2 0;
+#X connect 5 0 9 0;
+#X connect 6 0 15 0;
+#X connect 15 0 14 0;
+#X coords 0 -1 1 1 120 120 2 100 100;

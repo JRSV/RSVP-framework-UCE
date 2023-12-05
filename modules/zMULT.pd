@@ -1,0 +1,192 @@
+#N struct 1661-color float x float y float farbe;
+#N struct 1661-color-display float x float y float farbe;
+#N struct 1664-color float x float y float farbe;
+#N struct 1664-color-display float x float y float farbe;
+#N struct 1658-matrixctrl float x float y float size float color float
+state;
+#N canvas 777 142 1011 531 10;
+#X declare -path RSVP;
+#X declare -path ../sys.comunication;
+#X declare -path ../;
+#X obj 200 100 cnv 15 220 200 empty \$2-canvas empty 20 12 0 14 #14e814
+#202020 0;
+#X obj 205 105 cnv 15 210 190 empty empty empty 6 80 0 12 #e0e0e0 #000000
+0;
+#X obj 838 33 declare -path RSVP;
+#X obj 278 111 cnv 10 33 13 empty empty fback 2 7 0 10 #000000 #00f8fc
+0;
+#X obj 205 130 cnv 5 32 9 empty empty ON/OFF 2 5 0 8 #000000 #fcfcfc
+0;
+#X obj 558 451 s to_pd~_subprocess;
+#X obj 558 109 pack f 10;
+#X obj 558 131 line;
+#X obj 600 181 pack f 10;
+#X obj 600 201 line;
+#X obj 671 279 RSVP-Gclip 0 99;
+#X obj 558 153 message-to-pd~ del-time-1 \$1-\$2;
+#X obj 600 224 message-to-pd~ del-time-2 \$1-\$2;
+#X obj 773 303 message-to-pd~ feedback \$1-\$2;
+#X obj 630 252 message-to-pd~ DSP \$1-\$2;
+#X obj 733 56 declare -path ../sys.comunication;
+#X obj 210 274 cnv 5 80 15 empty \$1.\$2.\$3.\$4.color-tag \$2->\$3.\$4
+4 8 0 10 #f430f0 #fcfcfc 0;
+#N canvas 0 96 450 391 tag 0;
+#X obj 131 252 list prepend color;
+#X obj 131 280 route list;
+#X obj 84 65 \$4;
+#X obj 85 87 sel 1 2 3 4 5 6 7 8;
+#X obj 84 42 loadbang;
+#X obj 131 309 s \$1.\$2.\$3.\$4.color-tag;
+#X msg 85 111 13 0 0;
+#X msg 98 135 14 0 2;
+#X msg 112 159 15 0 2;
+#X msg 126 181 16 0 0;
+#X msg 140 115 17 0 12;
+#X msg 154 137 18 0 0;
+#X msg 168 163 19 0 0;
+#X msg 182 188 0 0 12;
+#X connect 0 0 1 0;
+#X connect 1 0 5 0;
+#X connect 2 0 3 0;
+#X connect 3 0 6 0;
+#X connect 3 1 7 0;
+#X connect 3 2 8 0;
+#X connect 3 3 9 0;
+#X connect 3 4 10 0;
+#X connect 3 5 11 0;
+#X connect 3 6 12 0;
+#X connect 3 7 13 0;
+#X connect 4 0 2 0;
+#X connect 6 0 0 0;
+#X connect 7 0 0 0;
+#X connect 8 0 0 0;
+#X connect 9 0 0 0;
+#X connect 10 0 0 0;
+#X connect 11 0 0 0;
+#X connect 12 0 0 0;
+#X connect 13 0 0 0;
+#X restore 31 46 pd tag;
+#X obj 26 496 s to_pd~_subprocess;
+#X obj 310 229 cnv 10 25 10 empty \$0-label fmod 3 5 0 8 #000000 #00f8fc
+0;
+#X obj 369 222 cnv 10 25 10 empty \$0-label amod 3 5 0 8 #000000 #00f8fc
+0;
+#X obj 82 91 loadbang;
+#X obj 82 116 del 100;
+#X msg 82 142 color 45 721;
+#X obj 215 189 cnv 5 30 12 empty empty IN-> 5 6 0 8 #000000 #fcfcfc
+0;
+#X obj 215 207 cnv 5 30 12 empty empty TDEL 5 6 0 8 #000000 #fcfcfc
+0;
+#X obj 215 225 cnv 5 30 12 empty empty RMOD 5 6 0 8 #000000 #fcfcfc
+0;
+#X obj 323 384 s to_pd~_subprocess;
+#X obj 323 360 pr.pnd CONNECTIONS-\$1-\$2;
+#X obj 372 111 cnv 10 25 10 empty \$0-label TVOL 3 5 0 8 #000000 #00f8fc
+0;
+#X obj 205 165 cnv 10 25 10 empty empty TDLY 3 5 0 8 #000000 #00f8fc
+0;
+#X obj 390 176 cnv 10 25 10 empty empty RMOD 3 5 0 8 #000000 #00f8fc
+0;
+#X obj 304 255 ./RSVP/LP.manager \$1 \$2 prst;
+#X obj 316 109 nbx_pre \$1-\$2 L TVOL;
+#X obj 334 188 nbx_pre \$1-\$2 L RVOL;
+#X obj 306 190 cnv 10 25 10 empty \$0-label RVOL 3 5 0 8 #000000 #00f8fc
+0;
+#X obj 310 212 nbx_pre \$1-\$2 L fmod;
+#X obj 338 233 nbx_pre \$1-\$2 L amod;
+#X obj 221 109 nbx_pre \$1-\$2 L fback;
+#X obj 257 149 hsl_pre \$1-\$2 L tdelay_2;
+#X obj 323 333 msc_pre \$1-\$2 L mult;
+#X obj 41 207 cnv 5 8 12 empty empty O 2 6 0 8 #000000 #fcfcfc 0;
+#X obj 41 217 cnv 5 8 12 empty empty U 2 6 0 8 #000000 #fcfcfc 0;
+#X obj 41 227 cnv 5 8 12 empty empty T 2 6 0 8 #000000 #fcfcfc 0;
+#X obj 270 240 cnv 5 8 12 empty empty R 2 6 0 8 #000000 #fcfcfc 0;
+#X obj 270 250 cnv 5 8 12 empty empty N 2 6 0 8 #000000 #fcfcfc 0;
+#X obj 270 260 cnv 5 8 12 empty empty G 2 6 0 8 #000000 #fcfcfc 0;
+#X obj 253 240 cnv 5 8 12 empty empty T 2 6 0 8 #000000 #fcfcfc 0;
+#X obj 253 250 cnv 5 8 12 empty empty D 2 6 0 8 #000000 #fcfcfc 0;
+#X obj 253 260 cnv 5 8 12 empty empty L 2 6 0 8 #000000 #fcfcfc 0;
+#X obj 248 186 ./jmmmp/matrixctrl 2 3 17;
+#X obj 677 330 RSVP-Gclip 0 1;
+#X obj 103 439 RSVP-Gclip 0 1;
+#X floatatom 304 428 5 0 0 0 - - - 0;
+#X obj 61 381 message-to-pd~ amod \$1-\$2;
+#X obj 26 350 message-to-pd~ fmod \$1-\$2;
+#X obj 845 11 declare -path ../;
+#X obj 474 482 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 513 474 loadbang;
+#X obj 513 497 audio-module-creator modules/zMLT1~ \$1 \$2 \$3 \$4
+;
+#X obj 220 140 ./customGUI/tgl-but_pre \$1 \$2 DSP;
+#X obj 257 129 hsl_pre \$1-\$2 L tdelay_1;
+#N canvas 845 191 483 492 blinker 0;
+#X obj 49 100 sel 0 1;
+#X obj 49 80 speedlim 500;
+#X obj 113 304 loadbang;
+#X obj 49 27 return-from-pd~ \$1-\$2-sig-in;
+#X obj 49 322 symbol \$2;
+#X msg 49 358 \; \$1-canvas color 12 12 12;
+#X obj 262 268 symbol \$2;
+#X msg 262 319 \; \$1-canvas color 16 12 12;
+#X text 30 431 blinks the border green when signal enters the instrument
+;
+#X obj 76 223 r \$1-\$2-blinker-off;
+#X obj 76 246 sel 0;
+#X text 63 391 black;
+#X text 290 354 green;
+#X text 64 267 turns off when DSP off;
+#X connect 0 0 4 0;
+#X connect 0 1 6 0;
+#X connect 1 0 0 0;
+#X connect 2 0 4 0;
+#X connect 3 0 1 0;
+#X connect 4 0 5 0;
+#X connect 6 0 7 0;
+#X connect 9 0 10 0;
+#X connect 10 0 4 0;
+#X restore 31 26 pd blinker;
+#X obj 73 205 s \$1-\$2-blinker-off;
+#X obj 231 173 cnv 2 185 2 empty empty empty 20 12 0 14 #000000 #404040
+0;
+#X obj 772 359 message-to-pd~ send vol-\$1-\$2-L-instrA;
+#X obj 192 474 message-to-pd~ send vol-\$1-\$2-L-instrB;
+#X connect 6 0 7 0;
+#X connect 7 0 11 0;
+#X connect 8 0 9 0;
+#X connect 9 0 12 0;
+#X connect 10 0 38 0;
+#X connect 10 1 13 0;
+#X connect 11 0 5 0;
+#X connect 12 0 5 0;
+#X connect 13 0 5 0;
+#X connect 14 0 5 0;
+#X connect 21 0 22 0;
+#X connect 22 0 23 0;
+#X connect 23 0 50 0;
+#X connect 28 0 27 0;
+#X connect 33 0 51 0;
+#X connect 34 0 52 0;
+#X connect 36 0 55 0;
+#X connect 37 0 54 0;
+#X connect 38 0 10 0;
+#X connect 39 0 8 0;
+#X connect 40 0 28 0;
+#X connect 40 0 50 0;
+#X connect 50 0 40 0;
+#X connect 50 0 28 0;
+#X connect 51 0 33 0;
+#X connect 51 1 65 0;
+#X connect 52 0 34 0;
+#X connect 52 1 66 0;
+#X connect 54 0 18 0;
+#X connect 55 0 18 0;
+#X connect 57 0 59 0;
+#X connect 58 0 59 0;
+#X connect 60 0 14 0;
+#X connect 60 0 63 0;
+#X connect 61 0 6 0;
+#X connect 65 0 5 0;
+#X connect 66 0 18 0;
+#X coords 0 -1 1 1 220 200 2 200 100;

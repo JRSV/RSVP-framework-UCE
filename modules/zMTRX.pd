@@ -1,0 +1,252 @@
+#N struct 1155-color float x float y float farbe;
+#N struct 1155-color-display float x float y float farbe;
+#N struct 1158-color float x float y float farbe;
+#N struct 1158-color-display float x float y float farbe;
+#N struct 1152-matrixctrl float x float y float size float color float
+state;
+#N canvas 1373 138 703 481 10;
+#X declare -path RSVP;
+#X declare -path ../sys.comunication;
+#X declare -path ../;
+#X obj 100 100 cnv 15 255 270 empty empty empty 20 12 0 14 #202020
+#fcfcfc 0;
+#X obj 105 105 cnv 15 245 260 empty empty empty 4 250 0 14 #dcdcdc
+#000000 0;
+#X msg 173 44 reset;
+#X obj 75 23 loadbang;
+#X obj 75 46 del 100;
+#X msg 75 68 color 45 721;
+#N canvas 871 50 450 300 clear 0;
+#X obj 100 100 bng 11 250 50 0 empty empty CLEAR 13 6 0 8 #207094 #fc0400
+#000000;
+#X obj 100 144 send clear;
+#X connect 0 0 1 0;
+#X coords 0 -1 1 1 39 11 2 100 100;
+#X restore 107 330 pd clear;
+#X obj 173 22 r clear;
+#X obj 102 115 cnv 10 69 14 empty empty IN.1-> 33 7 0 10 #202020 #fcfcfc
+0;
+#X obj 554 133 cnv 5 9 16 empty empty S 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 554 148 cnv 5 9 16 empty empty D 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 554 163 cnv 5 9 16 empty empty L 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 534 133 cnv 5 9 16 empty empty V 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 534 148 cnv 5 9 16 empty empty C 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 534 163 cnv 5 9 16 empty empty R 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 444 133 cnv 5 9 16 empty empty H 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 444 148 cnv 5 9 16 empty empty G 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 444 163 cnv 5 9 16 empty empty H 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 544 133 cnv 5 9 16 empty empty H 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 544 148 cnv 5 9 16 empty empty R 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 544 163 cnv 5 9 16 empty empty M 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 494 133 cnv 5 9 16 empty empty C 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 494 148 cnv 5 9 16 empty empty H 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 494 163 cnv 5 9 16 empty empty P 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 297 36 declare -path RSVP;
+#X obj 488 367 s to_pd~_subprocess;
+#X msg 534 62 matrixctrl 5 7 20;
+#X msg 534 82 matrixctrl 8 10 17;
+#X obj 331 319 cnv 5 9 16 empty empty A 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 331 334 cnv 5 9 16 empty empty N 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 331 349 cnv 5 9 16 empty empty L 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 514 133 cnv 5 9 16 empty empty G 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 514 148 cnv 5 9 16 empty empty R 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 514 163 cnv 5 9 16 empty empty N 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 524 133 cnv 5 9 16 empty empty R 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 524 148 cnv 5 9 16 empty empty V 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 524 163 cnv 5 9 16 empty empty B 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 464 133 cnv 5 9 16 empty empty F 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 464 148 cnv 5 9 16 empty empty R 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 464 163 cnv 5 9 16 empty empty Z 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 474 133 cnv 5 9 16 empty empty C 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 474 148 cnv 5 9 16 empty empty H 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 474 163 cnv 5 9 16 empty empty P 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 102 132 cnv 10 69 14 empty empty IN.2-> 33 7 0 10 #202020 #fcfcfc
+0;
+#X obj 102 149 cnv 10 69 14 empty empty FX.01-> 25 7 0 10 #202020 #fcfcfc
+0;
+#X obj 102 166 cnv 10 69 14 empty empty FX.02-> 25 7 0 10 #202020 #fcfcfc
+0;
+#X obj 102 183 cnv 10 69 14 empty empty FX.03-> 25 7 0 10 #202020 #fcfcfc
+0;
+#X obj 102 251 cnv 10 69 14 empty empty FX.07-> 25 7 0 10 #202020 #fcfcfc
+0;
+#X obj 102 217 cnv 10 69 14 empty empty FX.05-> 25 7 0 10 #202020 #fcfcfc
+0;
+#X obj 102 234 cnv 10 69 14 empty empty FX.06-> 25 7 0 10 #202020 #fcfcfc
+0;
+#X obj 434 202 cnv 10 69 14 empty empty S/DELAY-> 15 7 0 10 #202020
+#fcfcfc 0;
+#X obj 484 133 cnv 5 9 16 empty empty D 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 484 148 cnv 5 9 16 empty empty E 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 484 163 cnv 5 9 16 empty empty L 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 177 320 cnv 5 9 16 empty empty F 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 177 334 cnv 5 9 16 empty empty X 2 8 0 10 #fc0400 #fcfcfc 0
+;
+#X obj 177 350 cnv 5 9 16 empty empty 1 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 454 133 cnv 5 9 16 empty empty G 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 454 148 cnv 5 9 16 empty empty S 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 454 163 cnv 5 9 16 empty empty T 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 314 319 cnv 5 9 16 empty empty 2 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 314 334 cnv 5 9 16 empty empty B 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 314 349 cnv 5 9 16 empty empty X 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 434 133 cnv 5 9 16 empty empty L 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 434 148 cnv 5 9 16 empty empty O 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 434 163 cnv 5 9 16 empty empty W 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 102 200 cnv 10 69 14 empty empty FX.04-> 25 7 0 10 #202020 #fcfcfc
+0;
+#X obj 102 268 cnv 10 69 14 empty empty FX.08-> 25 7 0 10 #202020 #fcfcfc
+0;
+#X obj 113 284 cnv 4 60 35 empty empty empty 15 7 0 10 #fc8000 #fcfcfc
+0;
+#X obj 434 184 cnv 4 165 5 empty empty empty 15 7 0 10 #000000 #fcfcfc
+0;
+#X obj 434 191 cnv 4 165 5 empty empty empty 15 7 0 10 #000000 #fcfcfc
+0;
+#X obj 112 286 cnv 10 59 25 empty empty 2BXHIGH-> 5 7 0 10 #202020
+#fcfcfc 0;
+#X obj 112 303 cnv 10 59 14 empty empty 2BX.LOW-> 5 7 0 10 #202020
+#fcfcfc 0;
+#X obj 504 133 cnv 5 9 16 empty empty R 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 504 148 cnv 5 9 16 empty empty M 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 504 163 cnv 5 9 16 empty empty D 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 105 284 cnv 4 7 35 empty empty empty 5 7 0 10 #fc8000 #fcfcfc
+0;
+#X obj 488 253 msc_pre \$1 \$2 mtrx;
+#X obj 488 346 pr.pnd CONNECTIONS-\$1-\$2;
+#X obj 194 319 cnv 5 9 16 empty empty F 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 194 334 cnv 5 9 16 empty empty X 2 8 0 10 #fc8000 #fcfcfc 0
+;
+#X obj 194 349 cnv 5 9 16 empty empty 2 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 211 319 cnv 5 9 16 empty empty F 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 211 334 cnv 5 9 16 empty empty X 2 8 0 10 #f8fc00 #7c7c7c 0
+;
+#X obj 211 349 cnv 5 9 16 empty empty 3 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 228 319 cnv 5 9 16 empty empty F 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 228 334 cnv 5 9 16 empty empty X 2 8 0 10 #00fc04 #fcfcfc 0
+;
+#X obj 228 349 cnv 5 9 16 empty empty 4 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 245 319 cnv 5 9 16 empty empty F 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 245 334 cnv 5 9 16 empty empty X 2 8 0 10 #00f8fc #fcfcfc 0
+;
+#X obj 245 349 cnv 5 9 16 empty empty 5 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 262 319 cnv 5 9 16 empty empty F 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 262 334 cnv 5 9 16 empty empty X 2 8 0 10 #0400fc #fcfcfc 0
+;
+#X obj 262 349 cnv 5 9 16 empty empty 6 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 280 319 cnv 5 9 16 empty empty F 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 280 334 cnv 5 9 16 empty empty X 2 8 0 10 #fc00fc #fcfcfc 0
+;
+#X obj 280 349 cnv 5 9 16 empty empty 7 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 297 319 cnv 5 9 16 empty empty F 2 8 0 10 #202020 #fcfcfc 0
+;
+#X obj 297 334 cnv 5 9 16 empty empty X 2 8 0 10 #fcfcfc #000000 0
+;
+#X obj 297 349 cnv 5 9 16 empty empty 8 2 8 0 10 #202020 #fcfcfc 0
+;
+#X msg 534 22 matrixctrl 11 12 17;
+#X msg 534 42 matrixctrl 10 12 17;
+#X obj 173 113 matrixctrl 10 12 17;
+#N canvas 976 183 158 120 2BX-freq 1;
+#X obj 17 32 ./modules/zXOVER \$1 \$2 XOVER;
+#X restore 150 426 pd 2BX-freq;
+#X obj 151 332 tgl 15 0 empty empty 2BXF -5 22 0 12 #fc8000 #000000
+#000000 0 1;
+#X obj 297 59 declare -path ../sys.comunication;
+#X obj 102 348 cnv 5 40 12 empty empty \$2-\$3 4 7 0 8 #000000 #fcfcfc
+0;
+#X obj 107 153 cnv 5 7 7 empty empty empty 20 12 0 14 #fc0400 #404040
+0;
+#X obj 107 169 cnv 5 7 7 empty empty empty 20 12 0 14 #fc8000 #404040
+0;
+#X obj 107 186 cnv 5 7 7 empty empty empty 20 12 0 14 #f8fc00 #404040
+0;
+#X obj 107 203 cnv 5 7 7 empty empty empty 20 12 0 14 #00fc04 #404040
+0;
+#X obj 107 220 cnv 5 7 7 empty empty empty 20 12 0 14 #00f8fc #404040
+0;
+#X obj 107 237 cnv 5 7 7 empty empty empty 20 12 0 14 #0400fc #404040
+0;
+#X obj 107 254 cnv 5 7 7 empty empty empty 20 12 0 14 #fc00fc #404040
+0;
+#X obj 107 272 cnv 5 7 7 empty empty empty 20 12 0 14 #fcfcfc #404040
+0;
+#X obj 344 394 loadbang;
+#X obj 344 416 audio-module-creator modules/zMTRX~ \$1 \$2 \$3 \$4
+;
+#X obj 407 393 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 151 386 \; pd-2BX-freq vis \$1;
+#X obj 297 15 declare -path ../;
+#X connect 2 0 102 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 102 0;
+#X connect 7 0 2 0;
+#X connect 77 0 78 0;
+#X connect 77 0 102 0;
+#X connect 78 0 25 0;
+#X connect 102 0 77 0;
+#X connect 102 0 78 0;
+#X connect 104 0 118 0;
+#X connect 115 0 116 0;
+#X connect 117 0 116 0;
+#X coords 0 -1 1 1 256 270 2 100 100;

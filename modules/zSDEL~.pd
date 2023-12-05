@@ -1,0 +1,338 @@
+#N canvas 253 146 1113 622 10;
+#N canvas 89 108 769 659 fft-analysis 0;
+#X obj 99 80 *~;
+#X obj 99 15 inlet~;
+#X obj 99 104 rfft~;
+#X obj 120 56 tabreceive~ \$0-hann;
+#X obj 280 597 *~;
+#X obj 324 580 tabreceive~ \$0-hann;
+#X obj 280 524 rifft~;
+#X obj 280 629 outlet~;
+#X obj 301 286 wrap~;
+#X obj 280 310 -~;
+#X obj 280 361 /~ 44.1;
+#X obj 280 553 /~ 64;
+#X obj 415 317 *~;
+#X obj 379 318 *~;
+#X obj 458 322 samplerate~;
+#X obj 458 300 loadbang;
+#X obj 458 344 / 1000;
+#X obj 99 139 *~;
+#X obj 140 139 *~;
+#X obj 332 93 *~ 0.0125;
+#X obj 392 47 r \$0-gain-depth;
+#X obj 392 69 * 0.015;
+#X obj 280 335 *~ 1024;
+#X obj 512 595 *~;
+#X obj 556 578 tabreceive~ \$0-hann;
+#X obj 512 522 rifft~;
+#X obj 512 627 outlet~;
+#X obj 512 551 /~ 64;
+#X obj 532 338 noise~;
+#X obj 532 379 +~ 1;
+#X obj 532 401 /~ 2;
+#X obj 280 483 *~;
+#X obj 376 481 *~;
+#X obj 512 481 *~;
+#X obj 608 479 *~;
+#X obj 575 379 -~ 1;
+#X obj 575 400 abs~;
+#X obj 652 335 noise~;
+#X obj 652 376 +~ 1;
+#X obj 652 398 /~ 2;
+#X obj 695 376 -~ 1;
+#X obj 695 397 abs~;
+#X obj 280 259 *~ 0.4;
+#X obj 43 77 env~;
+#X floatatom 43 100 5 0 0 0 - - -;
+#X obj 290 214 env~;
+#X floatatom 290 237 5 0 0 0 - - -;
+#X obj 429 227 inlet~ feedback;
+#X obj 441 166 block~ 2048 2;
+#X obj 280 193 inlet~ delay;
+#X obj 438 252 env~;
+#X floatatom 438 275 5 0 0 0 - - -;
+#X obj 332 22 tabreceive~ gain-\$1-\$2;
+#X obj 140 164 delwrite~ \$1-\$2-im 12000;
+#X obj 99 189 delwrite~ \$1-\$2-re 12000;
+#X obj 376 392 delread4~ \$1-\$2-im;
+#X obj 280 392 delread4~ \$1-\$2-re;
+#X connect 0 0 2 0;
+#X connect 1 0 0 0;
+#X connect 1 0 43 0;
+#X connect 2 0 17 0;
+#X connect 2 1 18 0;
+#X connect 3 0 0 1;
+#X connect 4 0 7 0;
+#X connect 5 0 4 1;
+#X connect 6 0 11 0;
+#X connect 8 0 9 1;
+#X connect 9 0 22 0;
+#X connect 10 0 55 0;
+#X connect 10 0 56 0;
+#X connect 11 0 4 0;
+#X connect 12 0 53 0;
+#X connect 13 0 54 0;
+#X connect 14 0 16 0;
+#X connect 15 0 14 0;
+#X connect 16 0 10 1;
+#X connect 17 0 54 0;
+#X connect 18 0 53 0;
+#X connect 19 0 18 1;
+#X connect 19 0 17 1;
+#X connect 20 0 21 0;
+#X connect 21 0 19 1;
+#X connect 22 0 10 0;
+#X connect 23 0 26 0;
+#X connect 24 0 23 1;
+#X connect 25 0 27 0;
+#X connect 27 0 23 0;
+#X connect 28 0 29 0;
+#X connect 28 0 35 0;
+#X connect 29 0 30 0;
+#X connect 30 0 31 1;
+#X connect 31 0 6 0;
+#X connect 32 0 6 1;
+#X connect 33 0 25 0;
+#X connect 34 0 25 1;
+#X connect 35 0 36 0;
+#X connect 36 0 33 1;
+#X connect 37 0 38 0;
+#X connect 37 0 40 0;
+#X connect 38 0 39 0;
+#X connect 39 0 32 1;
+#X connect 40 0 41 0;
+#X connect 41 0 34 1;
+#X connect 42 0 8 0;
+#X connect 42 0 9 0;
+#X connect 43 0 44 0;
+#X connect 45 0 46 0;
+#X connect 47 0 13 1;
+#X connect 47 0 12 1;
+#X connect 47 0 50 0;
+#X connect 49 0 42 0;
+#X connect 49 0 45 0;
+#X connect 50 0 51 0;
+#X connect 52 0 19 0;
+#X connect 55 0 12 0;
+#X connect 55 0 32 0;
+#X connect 55 0 34 0;
+#X connect 56 0 13 0;
+#X connect 56 0 31 0;
+#X connect 56 0 33 0;
+#X restore 225 149 pd fft-analysis;
+#N canvas 1088 62 600 441 Hann-window 0;
+#N canvas 0 50 450 300 (subpatch) 0;
+#X array \$0-hann 2048 float 0;
+#X coords 0 1 2047 0 200 120 1;
+#X restore 293 249 graph;
+#X msg 171 263 0;
+#X obj 65 312 osc~;
+#X obj 65 264 samplerate~;
+#X obj 65 335 *~ -0.5;
+#X obj 65 358 +~ 0.5;
+#X obj 57 383 tabwrite~ \$0-hann;
+#X text 279 241 1;
+#X text 272 359 0;
+#X text 288 372 0;
+#X obj 57 241 bng 15 250 50 0 empty empty empty 0 -6 0 8 -262144 -1
+-1;
+#X text 336 221 Hann window;
+#X text 113 310 period 512;
+#X text 90 215 recalculate Hann;
+#X text 125 230 window table;
+#X obj 57 146 loadbang;
+#X msg 79 179 \; pd dsp 1;
+#X text 40 27 The Hann window is now recomputed on 'loadbang' to make
+the file smaller (it doesn't have to be saved with the array.);
+#X obj 65 288 / 2048;
+#X text 475 375 2048;
+#X connect 1 0 2 1;
+#X connect 2 0 4 0;
+#X connect 3 0 18 0;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 10 0 3 0;
+#X connect 10 0 1 0;
+#X connect 10 0 6 0;
+#X connect 15 0 10 0;
+#X connect 15 0 16 0;
+#X connect 18 0 2 0;
+#X restore 546 367 pd Hann-window;
+#N canvas 0 50 450 300 (subpatch) 0;
+#X array feedback-\$1-\$2 1024 float 2;
+#X coords 0 1 1024 0 150 60 1 0 0;
+#X restore 665 473 graph;
+#N canvas 0 50 450 300 (subpatch) 0;
+#X array gain-\$1-\$2 1024 float 2;
+#X coords 0 1 1024 -0.01 150 60 1 0 0;
+#X restore 665 552 graph;
+#N canvas 0 50 450 278 (subpatch) 0;
+#X array delay-\$1-\$2 1024 float 3;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#A 1000 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 1024 1024 0 150 70 1 0 0;
+#X restore 665 385 graph;
+#X obj 471 238 DSP-ON;
+#X obj 504 267 switch~;
+#X obj 225 301 *~;
+#X obj 327 300 *~;
+#X obj 455 517 *~;
+#X obj 369 338 /~ 2;
+#X obj 226 546 throw~ 2master_L;
+#X obj 328 569 throw~ 2master_R;
+#X obj 369 405 s vu-\$1;
+#X obj 276 450 /~ 2;
+#X obj 369 359 env~;
+#X obj 225 229 *~;
+#X obj 327 228 *~;
+#X obj 277 500 *~;
+#X obj 343 195 line~;
+#X msg 343 173 \$1 20;
+#X obj 351 483 line~;
+#X msg 351 461 \$1 20;
+#X obj 369 384 - 90;
+#X obj 609 167 stdout;
+#X obj 516 237 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#N canvas 0 50 450 278 (subpatch) 0;
+#X array CH-SPCT-\$1 8 float 3;
+#A 0 0.342855 0.171429 0.100001 0.057144 0.057144 0.0857152 0.157143
+0.414285;
+#X coords 0 1 8 0 150 70 1 0 0;
+#X restore 666 297 graph;
+#X obj 65 274 r \$1-CH-SPCT;
+#X obj 685 19 r \$1-feedback;
+#X text 50 253 copies the USERS TAB;
+#X obj 591 52 r chord-spct;
+#X obj 550 211 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 65 297 send CH-SPCT-\$1;
+#X msg 684 99 \; feedback-\$2 const \$1;
+#X obj 685 78 pack f s;
+#X obj 730 39 loadbang;
+#X obj 786 38 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 794 226 pack f s;
+#X obj 794 157 loadbang;
+#X msg 794 249 \; gain-\$2 const \$1;
+#X msg 794 203 1;
+#X obj 794 182 t b b;
+#X obj 492 443 stdout;
+#X obj 46 82 env~, f 5;
+#X obj 46 177 stdout;
+#X obj 46 101 > 0;
+#X obj 46 120 change;
+#X obj 46 139 speedlim;
+#X floatatom 93 103 5 0 0 0 - - -;
+#X obj 420 375 dac~ \$3;
+#X obj 267 103 tabreceive~ delay-\$1-\$2;
+#X obj 311 123 tabreceive~ feedback-\$1-\$2;
+#X obj 343 150 r vol-\$1-\$2-send;
+#X obj 46 158 message-to-pd~ sig-in \$1-\$2;
+#X obj 471 208 r \$1-\$2-DSP;
+#X obj 351 439 r send-\$1-\$2-send;
+#X obj 492 418 message-to-pd~ vmtr \$1-\$2;
+#X obj 839 200 symbol \$1-\$2;
+#X obj 730 58 symbol \$1-\$2;
+#X obj 609 145 message-to-pd~ sig-in \$1-\$2;
+#X obj 31 470 ch-spctrl_del \$1-\$2;
+#X obj 31 448 r \$1-\$2-chord-text;
+#X text 35 491 magic inside -A;
+#X msg 582 287 set \$1;
+#X obj 582 217 loadbang;
+#X obj 582 240 i \$3;
+#X obj 582 263 + 1;
+#X obj 226 20 r~ to_\$3;
+#X obj 455 571 send~ from_\$3;
+#X connect 0 0 16 0;
+#X connect 0 0 14 0;
+#X connect 0 1 17 0;
+#X connect 0 1 14 0;
+#X connect 5 0 7 1;
+#X connect 5 0 8 1;
+#X connect 5 0 9 1;
+#X connect 5 1 6 0;
+#X connect 5 1 23 0;
+#X connect 7 0 10 0;
+#X connect 7 0 11 0;
+#X connect 8 0 10 0;
+#X connect 8 0 12 0;
+#X connect 9 0 68 0;
+#X connect 10 0 15 0;
+#X connect 10 0 49 0;
+#X connect 14 0 18 0;
+#X connect 15 0 23 0;
+#X connect 16 0 7 0;
+#X connect 17 0 8 0;
+#X connect 18 0 9 0;
+#X connect 19 0 16 1;
+#X connect 19 0 17 1;
+#X connect 20 0 19 0;
+#X connect 21 0 18 1;
+#X connect 22 0 21 0;
+#X connect 23 0 13 0;
+#X connect 23 0 56 0;
+#X connect 27 0 32 0;
+#X connect 28 0 34 0;
+#X connect 31 0 5 0;
+#X connect 34 0 33 0;
+#X connect 35 0 58 0;
+#X connect 36 0 58 0;
+#X connect 37 0 39 0;
+#X connect 38 0 41 0;
+#X connect 40 0 37 0;
+#X connect 41 0 40 0;
+#X connect 41 1 57 0;
+#X connect 43 0 45 0;
+#X connect 43 0 48 0;
+#X connect 45 0 46 0;
+#X connect 46 0 47 0;
+#X connect 47 0 53 0;
+#X connect 50 0 0 1;
+#X connect 51 0 0 2;
+#X connect 52 0 20 0;
+#X connect 53 0 44 0;
+#X connect 54 0 5 0;
+#X connect 54 0 25 0;
+#X connect 55 0 22 0;
+#X connect 56 0 42 0;
+#X connect 57 0 37 1;
+#X connect 58 0 34 1;
+#X connect 59 0 24 0;
+#X connect 61 0 60 0;
+#X connect 63 0 49 0;
+#X connect 64 0 65 0;
+#X connect 65 0 66 0;
+#X connect 66 0 63 0;
+#X connect 67 0 0 0;
+#X connect 67 0 43 0;

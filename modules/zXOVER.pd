@@ -1,0 +1,44 @@
+#N canvas 1161 669 681 409 10;
+#X declare -path RSVP;
+#X obj 100 100 cnv 15 100 60 empty \$1-canvas empty 20 12 0 14 #202020
+#202020 0;
+#X obj 105 105 cnv 15 90 50 empty empty 2BXOVER 8 11 0 14 #e0e0e0 #404040
+0;
+#X obj 103 224 s to_pd~_subprocess;
+#X obj 56 40 declare -path RSVP;
+#X obj 158 127 cnv 15 38 15 empty empty Cutoff 5 8 0 8 #0400fc #dcdcdc
+0;
+#N canvas 849 253 450 300 blinker 0;
+#X obj 49 68 sel 0 1;
+#X obj 49 48 speedlim 500;
+#X obj 10 6 loadbang;
+#X obj 49 27 return-from-pd~ \$1-\$2-sig-in;
+#X msg 49 136 \; \$1-canvas color 12 12 12;
+#X obj 245 27 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X msg 129 177 \; \$1-canvas color 16 12 12;
+#X text 27 244 blinks the border green when signal enters the instrument
+;
+#X obj 49 100 symbol \$1;
+#X obj 129 97 symbol \$1;
+#X connect 0 0 8 0;
+#X connect 0 1 9 0;
+#X connect 1 0 0 0;
+#X connect 2 0 8 0;
+#X connect 3 0 1 0;
+#X connect 5 0 0 0;
+#X connect 8 0 4 0;
+#X connect 9 0 6 0;
+#X restore 415 56 pd blinker;
+#X obj 260 71 loadbang;
+#X obj 103 198 message-to-pd~ 2BX-freq \$1-\$2;
+#X obj 233 71 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 260 94 i 1500;
+#X obj 104 126 nbx_pre \$1 \$2 Xfreq;
+#X connect 6 0 9 0;
+#X connect 7 0 2 0;
+#X connect 8 0 9 0;
+#X connect 9 0 10 0;
+#X connect 10 0 7 0;
+#X coords 0 -1 1 1 100 60 2 100 100;

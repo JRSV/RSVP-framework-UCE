@@ -1,0 +1,145 @@
+#N canvas 2020 210 858 495 10;
+#X declare -path RSVP;
+#X declare -path ../sys.comunication;
+#X obj 200 100 cnv 15 190 75 empty \$2-canvas empty 20 12 0 14 -33289
+-33289 0;
+#X obj 205 105 cnv 15 180 65 empty empty empty 6 80 0 12 -233017 -1
+0;
+#X obj 708 13 declare -path RSVP;
+#X obj 350 128 cnv 5 32 9 empty empty ON/OFF 2 5 0 8 -1 -262144 0;
+#X obj 429 146 s to_pd~_subprocess;
+#X obj 696 184 RSVP-Gclip 0 99;
+#X obj 359 109 ./customGUI/tgl-but_pre TITLE TDEL tdelay;
+#X obj 429 126 message-to-pd~ DSP \$1-\$2;
+#X obj 638 185 nbx_pre \$1 \$2 fback;
+#X obj 618 34 declare -path ../sys.comunication;
+#N canvas 849 253 450 300 blinker 0;
+#X obj 49 68 sel 0 1;
+#X obj 49 48 speedlim 500;
+#X obj 10 6 loadbang;
+#X obj 49 27 return-from-pd~ \$1-\$2-sig-in;
+#X obj 49 100 symbol \$2;
+#X msg 49 136 \; \$1-canvas color 12 12 12;
+#X obj 129 97 symbol \$2;
+#X obj 245 27 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 129 177 \; \$1-canvas color 16 12 12;
+#X text 27 244 blinks the border green when signal enters the instrument
+;
+#X connect 0 0 4 0;
+#X connect 0 1 6 0;
+#X connect 1 0 0 0;
+#X connect 2 0 4 0;
+#X connect 3 0 1 0;
+#X connect 4 0 5 0;
+#X connect 6 0 8 0;
+#X connect 7 0 0 0;
+#X restore 31 24 pd blinker;
+#X obj 211 152 cnv 5 80 15 empty \$1.\$2.\$3.\$4.color-tag \$2->\$3.\$4
+4 8 0 10 -62784 -262144 0;
+#N canvas 0 96 450 391 tag 0;
+#X obj 131 252 list prepend color;
+#X obj 131 280 route list;
+#X obj 84 65 \$4;
+#X obj 85 87 sel 1 2 3 4 5 6 7 8;
+#X obj 84 42 loadbang;
+#X obj 131 309 s \$1.\$2.\$3.\$4.color-tag;
+#X msg 85 111 13 0 0;
+#X msg 98 135 14 0 2;
+#X msg 112 159 15 0 2;
+#X msg 126 181 16 0 0;
+#X msg 140 115 17 0 12;
+#X msg 154 137 18 0 0;
+#X msg 168 163 19 0 0;
+#X msg 182 188 0 0 12;
+#X connect 0 0 1 0;
+#X connect 1 0 5 0;
+#X connect 2 0 3 0;
+#X connect 3 0 6 0;
+#X connect 3 1 7 0;
+#X connect 3 2 8 0;
+#X connect 3 3 9 0;
+#X connect 3 4 10 0;
+#X connect 3 5 11 0;
+#X connect 3 6 12 0;
+#X connect 3 7 13 0;
+#X connect 4 0 2 0;
+#X connect 6 0 0 0;
+#X connect 7 0 0 0;
+#X connect 8 0 0 0;
+#X connect 9 0 0 0;
+#X connect 10 0 0 0;
+#X connect 11 0 0 0;
+#X connect 12 0 0 0;
+#X connect 13 0 0 0;
+#X restore 31 44 pd tag;
+#X obj 588 33 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 534 32 loadbang;
+#X obj 534 54 audio-module-creator modules/zTDEL~ \$1 \$2 \$3 \$4;
+#X obj 520 13 iemguts/initbang;
+#X text 32 198 label;
+#X text 664 258 argumentos: \; 1 nombre del proyecto \; 2 nombre del
+modulo \; 3 nombre propio \; 4... otros;
+#X text 632 397 *use RSVP preset system as GUI;
+#X text 533 70 This abstraction records its ~ pair in the text file
+used by RSVP to create all modules through dynamic patching, f 49
+;
+#X text 603 207 If necessary to limit the range of RSVP GUI abstractions
+\, use RSVP-Gclip, f 37;
+#X text 21 72 black canvas (BLINKER) is same size as GOP grey canvas
+is 10 pixels shorter in height and width., f 22;
+#X obj 250 233 message-to-pd~ delt-1 \$1-\$2;
+#X obj 417 233 cnv 15 95 15 empty empty mensaje-a-audio 2 7 0 10 -258113
+-262144 0;
+#X obj 270 304 message-to-pd~ delt-2 \$1-\$2;
+#X obj 205 406 s to_pd~_subprocess;
+#X obj 437 306 cnv 15 95 15 empty empty mensaje-a-audio 2 7 0 10 -258113
+-262144 0;
+#X obj 324 365 message-to-pd~ fdbck \$1-\$2;
+#X obj 485 365 cnv 15 95 15 empty empty mensaje-a-audio 2 7 0 10 -258113
+-262144 0;
+#X obj 250 193 / 127;
+#X obj 250 213 * 1000;
+#X obj 270 263 / 127;
+#X obj 270 283 * 1000;
+#X text 661 416 [hsl_pre \$1 \$2 delt1];
+#X text 661 434 [hsl_pre \$1 \$2 delt2];
+#X obj 211 110 hsl_pre \$1 \$2 delt1;
+#X obj 211 130 hsl_pre \$1 \$2 delt2;
+#X text 299 204 tiempo de delay 0 a 1000 mseg;
+#X text 317 276 tiempo de delay 0 a 1000 mseg;
+#X text 365 343 feedback 0 a 1;
+#X text 16 241 The label will be named automatically and assigned a
+color when an I/O number is given on creation inside RSVP framework
+, f 22;
+#X text 614 345 IMPORTANT: GUI with preset capabilities is done with
+the RSVP preset system abstractions \, not the native vanilla, f 39
+;
+#X text 661 452 [nbx_pre \$1 \$2 fdbck];
+#X obj 300 152 nbx_pre \$1 \$2 fdbck;
+#X obj 300 179 RSVP-Gclip 0 99;
+#X obj 324 342 / 100;
+#X obj 358 155 cnv 10 30 10 empty \$0-label fdbck 3 5 0 8 -1 -4032
+0;
+#X connect 5 0 8 0;
+#X connect 6 0 7 0;
+#X connect 7 0 4 0;
+#X connect 8 0 5 0;
+#X connect 13 0 15 0;
+#X connect 14 0 15 0;
+#X connect 16 0 15 0;
+#X connect 23 0 26 0;
+#X connect 25 0 26 0;
+#X connect 28 0 26 0;
+#X connect 30 0 31 0;
+#X connect 31 0 23 0;
+#X connect 32 0 33 0;
+#X connect 33 0 25 0;
+#X connect 36 0 30 0;
+#X connect 37 0 32 0;
+#X connect 44 0 45 0;
+#X connect 45 0 44 0;
+#X connect 45 1 46 0;
+#X connect 46 0 28 0;
+#X coords 0 -1 1 1 190 75 2 200 100;

@@ -1,0 +1,266 @@
+#N canvas 568 426 1239 614 10;
+#X declare -stdpath jrsvabs;
+#X declare -path RSVP;
+#X declare -path ../;
+#X declare -path ../sys.comunication;
+#X obj 300 170 cnv 15 320 200 empty \$2-canvas empty 300 12 0 14 -24198
+-33289 0;
+#X obj 305 175 cnv 15 310 190 empty empty empty 215 10 0 13 -233017
+-66577 0;
+#X obj 619 34 declare -stdpath jrsvabs;
+#X obj 313 343 cnv 5 20 10 empty empty RPR 2 5 0 9 -1 -262144 0;
+#X obj 336 343 cnv 5 20 10 empty empty RPB 2 5 0 9 -1 -262144 0;
+#X obj 310 186 cnv 5 48 10 empty empty RND/PITCH 2 5 0 9 -1 -262144
+0;
+#X obj 582 349 cnv 5 33 10 empty empty ON/OFF 2 5 0 9 -1 -262144 0
+;
+#X obj 539 201 cnv 5 70 10 empty empty RECORDING.ENV 2 6 0 9 -1 -262144
+0;
+#X obj 364 230 cnv 5 19 10 empty empty REC 2 5 0 9 -4160 -262144 0
+;
+#X obj 337 459 * 1.37795;
+#X obj 314 414 * 1.37795;
+#X floatatom 365 329 5 0 0 3 length - -;
+#X obj 655 54 declare -path RSVP;
+#X obj 363 254 cnv 5 39 10 empty empty P.SHIFT 2 5 0 9 -1 -262144 0
+;
+#X obj 360 287 cnv 5 45 10 empty empty RING.MOD 2 5 0 9 -1 -262144
+0;
+#X msg 152 545 \; pd-comp vis \$1;
+#X obj 131 550 tgl 15 0 empty empty show/compressor 17 7 0 10 -4160
+-257985 -1 0 1;
+#N canvas 1393 302 450 300 ENV-gen 0;
+#X msg 91 78 dump;
+#X obj 91 97 t a b b;
+#X obj 236 95 - 100;
+#X obj 169 137 + 100;
+#X msg 114 208 duration \$1;
+#X obj 114 161 i;
+#X obj 140 129 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 91 254 outlet;
+#X obj 360 240 cnv 15 15 15 empty empty empty 20 12 0 14 -4160 -66577
+0;
+#X obj 135 -1 return-from-pd~ \$1-update-env;
+#X obj 180 78 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 135 20 route update;
+#X obj 137 52 bang;
+#X floatatom 246 116 5 0 0 0 - - -;
+#X obj 169 114 random 100;
+#X obj 179 177 outlet to 3rd inlet of env-selector;
+#X obj 182 239 message-to-pd~ duration \$1-\$2;
+#X obj 117 31 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 236 76 r \$0-duration;
+#X connect 0 0 1 0;
+#X connect 1 0 7 0;
+#X connect 1 1 5 0;
+#X connect 1 2 15 0;
+#X connect 1 2 14 0;
+#X connect 2 0 13 0;
+#X connect 2 0 14 1;
+#X connect 3 0 5 1;
+#X connect 4 0 7 0;
+#X connect 5 0 4 0;
+#X connect 5 0 16 0;
+#X connect 6 0 5 0;
+#X connect 9 0 11 0;
+#X connect 10 0 14 0;
+#X connect 12 0 10 0;
+#X connect 12 0 5 0;
+#X connect 12 0 14 0;
+#X connect 12 0 0 0;
+#X connect 14 0 3 0;
+#X connect 17 0 12 0;
+#X connect 18 0 2 0;
+#X restore 306 62 pd ENV-gen;
+#X obj 359 203 cnv 5 25 10 empty empty PLAY 2 5 0 9 -4160 -262144 0
+;
+#X obj 768 34 cnv 15 15 15 empty empty empty 20 12 0 14 -35334 -66577
+0;
+#X obj 768 55 cnv 15 15 15 empty empty empty 20 12 0 14 -35334 -66577
+0;
+#X obj 154 177 r bang-fire;
+#X msg 156 199 1;
+#N canvas 465 629 389 219 comp 0;
+#X obj 7 5 inlet;
+#X obj 12 178 outlet;
+#X obj 7 197 message-to-pd~ \$1 comp-out;
+#X obj 7 26 ext.modules/tb_compressorUI;
+#X obj 44 5 declare -path ../;
+#X connect 0 0 3 0;
+#X connect 3 0 1 0;
+#X connect 3 0 2 0;
+#X restore 602 512 pd comp;
+#X obj 649 512 cnv 15 15 15 empty empty empty 20 12 0 14 -35334 -66577
+0;
+#X obj 837 310 cnv 15 15 15 empty empty empty 20 12 0 14 -4160 -66577
+0;
+#X obj 859 258 cnv 15 15 15 empty empty empty 20 12 0 14 -4160 -66577
+0;
+#X obj 813 360 cnv 15 15 15 empty empty empty 20 12 0 14 -35334 -66577
+0;
+#X obj 882 232 cnv 15 15 15 empty empty empty 20 12 0 14 -4160 -66577
+0;
+#X obj 895 196 cnv 15 15 15 empty empty empty 20 12 0 14 -159808 -66577
+0;
+#X obj 552 486 cnv 15 15 15 empty empty empty 20 12 0 14 -4160 -66577
+0;
+#X obj 524 521 cnv 15 15 15 empty empty empty 20 12 0 14 -4160 -66577
+0;
+#X obj 538 381 cnv 15 15 15 empty empty empty 20 12 0 14 -4160 -66577
+0;
+#X msg 619 377 done;
+#X obj 687 135 route update;
+#X obj 687 156 bang;
+#X obj 381 38 return-from-pd~ \$1-\$2-rec_gest-OFF;
+#X obj 366 114 return-from-pd~ \$1-\$2-buffer-total-time;
+#X obj 687 111 return-from-pd~ \$1-\$2-to-breakpoints;
+#X obj 652 196 return-from-pd~ \$1-\$2-playing_gest-OFF;
+#X obj 651 232 message-to-pd~ playing_gest-ON \$1-\$2;
+#X obj 653 258 message-to-pd~ rec_gest-ON \$1-\$2;
+#X obj 654 309 message-to-pd~ rmod-ON \$1-\$2;
+#X obj 654 359 message-to-pd~ DSP \$1-\$2;
+#X obj 897 442 r \$1-\$2-message-to-general-out;
+#X obj 619 398 message-to-pd~ env-brkpoints-bang \$1-\$2;
+#X obj 412 418 message-to-pd~ amp-samp-env-brkpoints \$1-\$2;
+#X obj 602 483 return-from-pd~ \$1-\$2-comp-fbck;
+#X obj 602 535 message-to-pd~ comp-out \$1-\$2;
+#X obj 337 485 message-to-pd~ rnd-p-bottom \$1-\$2;
+#X obj 314 520 message-to-pd~ rnd-p-range \$1-\$2;
+#X obj 361 380 message-to-pd~ p-t-ON \$1-\$2;
+#X obj 863 345 s \$0-duration;
+#X obj 897 465 s to_pd~_subprocess;
+#X obj 859 371 message-to-pd~ duration \$1-\$2;
+#X obj 284 92 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 590 389 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 141 32 cnv 5 25 10 empty empty PRES. 2 5 0 9 -1 -262144 0;
+#X obj 828 73 declare -path ../sys.comunication;
+#X obj 534 181 cnv 5 80 15 empty \$1.\$2.\$3.\$4.color-tag \$2->\$3.\$4
+4 8 0 10 -262144 -33289 0;
+#N canvas 849 253 450 300 blinker 0;
+#X obj 49 68 sel 0 1;
+#X obj 49 48 speedlim 500;
+#X obj 10 6 loadbang;
+#X obj 49 27 return-from-pd~ \$1-\$2-sig-in;
+#X obj 49 100 symbol \$2;
+#X msg 49 136 \; \$1-canvas color 12 12 12;
+#X obj 129 97 symbol \$2;
+#X obj 245 27 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 129 177 \; \$1-canvas color 16 12 12;
+#X text 27 244 blinks the border green when signal enters the instrument
+;
+#X connect 0 0 4 0;
+#X connect 0 1 6 0;
+#X connect 1 0 0 0;
+#X connect 2 0 4 0;
+#X connect 3 0 1 0;
+#X connect 4 0 5 0;
+#X connect 6 0 8 0;
+#X connect 7 0 0 0;
+#X restore 27 28 pd blinker;
+#N canvas 0 96 450 391 tag 0;
+#X obj 131 252 list prepend color;
+#X obj 131 280 route list;
+#X obj 84 65 \$4;
+#X obj 85 87 sel 1 2 3 4 5 6 7 8;
+#X obj 84 42 loadbang;
+#X obj 131 309 s \$1.\$2.\$3.\$4.color-tag;
+#X msg 85 111 13 0 0;
+#X msg 98 135 14 0 2;
+#X msg 112 159 15 0 2;
+#X msg 126 181 16 0 0;
+#X msg 140 115 17 0 12;
+#X msg 154 137 18 0 0;
+#X msg 168 163 19 0 0;
+#X msg 182 188 0 0 12;
+#X connect 0 0 1 0;
+#X connect 1 0 5 0;
+#X connect 2 0 3 0;
+#X connect 3 0 6 0;
+#X connect 3 1 7 0;
+#X connect 3 2 8 0;
+#X connect 3 3 9 0;
+#X connect 3 4 10 0;
+#X connect 3 5 11 0;
+#X connect 3 6 12 0;
+#X connect 3 7 13 0;
+#X connect 4 0 2 0;
+#X connect 6 0 0 0;
+#X connect 7 0 0 0;
+#X connect 8 0 0 0;
+#X connect 9 0 0 0;
+#X connect 10 0 0 0;
+#X connect 11 0 0 0;
+#X connect 12 0 0 0;
+#X connect 13 0 0 0;
+#X restore 27 48 pd tag;
+#X obj 412 216 ./extraGUI/brp_pre \$1-\$2 L env;
+#X obj 411 178 LP.manager \$1 \$2 prst;
+#X obj 338 205 vsl_pre \$1-\$2 L rnd-low;
+#X obj 314 205 vsl_pre \$1-\$2 L rnd-p-range;
+#X obj 384 201 ./customGUI/tgl-but_pre \$1-\$2 L fire;
+#X obj 384 227 ./customGUI/tgl-but_pre \$1-\$2 L rec;
+#X obj 373 266 tgl_pre \$1-\$2 L p.shift;
+#X obj 373 299 tgl_pre \$1-\$2 L rmod;
+#X obj 564 349 ./customGUI/tgl-but_pre \$1 \$2 DSP;
+#X obj 972 111 print breakpoints-gest;
+#X obj 417 346 nbx_pre \$1-\$2 L SIT;
+#X obj 474 349 cnv 10 25 10 empty \$0-label SIT 3 5 0 8 -1 -4032 0
+;
+#X obj 61 479 message-to-pd~ SIT \$1-\$2;
+#X obj 918 249 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 927 204 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 925 176 r /C.Celestes-GEST/L/rnd-p-range-vsl-o;
+#X obj 911 279 s /C.Celestes-GEST/L/rnd-p-range-vsl;
+#X obj 155 267 sel 0 1;
+#X msg 155 290 1;
+#X msg 195 289 0;
+#X obj 862 533 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 901 525 loadbang;
+#X obj 901 548 audio-module-creator modules/zGEST~ \$1 \$2 \$3 \$4
+;
+#X connect 9 0 49 0;
+#X connect 10 0 50 0;
+#X connect 16 0 15 0;
+#X connect 17 0 62 0;
+#X connect 21 0 22 0;
+#X connect 22 0 66 0;
+#X connect 23 0 48 0;
+#X connect 33 0 45 0;
+#X connect 34 0 35 0;
+#X connect 35 0 62 0;
+#X connect 36 0 67 0;
+#X connect 37 0 11 0;
+#X connect 38 0 34 0;
+#X connect 38 0 62 0;
+#X connect 39 0 66 0;
+#X connect 44 0 53 0;
+#X connect 47 0 23 0;
+#X connect 55 0 62 0;
+#X connect 62 0 46 0;
+#X connect 62 1 56 0;
+#X connect 64 0 9 0;
+#X connect 65 0 10 0;
+#X connect 66 0 40 0;
+#X connect 67 0 41 0;
+#X connect 67 0 79 0;
+#X connect 68 0 51 0;
+#X connect 69 0 42 0;
+#X connect 70 0 43 0;
+#X connect 72 0 74 0;
+#X connect 75 0 78 0;
+#X connect 77 0 76 0;
+#X connect 79 0 80 0;
+#X connect 79 1 81 0;
+#X connect 81 0 66 0;
+#X connect 82 0 84 0;
+#X connect 83 0 84 0;
+#X coords 0 -1 1 1 319 200 2 300 170;
