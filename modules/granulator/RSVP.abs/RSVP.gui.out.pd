@@ -1,0 +1,11 @@
+#N canvas 2040 78 441 164 12;
+#X obj 48 15 inlet;
+#X obj 48 116 outlet;
+#X obj 196 99 s RSVP.GUI-to-OSC;
+#X obj 68 77 s \$1/\$2/\$3-\$4-o;
+#X obj 196 77 list prepend /\$1/\$2/\$3-\$4-o;
+#X connect 0 0 1 0;
+#X connect 0 0 3 0;
+#X connect 0 0 4 0;
+#X connect 4 0 2 0;
+#X coords 0 164 1 163 17 135 0;
