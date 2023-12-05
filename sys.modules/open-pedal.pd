@@ -1,0 +1,10 @@
+#N canvas 699 318 658 300 10;
+#X obj 157 161 spigot;
+#X obj 190 140 r TURN-ON-PEDAL-\$1;
+#X obj 157 115 inlet;
+#X obj 157 182 outlet;
+#X text 27 37 works with [route-pedal];
+#X text 26 59 argument is the number of pedal to open;
+#X connect 0 0 3 0;
+#X connect 1 0 0 1;
+#X connect 2 0 0 0;

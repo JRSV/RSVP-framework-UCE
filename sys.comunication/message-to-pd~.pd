@@ -1,0 +1,18 @@
+#N canvas 1129 423 360 273 10;
+#X obj 172 81 loadbang;
+#X obj 172 104 symbol \$2;
+#X obj 103 45 inlet;
+#X obj 172 131 makefilename \$2-\$1;
+#X obj 103 246 outlet;
+#X obj 103 181 list trim;
+#X obj 103 159 list prepend;
+#X obj 116 218 send \$2-message-to-general-out;
+#X obj 160 57 iemguts/initbang;
+#X connect 0 0 1 0;
+#X connect 1 0 3 0;
+#X connect 2 0 6 0;
+#X connect 3 0 6 1;
+#X connect 5 0 4 0;
+#X connect 5 0 7 0;
+#X connect 6 0 5 0;
+#X connect 8 0 1 0;

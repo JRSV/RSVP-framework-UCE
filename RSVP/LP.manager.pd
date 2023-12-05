@@ -1,0 +1,328 @@
+#N canvas 227 51 583 475 12;
+#X declare -path ./customGUI;
+#X text 370 164 www.jrsv.net;
+#X text 335 150 released under GPL license;
+#X msg 16 233 vis \$1;
+#N canvas 743 622 218 189 Localmanager 0;
+#N canvas 792 217 1060 596 LPM 0;
+#X obj 501 101 cnv 15 140 58 empty \$0-PreManager-presetName L.Prst
+3 50 0 14 #dcdcdc #000000 0;
+#N canvas 890 531 623 390 Premanager-STORE 0;
+#X obj 98 123 cnv 15 116 15 empty \$1-store_blink_color empty 20 12
+0 14 #28f4f4 #fcfcfc 0;
+#X floatatom 127 101 5 0 500 0 - - - 0;
+#X obj 58 110 bng 15 250 50 0 empty empty - 5 7 0 10 #fcc4c4 #0400fc
+#000000;
+#X obj 47 146 bng 15 250 50 0 empty empty + 5 7 0 10 #fcc4c4 #0400fc
+#000000;
+#X obj 102 181 i;
+#X msg 165 181 1;
+#X obj 119 221 +;
+#X obj 102 145 t b b;
+#X msg 129 181 -1;
+#X obj 138 145 t b b;
+#X obj 102 103 bng 15 250 50 0 empty empty S 17 8 0 10 #fcc4c4 #0400fc
+#000000;
+#X obj 190 340 outlet;
+#X obj 415 135 t b b;
+#X obj 415 161 del 200;
+#X obj 119 242 clip 0 500;
+#X floatatom 500 143 5 0 0 0 - - - 0;
+#X msg 476 185 color 43;
+#X msg 415 185 color 17;
+#X obj 15 33 inlet;
+#X obj 15 55 t b a a;
+#X obj 120 47 r \$1-\$2-UPDT-number-STORE;
+#X obj 119 361 s \$1-\$2-UPDT-number-STORE;
+#X obj 415 207 s \$1-\$2-store_blink_color;
+#X obj 190 273 f;
+#X connect 1 0 4 1;
+#X connect 1 0 23 1;
+#X connect 2 0 7 0;
+#X connect 3 0 9 0;
+#X connect 4 0 6 0;
+#X connect 5 0 6 1;
+#X connect 6 0 14 0;
+#X connect 7 0 4 0;
+#X connect 7 1 8 0;
+#X connect 8 0 6 1;
+#X connect 9 0 4 0;
+#X connect 9 1 5 0;
+#X connect 10 0 12 0;
+#X connect 10 0 23 0;
+#X connect 12 0 13 0;
+#X connect 12 1 16 0;
+#X connect 13 0 17 0;
+#X connect 14 0 21 0;
+#X connect 14 0 23 1;
+#X connect 15 0 17 0;
+#X connect 16 0 22 0;
+#X connect 17 0 22 0;
+#X connect 18 0 19 0;
+#X connect 19 0 10 0;
+#X connect 19 1 14 0;
+#X connect 19 2 1 0;
+#X connect 20 0 1 0;
+#X connect 23 0 11 0;
+#X coords 0 -1 1 1 65 21 2 100 100;
+#X restore 571 104 pd Premanager-STORE;
+#N canvas 2249 202 638 420 Premanager-ReCALL 0;
+#X obj 63 192 cnv 15 65 15 empty \$1-recall_blink_color empty 20 12
+0 14 #28f4f4 #fcfcfc 0;
+#X floatatom 127 101 5 0 500 0 - - - 0;
+#X obj 40 156 bng 15 250 50 0 empty empty - 5 7 0 10 #fcc4c4 #0400fc
+#000000;
+#X obj 93 151 bng 15 250 50 0 empty empty + 5 7 0 10 #fcc4c4 #0400fc
+#000000;
+#X obj 102 210 i;
+#X msg 165 210 1;
+#X obj 119 250 +;
+#X obj 102 174 t b b;
+#X msg 129 210 -1;
+#X obj 138 174 t b b;
+#X obj 102 103 bng 15 250 50 0 empty empty R 17 8 0 10 #fcc4c4 #0400fc
+#000000;
+#X obj 190 329 outlet;
+#X obj 416 135 t b b;
+#X obj 415 166 del 200;
+#X obj 119 270 clip 0 500;
+#X obj 15 33 inlet;
+#X floatatom 135 133 5 0 0 0 - - - 0;
+#X obj 15 55 t b a a;
+#X floatatom 518 143 5 0 0 0 - - - 0;
+#X msg 415 198 color 17;
+#X msg 476 198 color 43;
+#X obj 27 118 print;
+#X obj 120 47 r \$1-\$2-UPDT-number-RECALL;
+#X obj 119 354 s \$1-\$2-UPDT-number-RECALL;
+#X obj 415 235 s \$1-\$2-recall_blink_color;
+#X obj 190 305 f;
+#X connect 1 0 4 1;
+#X connect 1 0 16 0;
+#X connect 1 0 25 1;
+#X connect 2 0 7 0;
+#X connect 3 0 9 0;
+#X connect 4 0 6 0;
+#X connect 5 0 6 1;
+#X connect 6 0 14 0;
+#X connect 7 0 4 0;
+#X connect 7 1 8 0;
+#X connect 8 0 6 1;
+#X connect 9 0 4 0;
+#X connect 9 1 5 0;
+#X connect 10 0 12 0;
+#X connect 10 0 25 0;
+#X connect 12 0 13 0;
+#X connect 12 1 20 0;
+#X connect 13 0 19 0;
+#X connect 14 0 23 0;
+#X connect 14 0 25 1;
+#X connect 15 0 17 0;
+#X connect 17 0 10 0;
+#X connect 17 1 14 0;
+#X connect 17 2 1 0;
+#X connect 18 0 19 0;
+#X connect 19 0 24 0;
+#X connect 20 0 24 0;
+#X connect 22 0 1 0;
+#X connect 25 0 11 0;
+#X coords 0 -1 1 1 65 21 2 100 100;
+#X restore 504 104 pd Premanager-ReCALL;
+#X text 82 62 www.jrsv.net;
+#X text 41 49 released under GPL license;
+#X text 55 77 Edinburgh - Scotland;
+#X text 41 34 (c) J.Rafael Subia V. 2019;
+#X text 317 36 Argument wil "link" to a family of GUIs;
+#X msg 543 296 clear;
+#X obj 413 270 t b b;
+#X obj 413 294 del 100;
+#X obj 413 319 t b b;
+#X obj 349 190 cnv 15 15 15 empty empty empty 10 12 0 14 #fc0400 #404040
+0;
+#X floatatom 493 212 5 0 10 0 - - - 0;
+#X msg 626 205 click;
+#N canvas 686 747 398 295 write-preset-file 0;
+#X obj 30 20 inlet;
+#X obj 30 200 outlet;
+#X obj 51 100 list prepend write;
+#X obj 30 140 route list;
+#X obj 30 120 list;
+#X obj 51 60 inlet;
+#X obj 51 80 makefilename ./PRESETS/\$1-\$2-%.1f.prst;
+#X connect 0 0 4 0;
+#X connect 2 0 4 1;
+#X connect 3 0 1 0;
+#X connect 4 0 3 0;
+#X connect 5 0 6 0;
+#X connect 6 0 2 0;
+#X restore 413 416 pd write-preset-file;
+#X obj 505 127 bng 15 250 50 0 empty empty PRESET 17 8 0 9 #fc0400
+#f8fc00 #000000;
+#X obj 814 108 declare -path ./customGUI;
+#X msg 653 231 sort;
+#X obj 626 180 t b b;
+#X obj 599 462 cnv 15 15 15 empty empty empty 10 12 0 14 #0400fc #404040
+0;
+#N canvas 276 244 398 295 read-preset-file 0;
+#X obj 30 20 inlet;
+#X obj 30 200 outlet;
+#X obj 30 140 route list;
+#X obj 30 120 list;
+#X obj 51 60 inlet;
+#X obj 51 100 list prepend read;
+#X obj 51 80 makefilename ./PRESETS/\$1-\$2-%.1f.prst;
+#X connect 0 0 3 0;
+#X connect 2 0 1 0;
+#X connect 3 0 2 0;
+#X connect 4 0 6 0;
+#X connect 5 0 3 1;
+#X connect 6 0 5 0;
+#X restore 243 307 pd read-preset-file;
+#X obj 461 240 t b a;
+#X obj 220 236 t a b a;
+#X text 591 276 clears before saving values \, this way deleted GUIs
+get eliminated from the preset, f 28;
+#X text 402 360 sends the SAVE order to all GUIs;
+#X text 247 323 loads the preset before calling, f 21;
+#X obj 709 509 print;
+#X text 765 61 action is immideate with number of preset (eg. store
+1), f 32;
+#X obj 805 25 inlet;
+#X obj 842 413 send \$0-PreManager-presetName;
+#X msg 842 384 label L.Prst;
+#X obj 842 346 loadbang;
+#X obj 614 10 r remote-PRST-change-\$1-\$2;
+#X obj 220 281 s \$1-\$2-PRECALL;
+#X obj 543 480 text define \$1-\$2-loaded-preset;
+#X obj 440 343 s \$1-\$2-save_preset;
+#X obj 327 226 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 582 127 int_nbx \$1-\$2;
+#N canvas 772 636 903 300 log 0;
+#X text 30 236 25|10|2021 - Now working with floating point presets
+number \, to have the possibility of subgroups, f 106;
+#X restore 81 467 pd log;
+#X obj 712 75 sel 1;
+#X obj 614 45 route recall store vis;
+#X connect 1 0 22 0;
+#X connect 2 0 13 0;
+#X connect 2 0 23 0;
+#X connect 8 0 35 0;
+#X connect 9 0 10 0;
+#X connect 9 1 8 0;
+#X connect 10 0 11 0;
+#X connect 11 0 15 0;
+#X connect 11 1 36 0;
+#X connect 14 0 35 0;
+#X connect 15 0 35 0;
+#X connect 16 0 19 0;
+#X connect 18 0 35 0;
+#X connect 19 0 14 0;
+#X connect 19 1 18 0;
+#X connect 21 0 35 0;
+#X connect 22 0 9 0;
+#X connect 22 1 15 1;
+#X connect 23 0 34 0;
+#X connect 23 1 21 0;
+#X connect 23 2 21 1;
+#X connect 29 0 41 0;
+#X connect 31 0 30 0;
+#X connect 32 0 31 0;
+#X connect 33 0 41 0;
+#X connect 35 1 27 0;
+#X connect 37 0 34 0;
+#X connect 40 0 16 0;
+#X connect 41 0 2 0;
+#X connect 41 1 1 0;
+#X connect 41 2 40 0;
+#X coords 0 -1 1 1 142 60 2 500 100;
+#X restore 16 39 pd LPM;
+#X obj 7 15 inlet;
+#X obj 7 154 sendcanvas;
+#X obj 160 19 inlet;
+#X text 13 97 press bang to recall or save preset specified in number
+box, f 24;
+#X obj 7 147 cnv 15 180 30 empty empty empty 10 12 0 14 #fc8000 #404040
+0;
+#X obj 7 6 cnv 15 150 30 empty empty \$1.\$2 10 12 0 14 #fc8000 #404040
+0;
+#X connect 1 0 2 0;
+#X connect 3 0 0 0;
+#X restore 16 424 pd Localmanager;
+#X text 329 136 (c) J.Rafael Subia V. 2020;
+#X text 360 179 Quito - Ecuador;
+#N canvas 358 620 1169 300 log 0;
+#X text 48 245 09|11|2020 - LocalPreset manager RSVP abstraccion is
+created;
+#X text 48 181 25|10|2021 -, f 116;
+#X text 138 181 Removed interpolation in the preset number box and
+implemented the on-cue / post-cue functionalities \, it is now possible
+to save preset numbers with floating points whcih opens one more possibility
+to create subgroups of presets, f 103;
+#X restore 417 54 pd log;
+#X obj 342 93 r \$1-\$2-delay.preset;
+#X obj 118 297 spigot 1;
+#X text 182 296 on cue;
+#X text 304 314 post-cue;
+#X obj 269 238 spigot 0;
+#X obj 269 314 pipe;
+#X msg 118 378 recall \$1;
+#X obj 101 101 cnv 15 102 32 empty empty empty 20 12 0 14 #885874 #404040
+0;
+#X obj 116 103 cnv 10 40 10 empty empty PRESETS 3 5 0 8 #000000 #00f8fc
+0;
+#X obj 169 110 cnv 10 30 10 empty empty empty 1 5 0 8 #c4c4fc #000000
+0;
+#X obj 118 115 nbx-Local-Pre-Manager_pre \$1 \$2 l.prst;
+#N canvas 959 375 439 360 /*patcherized*/ 0;
+#X obj 90 201 outlet;
+#X obj 101 101 tgl 12 0 empty empty empty 17 7 0 10 #14e814 #14e814
+#202020 0 1;
+#X obj 190 91 sel 0 1;
+#X msg 190 117 color 13 13 42;
+#X msg 213 141 color 16 16 42;
+#X obj 258 89 loadbang;
+#X connect 1 0 2 0;
+#X connect 1 0 0 0;
+#X connect 2 0 3 0;
+#X connect 2 1 4 0;
+#X connect 3 0 1 0;
+#X connect 4 0 1 0;
+#X connect 5 0 3 0;
+#X coords 0 -1 1 1 14 14 2 100 100;
+#X restore 102 103 pd /*patcherized*/;
+#X obj 169 121 cnv 10 30 10 empty empty empty 1 5 0 8 #c4c4fc #000000
+0;
+#X obj 192 117 cnv 5 5 5 empty empty empty 3 5 0 8 #f8fc00 #f8fc00
+0;
+#X obj 192 123 cnv 5 5 5 empty empty empty 3 5 0 8 #0400fc #0400fc
+0;
+#X obj 163 101 cnv 10 40 10 empty empty cue/post 1 5 0 8 #000000 #00f8fc
+0;
+#X obj 172 113 ./customGUI/tgl-but-y.b_pre \$1 \$2 l.prst.cue-post
+;
+#X obj 174 249 abs;
+#X obj 174 224 - 1;
+#X msg 103 335 vis 1;
+#X obj 103 118 bng 12 250 50 0 empty empty empty 17 7 0 10 #fc0400
+#f8fc00 #000000;
+#X obj 118 30 r CURRENT-PATCH-NUMBER;
+#X text 289 368 arguments \; - name of project \; - name of module
+\; - prst;
+#X connect 2 0 3 0;
+#X connect 8 0 13 0;
+#X connect 11 0 12 0;
+#X connect 12 0 13 0;
+#X connect 13 0 3 1;
+#X connect 17 0 8 0;
+#X connect 17 0 11 0;
+#X connect 17 1 12 1;
+#X connect 18 0 2 0;
+#X connect 23 0 25 0;
+#X connect 23 0 11 1;
+#X connect 24 0 8 1;
+#X connect 25 0 24 0;
+#X connect 26 0 3 1;
+#X connect 27 0 26 0;
+#X connect 28 0 17 0;
+#X coords 0 -1 1 1 104 34 2 100 100;

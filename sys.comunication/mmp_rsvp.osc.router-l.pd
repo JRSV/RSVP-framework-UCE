@@ -1,0 +1,16 @@
+#N canvas 406 606 808 360 12;
+#X obj 77 65 list trim;
+#X obj 77 86 route \$1;
+#X text 120 133 scalar (eg. convert 1 to 127);
+#X obj 77 44 receive \$3;
+#X obj 77 332 send \$4;
+#X obj 179 204 makefilename \$1;
+#X obj 77 158 t l b;
+#X obj 77 236 list prepend \$1;
+#X connect 0 0 1 0;
+#X connect 1 0 6 0;
+#X connect 3 0 0 0;
+#X connect 5 0 7 1;
+#X connect 6 0 7 0;
+#X connect 6 1 5 0;
+#X connect 7 0 4 0;

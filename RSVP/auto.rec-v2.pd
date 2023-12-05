@@ -1,0 +1,168 @@
+#N canvas 308 135 1223 603 12;
+#X declare -path ../;
+#X msg 656 159 -1;
+#X text 450 15 argument is complete ID of RSVP object/or new object
+to record (eg. \$1/\$2/\$3-<type>);
+#X obj 73 463 text define \$0-auto.rec_01;
+#X obj 16 55 sel 1 0;
+#X obj 295 60 t b b b b;
+#X obj 656 182 text delete \$0-auto.rec_01;
+#X obj 355 109 s \$0-stop;
+#X obj 355 84 0;
+#X msg 335 133 rewind;
+#X obj 39 83 s \$0-tgl-0;
+#X obj 16 108 s \$0-tgl-1;
+#X obj 295 34 r \$0-tgl-0;
+#X obj 423 109 cnv 10 10 10 empty empty empty 20 12 0 14 -258113 -66577
+0;
+#X obj 370 34 cnv 10 10 10 empty empty empty 20 12 0 14 -4160 -66577
+0;
+#X obj 91 108 cnv 10 10 10 empty empty empty 20 12 0 14 -4160 -66577
+0;
+#X obj 114 83 cnv 10 10 10 empty empty empty 20 12 0 14 -4160 -66577
+0;
+#X obj 16 31 inlet tgl-record.automation;
+#X obj 656 59 inlet;
+#N canvas 239 372 838 479 recording.automation 0;
+#X obj 37 270 f;
+#X obj 476 270 1e+19;
+#X obj 424 247 t a b;
+#X obj 37 202 metro 100;
+#X obj 424 201 list prepend;
+#X obj 424 224 list prepend;
+#X obj 642 119 loadbang;
+#X obj 105 250 r \$1/\$2/\$3-\$4;
+#X obj 674 204 symbol \$1/\$2/\$3-\$4;
+#X text 139 189 one minute of buffer at 10 ticks per second. 100 ms
+recording interval, f 27;
+#X obj 37 149 1;
+#X obj 424 293 text set \$0-auto.rec_01;
+#N canvas 423 633 200 201 ctr.AutoData-nmbr 0;
+#X obj 20 20 inlet;
+#X obj 70 20 inlet;
+#X obj 20 171 outlet;
+#X obj 30 86 f;
+#X obj 59 86 + 1;
+#X obj 48 60 0;
+#X msg 30 111 Auto.Data.\$1;
+#X connect 0 0 3 0;
+#X connect 1 0 5 0;
+#X connect 3 0 4 0;
+#X connect 3 0 6 0;
+#X connect 4 0 3 1;
+#X connect 5 0 3 1;
+#X connect 6 0 2 0;
+#X restore 505 167 pd ctr.AutoData-nmbr;
+#X obj 37 371 textfile;
+#X msg 37 303 add2 \$1;
+#X msg 97 124 clear;
+#X obj 97 147 s \$0-clear-tmp;
+#X obj 47 325 r \$0-txt-dmp;
+#X obj 37 66 r \$0-tgl-1;
+#X obj 37 94 t b b b b;
+#X obj 58 348 r \$0-clear-tmp;
+#X obj 45 176 r \$0-stop;
+#X obj 642 144 t b b;
+#X obj 113 176 cnv 10 10 10 empty empty empty 20 12 0 14 -258113 -66577
+0;
+#X obj 112 66 cnv 10 10 10 empty empty empty 20 12 0 14 -4160 -66577
+0;
+#X obj 37 397 s \$0-tmp-data;
+#X obj 424 118 r \$0-tmp-data;
+#X obj 133 397 cnv 10 10 10 empty empty empty 20 12 0 14 -4034 -66577
+0;
+#X obj 520 118 cnv 10 10 10 empty empty empty 20 12 0 14 -4034 -66577
+0;
+#X obj 424 147 t a b;
+#X obj 256 44 inlet value-2-record;
+#X obj 620 92 r \$0-clear;
+#X obj 694 96 cnv 10 10 10 empty empty empty 20 12 0 14 -159808 -66577
+0;
+#X connect 0 0 14 0;
+#X connect 1 0 11 1;
+#X connect 2 0 11 0;
+#X connect 2 1 1 0;
+#X connect 3 0 0 0;
+#X connect 4 0 5 0;
+#X connect 5 0 2 0;
+#X connect 6 0 22 0;
+#X connect 7 0 0 1;
+#X connect 8 0 5 1;
+#X connect 10 0 3 0;
+#X connect 12 0 4 1;
+#X connect 13 0 25 0;
+#X connect 14 0 13 0;
+#X connect 15 0 16 0;
+#X connect 17 0 13 0;
+#X connect 18 0 19 0;
+#X connect 19 0 10 0;
+#X connect 19 3 15 0;
+#X connect 20 0 13 0;
+#X connect 21 0 3 0;
+#X connect 22 0 12 1;
+#X connect 22 1 8 0;
+#X connect 26 0 29 0;
+#X connect 29 0 4 0;
+#X connect 29 1 12 0;
+#X connect 30 0 0 1;
+#X connect 31 0 12 1;
+#X restore 34 251 pd recording.automation;
+#X obj 315 159 s \$0-txt-dmp;
+#X obj 34 225 inlet values_2_record;
+#X obj 670 109 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 549 252 records to a file with its name from the arguments
+and opens it every time the abstraction is loaded.;
+#X obj 295 185 s \$0-write.file;
+#X msg 73 440 read \$1;
+#X obj 73 417 makefilename ./automation.DATA/\$1-\$2-\$3-\$4.autodata
+;
+#X obj 63 347 makefilename ./automation.DATA/\$1-\$2-\$3-\$4.autodata
+;
+#X msg 63 370 write \$1;
+#X obj 703 391 declare -path ../;
+#X obj 63 325 r \$0-write.file;
+#X obj 73 395 loadbang;
+#X obj 710 132 cnv 10 10 10 empty empty empty 20 12 0 14 -159808 -66577
+0;
+#X obj 636 132 s \$0-clear;
+#X obj 656 84 route clear auto play replace;
+#N canvas 916 468 450 300 replace.line 0;
+#X obj 68 221 text insert \$0-auto.rec_01;
+#X obj 206 152 text delete \$0-auto.rec_01;
+#X obj 134 35 inlet auto.DATA number;
+#X obj 65 163 s \$0-txt-dmp;
+#X obj 134 89 t b a a;
+#X connect 2 0 4 0;
+#X connect 4 0 3 0;
+#X connect 4 1 0 1;
+#X connect 4 2 1 0;
+#X restore 709 332 pd replace.line;
+#X obj 851 290 cnv 10 10 10 empty empty empty 20 12 0 14 -4034 -66577
+0;
+#X obj 755 290 r \$0-tmp-data;
+#X msg 709 299 2;
+#X connect 0 0 5 0;
+#X connect 3 0 10 0;
+#X connect 3 1 9 0;
+#X connect 4 0 23 0;
+#X connect 4 1 19 0;
+#X connect 4 2 8 0;
+#X connect 4 3 7 0;
+#X connect 7 0 6 0;
+#X connect 8 0 19 0;
+#X connect 11 0 4 0;
+#X connect 16 0 3 0;
+#X connect 17 0 33 0;
+#X connect 20 0 18 0;
+#X connect 24 0 2 0;
+#X connect 25 0 24 0;
+#X connect 26 0 27 0;
+#X connect 27 0 2 0;
+#X connect 29 0 26 0;
+#X connect 30 0 25 0;
+#X connect 33 0 0 0;
+#X connect 33 0 21 0;
+#X connect 33 0 32 0;
+#X connect 36 0 34 0;
+#X connect 37 0 34 0;

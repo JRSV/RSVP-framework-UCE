@@ -1,0 +1,100 @@
+#N canvas 216 96 868 653 12;
+#X obj 107 478 f;
+#X obj 107 207 r \$1-save_preset;
+#X obj 491 173 spigot 1;
+#X obj 352 211 list prepend set;
+#X obj 352 236 route list;
+#X obj 640 307 change;
+#X obj 640 332 bang;
+#X obj 640 357 0;
+#X obj 107 236 t b b;
+#X obj 732 481 cnv 10 25 10 empty \$0-label sendfader 3 5 0 8 -1 -4032
+0;
+#X obj 727 418 loadbang;
+#X obj 727 496 s \$0-label;
+#X obj 709 415 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 727 458 label \$1;
+#X obj 727 439 symbol \$3;
+#X obj 300 256 t a;
+#X obj 753 37 cnv 15 15 15 empty empty CHANGE.GUI 18 7 0 8 -257985
+-66577 0;
+#X obj 362 527 cnv 15 15 15 empty empty CHANGE.GUI 18 7 0 8 -257985
+-66577 0;
+#N canvas 54 96 605 300 LOG 0;
+#X text 34 172 20/04/2020 - Added route bang \, added remote send,
+f 51;
+#X text 34 151 25/04/2020 - Added [RSVP.gui."x"] abstractions & reordered
+the layout, f 72;
+#X restore 33 67 pd LOG;
+#X text 40 549 \$1 PresetManager Link \; \$2 Module (name of the instrument)
+\; \$3 parameter-(GUI)type, f 36;
+#X obj 491 596 outlet;
+#X obj 753 586 cnv 15 15 15 empty empty CHANGE.GUI 18 7 0 8 -257985
+-66577 0;
+#X obj 384 37 cnv 15 15 15 empty empty CHANGE.GUI 18 7 0 8 -257985
+-66577 0;
+#X obj 150 24 inlet;
+#X obj 608 280 t a a;
+#X text 686 326 when mouse moves GUI \, it stops line "LATCH", f 19
+;
+#X obj 300 437 t a a a;
+#X obj 491 150 line;
+#X obj 491 86 pack f f;
+#X obj 491 44 t a b b;
+#X obj 591 71 t b b;
+#X obj 591 93 i;
+#X obj 591 115 pack f 0;
+#X obj 544 115 1;
+#X text 556 164 switches between preset and RT GUI change, f 17;
+#X text 656 74 records the RT change for line to interpolate from that
+new value on next preset, f 23;
+#X text 139 288 Place FLOAT GUI here:;
+#X obj 300 282 vsl 10 145 0 127 0 0 empty empty empty 0 -9 0 10 -1951
+-262144 -262144 13700 1;
+#X obj 150 53 ./RSVP.abs/RSVP.gui.in \$1 \$2 \$3 vsl;
+#X obj 491 15 ./RSVP.abs/RSVP.gui.recall \$1 \$2 \$3 vsl;
+#X obj 491 566 ./RSVP.abs/RSVP.gui.remote \$1 \$2 \$3 vsl;
+#X obj 107 506 ./RSVP.abs/RSVP.gui.store \$1 \$2 \$3 vsl;
+#X obj 392 86 t a b;
+#X connect 0 0 41 0;
+#X connect 1 0 8 0;
+#X connect 2 0 3 0;
+#X connect 2 0 40 0;
+#X connect 3 0 4 0;
+#X connect 4 0 15 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 2 1;
+#X connect 8 0 0 0;
+#X connect 8 1 15 0;
+#X connect 10 0 14 0;
+#X connect 12 0 14 0;
+#X connect 13 0 11 0;
+#X connect 14 0 13 0;
+#X connect 15 0 37 0;
+#X connect 23 0 38 0;
+#X connect 24 0 31 1;
+#X connect 24 1 5 0;
+#X connect 26 0 0 1;
+#X connect 26 1 40 0;
+#X connect 26 2 24 0;
+#X connect 27 0 2 0;
+#X connect 28 0 27 0;
+#X connect 29 0 28 0;
+#X connect 29 1 33 0;
+#X connect 29 2 30 0;
+#X connect 30 0 31 0;
+#X connect 30 1 15 0;
+#X connect 31 0 32 0;
+#X connect 32 0 27 0;
+#X connect 33 0 2 1;
+#X connect 37 0 26 0;
+#X connect 38 0 15 0;
+#X connect 38 1 42 0;
+#X connect 39 0 29 0;
+#X connect 39 1 28 1;
+#X connect 40 0 20 0;
+#X connect 42 0 27 0;
+#X connect 42 1 33 0;
+#X coords 0 -1 1 1 10 150 2 300 280;

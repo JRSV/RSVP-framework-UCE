@@ -1,0 +1,33 @@
+#N canvas 155 445 383 119 10;
+#X obj 19 8 inlet;
+#N canvas 692 264 632 276 open-canvas 1;
+#X obj 16 119 inlet;
+#X obj 16 140 sendcanvas;
+#X obj 19 8 inlet;
+#N canvas 0 23 450 300 open-canvas 0;
+#X obj 239 118 inlet;
+#X obj 240 152 sendcanvas;
+#X connect 0 0 1 0;
+#X coords 0 -1 1 1 2 2 2 100 100;
+#X restore 19 25 pd open-canvas;
+#X obj 4 4 cnv 15 600 250 empty empty empty 20 12 0 14 -4160 -66577
+0;
+#X obj 8 8 cnv 15 590 240 empty empty PEDAL 5 80 0 120 -257985 -4160
+0;
+#X obj 385 35 cnv 15 200 200 empty PEDAL-NOW 5 10 90 0 148 -4160 -257985
+0;
+#X connect 0 0 1 0;
+#X connect 2 0 3 0;
+#X coords 0 -1 1 1 2 2 2 0 0;
+#X restore 19 25 pd open-canvas;
+#X obj 4 4 cnv 15 358 108 empty empty empty 20 12 0 14 -4160 -66577
+0;
+#X obj 8 8 cnv 15 350 100 empty empty PEDAL 10 50 0 68 -257985 -4160
+0;
+#X obj 241 27 cnv 15 100 60 empty PEDAL-NOW 5 10 31 0 68 -4160 -257985
+0;
+#X obj 239 118 inlet;
+#X obj 240 152 sendcanvas;
+#X connect 0 0 1 0;
+#X connect 5 0 6 0;
+#X coords 0 -1 1 1 85 60 1 0 0;

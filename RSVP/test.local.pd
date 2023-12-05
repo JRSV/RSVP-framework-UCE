@@ -1,0 +1,5 @@
+#N canvas 2077 95 877 605 12;
+#X obj 43 23 ./modules/zGRNS piece module mtx 1;
+#X obj 428 170 ./modules/zSTTR \$1 \$2;
+#X obj 444 57 ./modules/zCHPR;
+#X obj 105 325 ./modules/zGRNS piece GRN2 mtx 2;

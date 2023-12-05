@@ -1,0 +1,24 @@
+#N canvas 952 366 889 423 12;
+#X text 108 21 Send RSVP will send the value of the RSVP GUI to the
+[pd~] and to the MobMuPlat App.;
+#X obj 190 176 loadbang;
+#X obj 190 199 symbol \$2;
+#X obj 109 141 inlet;
+#X obj 190 226 makefilename \$2-\$1;
+#X obj 109 342 outlet;
+#X obj 109 277 list trim;
+#X obj 109 255 list prepend;
+#X obj 122 314 send \$2-message-to-general-out;
+#X obj 505 359 s /\$1/\$2/\$3-\$4;
+#X text 108 71 Arguments build the /\$1/\$2/\$3-«type» of message
+(\$4);
+#X obj 379 199 makefilename /\$1/\$2/\$3-\$4;
+#X obj 471 143 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X connect 1 0 2 0;
+#X connect 2 0 4 0;
+#X connect 3 0 7 0;
+#X connect 4 0 7 1;
+#X connect 6 0 5 0;
+#X connect 6 0 8 0;
+#X connect 7 0 6 0;

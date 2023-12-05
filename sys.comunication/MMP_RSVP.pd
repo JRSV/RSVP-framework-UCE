@@ -1,0 +1,342 @@
+#N canvas 2681 613 360 98 10;
+#N canvas 34 392 1294 360 MIXER_MMP-GUI 0;
+#X obj 30 33 receive fromGUI;
+#X obj 526 320 send toNetwork;
+#X obj 30 58 list trim;
+#X msg 526 109 list /MASTER_VOL \$1;
+#X msg 100 245 list /Vol_SNTH \$1;
+#X msg 171 221 list /Vol_GRNS \$1;
+#X msg 242 198 list /Vol_RVRB \$1;
+#X msg 313 176 list /Vol_DELY \$1;
+#X msg 384 154 list /Vol_CHPR \$1;
+#X msg 30 263 list /Vol_INPT \$1;
+#X obj 30 82 route /Vol_Input /Vol_SNTH /Vol_GRNS /Vol_RVRB /Vol_DELY
+/Vol_CHPR /Vol_STTR /MASTER_VOL, f 95;
+#X msg 455 130 list /Vol_STTR \$1;
+#X obj 680 28 receive fromNetwork;
+#X obj 680 52 route list;
+#X obj 680 321 send toGUI;
+#X msg 729 143 list /Vol_SNTH set \$1;
+#X msg 779 164 list /Vol_GRNS set \$1;
+#X msg 828 186 list /Vol_RVRB set \$1;
+#X msg 878 207 list /Vol_DELY set \$1;
+#X msg 927 228 list /Vol_CHPR set \$1;
+#X msg 680 123 list /Vol_Input set \$1;
+#X obj 680 75 route /INPT_fbck /SNTH_fbck /GRNS_fbck /RVRB_fbck /DELY_fbck
+/CHPR_fbck /STTR_fbck /MASTER_VOL_fbck, f 99;
+#X msg 1016 289 list /MASTER_VOL set \$1;
+#X msg 984 259 list /Vol_STTR set \$1;
+#X connect 0 0 2 0;
+#X connect 2 0 10 0;
+#X connect 3 0 1 0;
+#X connect 4 0 1 0;
+#X connect 5 0 1 0;
+#X connect 6 0 1 0;
+#X connect 7 0 1 0;
+#X connect 8 0 1 0;
+#X connect 9 0 1 0;
+#X connect 10 0 9 0;
+#X connect 10 1 4 0;
+#X connect 10 2 5 0;
+#X connect 10 3 6 0;
+#X connect 10 4 7 0;
+#X connect 10 5 8 0;
+#X connect 10 6 11 0;
+#X connect 10 7 3 0;
+#X connect 11 0 1 0;
+#X connect 12 0 13 0;
+#X connect 13 0 21 0;
+#X connect 15 0 14 0;
+#X connect 16 0 14 0;
+#X connect 17 0 14 0;
+#X connect 18 0 14 0;
+#X connect 19 0 14 0;
+#X connect 20 0 14 0;
+#X connect 21 0 20 0;
+#X connect 21 1 15 0;
+#X connect 21 2 16 0;
+#X connect 21 3 17 0;
+#X connect 21 4 18 0;
+#X connect 21 5 19 0;
+#X connect 21 6 23 0;
+#X connect 21 7 22 0;
+#X connect 22 0 14 0;
+#X connect 23 0 14 0;
+#X restore 226 7 pd MIXER_MMP-GUI;
+#N canvas 454 100 753 258 MATRIX_MMP-GUI 0;
+#X restore 226 29 pd MATRIX_MMP-GUI;
+#N canvas 255 96 1038 622 GRAIN_MMP-GUI 0;
+#X obj 30 33 receive fromGUI;
+#X obj 30 535 send toNetwork;
+#X obj 30 58 list trim;
+#X obj 505 7 receive fromNetwork;
+#X obj 505 31 route list;
+#X obj 505 583 send toGUI;
+#X msg 46 152 list /amp_rnd \$1;
+#X msg 63 172 list /pan \$1;
+#X msg 80 192 list /pan_rnd \$1;
+#X msg 97 212 list /trn \$1;
+#X msg 114 232 list /trn_rnd \$1;
+#X msg 131 252 list /dur \$1;
+#X msg 148 272 list /dur_rnd \$1;
+#X msg 165 297 list /iot \$1;
+#X msg 182 317 list /iot_rnd \$1;
+#X msg 199 337 list /shp \$1;
+#X msg 216 357 list /shp_rnd \$1;
+#X msg 233 377 list /skw \$1;
+#X msg 250 397 list /skw_rnd \$1;
+#X msg 267 417 list /del \$1;
+#X msg 284 437 list /del_rnd \$1;
+#X msg 318 479 list /vcs \$1;
+#X msg 301 459 list /fdb \$1;
+#X obj 30 81 route /grain;
+#X msg 30 132 list /amp \$1;
+#X obj 30 106 unpack 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X msg 505 536 list /grain \$1 \$2 \$3 \$4 \$5 \$6 \$7 \$8 \$9 \$10
+\$11 \$12 \$13 \$14 \$15 \$16 \$17 \$18;
+#X obj 505 510 pack 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X obj 527 115 t b a;
+#X obj 550 135 t b a;
+#X obj 573 155 t b a;
+#X obj 596 175 t b a;
+#X obj 618 195 t b a;
+#X obj 641 215 t b a;
+#X obj 664 235 t b a;
+#X obj 687 255 t b a;
+#X obj 710 276 t b a;
+#X obj 732 296 t b a;
+#X obj 755 316 t b a;
+#X obj 778 336 t b a;
+#X obj 801 356 t b a;
+#X obj 823 376 t b a;
+#X obj 846 396 t b a;
+#X obj 869 416 t b a;
+#X obj 892 437 t b a;
+#X obj 505 54 route /grn_fbk_1 /grn_fbk_2 /grn_fbk_3 /grn_fbk_4 /grn_fbk_5
+/grn_fbk_6 /grn_fbk_7 /grn_fbk_8 /grn_fbk_9 /grn_fbk_10 /grn_fbk_11
+/grn_fbk_12 /grn_fbk_13 /grn_fbk_14 /grn_fbk_15 /grn_fbk_16 /grn_fbk_17
+/grn_fbk_18;
+#X connect 0 0 2 0;
+#X connect 2 0 23 0;
+#X connect 3 0 4 0;
+#X connect 4 0 45 0;
+#X connect 6 0 1 0;
+#X connect 7 0 1 0;
+#X connect 8 0 1 0;
+#X connect 9 0 1 0;
+#X connect 10 0 1 0;
+#X connect 11 0 1 0;
+#X connect 12 0 1 0;
+#X connect 13 0 1 0;
+#X connect 14 0 1 0;
+#X connect 15 0 1 0;
+#X connect 16 0 1 0;
+#X connect 17 0 1 0;
+#X connect 18 0 1 0;
+#X connect 19 0 1 0;
+#X connect 20 0 1 0;
+#X connect 21 0 1 0;
+#X connect 22 0 1 0;
+#X connect 23 0 25 0;
+#X connect 24 0 1 0;
+#X connect 25 0 24 0;
+#X connect 25 1 6 0;
+#X connect 25 2 7 0;
+#X connect 25 3 8 0;
+#X connect 25 4 9 0;
+#X connect 25 5 10 0;
+#X connect 25 6 11 0;
+#X connect 25 7 12 0;
+#X connect 25 8 13 0;
+#X connect 25 9 14 0;
+#X connect 25 10 15 0;
+#X connect 25 11 16 0;
+#X connect 25 12 17 0;
+#X connect 25 13 18 0;
+#X connect 25 14 19 0;
+#X connect 25 15 20 0;
+#X connect 25 16 22 0;
+#X connect 25 17 21 0;
+#X connect 26 0 5 0;
+#X connect 27 0 26 0;
+#X connect 28 0 27 0;
+#X connect 28 1 27 1;
+#X connect 29 0 27 0;
+#X connect 29 1 27 2;
+#X connect 30 0 27 0;
+#X connect 30 1 27 3;
+#X connect 31 0 27 0;
+#X connect 31 1 27 4;
+#X connect 32 0 27 0;
+#X connect 32 1 27 5;
+#X connect 33 0 27 0;
+#X connect 33 1 27 6;
+#X connect 34 0 27 0;
+#X connect 34 1 27 7;
+#X connect 35 0 27 0;
+#X connect 35 1 27 8;
+#X connect 36 0 27 0;
+#X connect 36 1 27 9;
+#X connect 37 0 27 0;
+#X connect 37 1 27 10;
+#X connect 38 0 27 0;
+#X connect 38 1 27 11;
+#X connect 39 0 27 0;
+#X connect 39 1 27 12;
+#X connect 40 0 27 0;
+#X connect 40 1 27 13;
+#X connect 41 0 27 0;
+#X connect 41 1 27 14;
+#X connect 42 0 27 0;
+#X connect 42 1 27 15;
+#X connect 43 0 27 0;
+#X connect 43 1 27 16;
+#X connect 44 0 27 0;
+#X connect 44 1 27 17;
+#X connect 45 0 27 0;
+#X connect 45 1 28 0;
+#X connect 45 2 29 0;
+#X connect 45 3 30 0;
+#X connect 45 4 31 0;
+#X connect 45 5 32 0;
+#X connect 45 6 33 0;
+#X connect 45 7 34 0;
+#X connect 45 8 35 0;
+#X connect 45 9 36 0;
+#X connect 45 10 37 0;
+#X connect 45 11 38 0;
+#X connect 45 12 39 0;
+#X connect 45 13 40 0;
+#X connect 45 14 41 0;
+#X connect 45 15 42 0;
+#X connect 45 16 43 0;
+#X connect 45 17 44 0;
+#X restore 226 51 pd GRAIN_MMP-GUI;
+#N canvas 314 320 1038 622 delay_MMP-GUI 0;
+#X obj 30 33 receive fromGUI;
+#X obj 30 223 send toNetwork;
+#X obj 30 58 list trim;
+#X obj 505 7 receive fromNetwork;
+#X obj 505 31 route list;
+#X obj 505 583 send toGUI;
+#X msg 97 188 list /amp_rnd \$1;
+#X msg 30 166 list /amp \$1;
+#X msg 505 536 list /grain \$1 \$2 \$3 \$4 \$5 \$6 \$7 \$8 \$9 \$10
+\$11 \$12 \$13 \$14 \$15 \$16 \$17 \$18;
+#X obj 527 115 t b a;
+#X obj 550 135 t b a;
+#X obj 30 81 route /delay_times;
+#X obj 30 106 unpack 0 0;
+#X obj 505 485 pack 0 0;
+#X connect 0 0 2 0;
+#X connect 2 0 11 0;
+#X connect 3 0 4 0;
+#X connect 6 0 1 0;
+#X connect 7 0 1 0;
+#X connect 8 0 5 0;
+#X connect 9 0 13 0;
+#X connect 9 1 13 1;
+#X connect 10 0 13 0;
+#X connect 11 0 12 0;
+#X connect 12 0 7 0;
+#X connect 12 1 6 0;
+#X connect 13 0 8 0;
+#X restore 226 73 pd delay_MMP-GUI;
+#N canvas 147 199 1506 392 in-MXR_MMP-GUI 0;
+#X obj 51 42 mmp_rsvp.osc.router /MASTER/in-MXR/1-vsl 127 fromGUI toNetwork
+;
+#X obj 51 75 mmp_rsvp.osc.router /MASTER/in-MXR/2-vsl 127 fromGUI toNetwork
+;
+#X obj 51 108 mmp_rsvp.osc.router /MASTER/in-MXR/3-vsl 127 fromGUI
+toNetwork;
+#X obj 51 141 mmp_rsvp.osc.router /MASTER/in-MXR/4-vsl 127 fromGUI
+toNetwork;
+#X obj 756 42 mmp_rsvp.osc.router /MASTER/in-MXR/DRCT-tgl 1 fromGUI
+toNetwork;
+#X obj 1115 42 mmp_rsvp.osc.router-l /MASTER/in-MXR/MTRX-msc 1 fromGUI
+toNetwork;
+#X obj 401 42 mmp_rsvp.osc.router /MASTER/in-MXR/MICS-tgl 1 fromGUI
+toNetwork;
+#X obj 51 212 mmp_rsvp.osc.router /MASTER/in-MXR/1-vsl 127 fromNetwork
+toGUI;
+#X obj 51 245 mmp_rsvp.osc.router /MASTER/in-MXR/2-vsl 127 fromNetwork
+toGUI;
+#X obj 51 278 mmp_rsvp.osc.router /MASTER/in-MXR/3-vsl 127 fromNetwork
+toGUI;
+#X obj 51 311 mmp_rsvp.osc.router /MASTER/in-MXR/4-vsl 127 fromNetwork
+toGUI;
+#X obj 401 213 mmp_rsvp.osc.router /MASTER/in-MXR/MICS-tgl 1 fromNetwork
+toGUI;
+#X obj 756 213 mmp_rsvp.osc.router /MASTER/in-MXR/DRCT-tgl 1 fromNetwork
+toGUI;
+#X obj 1115 213 mmp_rsvp.osc.router /MASTER/in-MXR/MTRX-msc 1 fromNetwork
+toGUI;
+#X restore 15 24 pd in-MXR_MMP-GUI;
+#N canvas 540 137 1314 661 VOLS_MMP-GUI 0;
+#X obj 400 30 cnv 5 10 500 empty empty empty 20 12 0 14 -1 -66577 0
+;
+#X obj 31 70 mmp_rsvp.osc.router /MASTER/O-VOL/L.ELE-svrb-vsl 127 fromGUI
+toNetwork;
+#X obj 31 103 mmp_rsvp.osc.router /MASTER/O-VOL/INSTR-vsl 127 fromGUI
+toNetwork;
+#X obj 31 136 mmp_rsvp.osc.router /MASTER/O-VOL/INSTR-svrb-vsl 127
+fromGUI toNetwork;
+#X obj 820 30 cnv 5 10 500 empty empty empty 20 12 0 14 -1 -66577 0
+;
+#X obj 417 31 mmp_rsvp.osc.router /MASTER/O-VOL/L.ELE-DAC-tgl 1 fromGUI
+toNetwork;
+#X obj 417 101 mmp_rsvp.osc.router /MASTER/O-VOL/INSTR-DAC-tgl 1 fromGUI
+toNetwork;
+#X obj 449 135 mmp_rsvp.osc.router /MASTER/O-VOL/INSTR-COMP-tgl 1 fromGUI
+toNetwork;
+#X obj 449 65 mmp_rsvp.osc.router /MASTER/O-VOL/L.ELE-COMP-tgl 1 fromGUI
+toNetwork;
+#X obj 837 101 mmp_rsvp.osc.router /RSVP/MASTER/REC-tgl 1 fromGUI toNetwork
+;
+#X obj 869 65 mmp_rsvp.osc.router /RSVP/MASTER/DAC-tgl 1 fromGUI toNetwork
+;
+#X obj 869 135 mmp_rsvp.osc.router /RSVP/MASTER/REC.RST-bng 1 fromGUI
+toNetwork;
+#X obj 31 37 mmp_rsvp.osc.router /MASTER/O-VOL/L.ELE-vsl 127 fromGUI
+toNetwork;
+#X obj 837 31 mmp_rsvp.osc.router /RSVP/MASTER/VOL-vsl 127 fromGUI
+toNetwork;
+#X restore 15 4 pd VOLS_MMP-GUI;
+#N canvas 503 404 1314 661 PRST_MMP-GUI 0;
+#X obj 400 30 cnv 5 10 500 empty empty empty 20 12 0 14 -1 -66577 0
+;
+#X obj 820 30 cnv 5 10 500 empty empty empty 20 12 0 14 -1 -66577 0
+;
+#X obj 14 35 mmp_rsvp.osc.router /MASTER/PRST/up-bng 1 fromGUI toNetwork
+;
+#X obj 14 55 mmp_rsvp.osc.router /MASTER/PRST/dwn-bng 1 fromGUI toNetwork
+;
+#X obj 863 36 mmp_rsvp.osc.router /MASTER/PRST/ped-tgl 1 fromGUI toNetwork
+;
+#X obj 856 98 mmp_rsvp.osc.router /MASTER/PRST/display-tgl 1 fromGUI
+toNetwork;
+#X obj 863 56 mmp_rsvp.osc.router /MASTER/PRST/rst-bng 1 fromGUI toNetwork
+;
+#X restore 15 64 pd PRST_MMP-GUI;
+#N canvas 586 277 1314 661 RVRB_MMP-GUI 0;
+#X obj 400 30 cnv 5 10 500 empty empty empty 20 12 0 14 -1 -66577 0
+;
+#X obj 820 30 cnv 5 10 500 empty empty empty 20 12 0 14 -1 -66577 0
+;
+#X obj 29 35 mmp_rsvp.osc.router /MASTER/RVRB/unity-bng 1 fromGUI toNetwork
+;
+#X obj 29 69 mmp_rsvp.osc.router /MASTER/RVRB/mute-bng 1 fromGUI toNetwork
+;
+#X obj 29 102 mmp_rsvp.osc.router /MASTER/RVRB/apply-bng 1 fromGUI
+toNetwork;
+#X obj 432 33 mmp_rsvp.osc.router /MASTER/RVRB/vol-vsl 1 fromGUI toNetwork
+;
+#X obj 432 53 mmp_rsvp.osc.router /MASTER/RVRB/dry-vsl 1 fromGUI toNetwork
+;
+#X obj 432 73 mmp_rsvp.osc.router /MASTER/RVRB/wet-vsl 1 fromGUI toNetwork
+;
+#X obj 861 103 mmp_rsvp.osc.router-l /MASTER/RVRB/eq-msc 1 fromGUI
+toNetwork;
+#X obj 861 34 mmp_rsvp.osc.router /MASTER/RVRB/DSP-tgl 1 fromGUI toNetwork
+;
+#X restore 15 44 pd RVRB_MMP-GUI;
