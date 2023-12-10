@@ -1,0 +1,16 @@
+#N canvas 248 475 719 425 12;
+#X msg 407 103 clear;
+#X msg 424 126 auto \$1;
+#X msg 442 149 play \$1;
+#X obj 88 126 vsl 15 128 0 127 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 0 1;
+#X floatatom 90 262 5 0 0 0 - - -;
+#X obj 172 177 auto.rec-v4 test module object vsl;
+#X obj 588 142 vsl 15 128 0 127 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 0 1;
+#X connect 0 0 5 1;
+#X connect 1 0 5 1;
+#X connect 2 0 5 1;
+#X connect 3 0 4 0;
+#X connect 3 0 5 0;
+#X connect 5 0 3 0;

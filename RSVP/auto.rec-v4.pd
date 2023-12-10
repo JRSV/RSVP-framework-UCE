@@ -1,0 +1,321 @@
+#N canvas 549 421 1285 454 10;
+#X declare -path ../;
+#X text 650 15 argument is complete ID of RSVP object/or new object
+to record (eg. \$1/\$2/\$3-<type>);
+#X obj 652 326 sel 1 0;
+#X obj 675 354 s \$0-tgl-0;
+#X obj 652 379 s \$0-tgl-1;
+#X obj 727 379 cnv 10 10 10 empty empty empty 20 12 0 14 -4160 -66577
+0;
+#X obj 750 354 cnv 10 10 10 empty empty empty 20 12 0 14 -4160 -66577
+0;
+#X obj 967 69 inlet;
+#N canvas 542 556 1215 524 recording.automation 0;
+#X obj 37 270 f;
+#X obj 37 202 metro 100;
+#X obj 345 252 r \$1/\$2/\$3-\$4;
+#X text 139 193 one minute of buffer at 10 ticks per second. 100 ms
+recording interval, f 27;
+#X obj 37 149 1;
+#X obj 37 371 textfile;
+#X msg 37 303 add2 \$1;
+#X msg 97 124 clear;
+#X obj 97 147 s \$0-clear-tmp;
+#X obj 47 325 r \$0-txt-dmp;
+#X obj 37 26 r \$0-tgl-1;
+#X obj 37 54 t b b b b;
+#X obj 58 348 r \$0-clear-tmp;
+#X obj 45 176 r \$0-stop;
+#X obj 104 176 cnv 10 10 10 empty empty empty 20 12 0 14 -258113 -66577
+0;
+#X obj 112 26 cnv 10 10 10 empty empty empty 20 12 0 14 -4160 -66577
+0;
+#X obj 37 397 s \$0-tmp-data;
+#X obj 133 397 cnv 10 10 10 empty empty empty 20 12 0 14 -4034 -66577
+0;
+#X obj 627 146 cnv 10 10 10 empty empty empty 20 12 0 14 -4034 -66577
+0;
+#X obj 258 137 inlet value-2-record;
+#X obj 533 46 t b b b b;
+#X obj 584 95 s \$0-stop;
+#X obj 584 70 0;
+#X msg 570 119 rewind;
+#X obj 533 20 r \$0-tgl-0;
+#X obj 642 95 cnv 10 10 10 empty empty empty 20 12 0 14 -258113 -66577
+0;
+#X obj 597 20 cnv 10 10 10 empty empty empty 20 12 0 14 -4160 -66577
+0;
+#X obj 550 145 s \$0-txt-dmp;
+#X text 189 333 records the value every 100 miliseconds. 10 values
+per second. when toggle 0 \, then it pushes to text;
+#X obj 827 114 cnv 10 10 10 empty empty empty 20 12 0 14 -4034 -66577
+0;
+#X obj 731 114 r \$0-tmp-data;
+#X obj 759 182 list length;
+#X obj 759 206 t a b;
+#X obj 731 136 t a a;
+#X obj 699 90 r \$0-update.from.file;
+#X obj 759 252 pack f s;
+#X msg 759 276 \; \$2.auto.env resize \$1;
+#X obj 804 224 symbol \$1/\$2/\$3-\$4;
+#X obj 731 318 list prepend 0;
+#X obj 731 341 send \$1/\$2/\$3-\$4.auto.env;
+#X obj 942 200 send \$0-length.auto.data;
+#X connect 0 0 6 0;
+#X connect 1 0 0 0;
+#X connect 2 0 0 1;
+#X connect 4 0 1 0;
+#X connect 5 0 16 0;
+#X connect 6 0 5 0;
+#X connect 7 0 8 0;
+#X connect 9 0 5 0;
+#X connect 10 0 11 0;
+#X connect 11 0 4 0;
+#X connect 11 3 7 0;
+#X connect 12 0 5 0;
+#X connect 13 0 1 0;
+#X connect 19 0 0 1;
+#X connect 20 1 27 0;
+#X connect 20 2 23 0;
+#X connect 20 3 22 0;
+#X connect 22 0 21 0;
+#X connect 23 0 27 0;
+#X connect 24 0 20 0;
+#X connect 30 0 33 0;
+#X connect 31 0 32 0;
+#X connect 31 0 40 0;
+#X connect 32 0 35 0;
+#X connect 32 1 37 0;
+#X connect 33 0 38 0;
+#X connect 33 1 31 0;
+#X connect 34 0 33 0;
+#X connect 35 0 36 0;
+#X connect 37 0 35 1;
+#X connect 38 0 39 0;
+#X restore 13 36 pd recording.automation;
+#X obj 13 10 inlet values_2_record;
+#X obj 981 119 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 907 221 declare -path ../;
+#X obj 1021 142 cnv 10 10 10 empty empty empty 20 12 0 14 -159808 -66577
+0;
+#X obj 947 142 s \$0-clear;
+#X obj 178 36 cnv 10 10 10 empty empty empty 20 12 0 14 -4034 -66577
+0;
+#X obj 260 127 s \$0-Auto.Data.number;
+#X obj 1037 59 r \$0-clear-tmp;
+#X obj 286 170 s \$0-write.file;
+#X obj 286 149 s \$0-read.file;
+#N canvas 1233 526 517 227 envelope-\$1/\$2/\$3-\$4 1;
+#N canvas 0 50 450 250 (subpatch) 0;
+#X array \$1/\$2/\$3-\$4.auto.env 46 float 1;
+#A 0 50 50 50 50 50 50 50 50 50 50 50 58 71 85 97 117 120 105 97 92
+88 80 74 58 55 61 74 59 49 48 68 82 89 100 100 95 73 61 45 40 40 40
+40 40 40 40;
+#X coords 0 127 45 0 500 140 1 0 0;
+#X restore 5 36 graph;
+#X obj 5 4 cnv 15 500 30 empty empty \$1/\$2/\$3-\$4 20 15 0 22 -159808
+-4032 0;
+#X obj 5 181 cnv 15 500 30 empty empty Automation/Env 20 15 0 22 -159808
+-4032 0;
+#X restore 13 113 pd envelope-\$1/\$2/\$3-\$4;
+#X msg 718 151 \; pd-envelope-\$1 vis 1;
+#X obj 718 125 symbol \$1/\$2/\$3-\$4;
+#N canvas 787 592 200 372 open.automation.fromfile 0;
+#X obj 97 198 makefilename ./automation.DATA/\$1-\$2-\$3-\$4_%d.autodata
+;
+#X obj 45 88 r \$0-Auto.Data.number;
+#X obj 30 116 i;
+#X obj 30 60 r \$0-read.file;
+#X obj 30 255 textfile;
+#X msg 49 206 rewind;
+#X msg 97 226 read \$1;
+#X obj 30 282 s \$0-update.from.file;
+#X obj 30 156 t b b a;
+#X connect 0 0 6 0;
+#X connect 1 0 2 1;
+#X connect 2 0 8 0;
+#X connect 3 0 2 0;
+#X connect 4 0 7 0;
+#X connect 5 0 4 0;
+#X connect 6 0 4 0;
+#X connect 8 0 4 0;
+#X connect 8 1 5 0;
+#X connect 8 2 0 0;
+#X restore 13 87 pd open.automation.fromfile;
+#N canvas 784 359 200 314 save.automation.2file 0;
+#X obj 30 180 symbol \$1/\$2/\$3-\$4;
+#X obj 75 158 makefilename ./automation.DATA/\$1-\$2-\$3-\$4_%d.autodata
+;
+#X msg 30 224 \; \$1.auto.env write \$2;
+#X obj 30 203 pack s s;
+#X obj 30 136 t b a;
+#X obj 30 60 r \$0-write.file;
+#X obj 48 86 r \$0-Auto.Data.number;
+#X obj 30 113 i;
+#X connect 0 0 3 0;
+#X connect 1 0 3 1;
+#X connect 3 0 2 0;
+#X connect 4 0 0 0;
+#X connect 4 1 1 0;
+#X connect 5 0 7 0;
+#X connect 6 0 7 1;
+#X connect 7 0 4 0;
+#X restore 13 62 pd save.automation.2file;
+#X obj 400 100 cnv 15 300 80 empty \$2-canvas empty 20 12 0 14 -33289
+-33289 0;
+#X obj 405 105 cnv 15 290 70 empty empty empty 8 11 0 14 -233017 -66577
+0;
+#N canvas 1148 722 450 300 blinker 0;
+#X obj 49 68 sel 0 1;
+#X obj 49 48 speedlim 500;
+#X obj 10 6 loadbang;
+#X obj 49 27 return-from-pd~ \$1-\$2-sig-in;
+#X obj 49 100 symbol \$2;
+#X msg 49 136 \; \$1-canvas color 12 12 12;
+#X obj 129 97 symbol \$2;
+#X obj 245 27 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 129 177 \; \$1-canvas color 16 12 12;
+#X text 27 244 blinks the border green when signal enters the instrument
+;
+#X connect 0 0 4 0;
+#X connect 0 1 6 0;
+#X connect 1 0 0 0;
+#X connect 2 0 4 0;
+#X connect 3 0 1 0;
+#X connect 4 0 5 0;
+#X connect 6 0 8 0;
+#X connect 7 0 0 0;
+#X restore 15 175 pd blinker;
+#N canvas 1369 503 450 391 tag 0;
+#X obj 131 252 list prepend color;
+#X obj 131 280 route list;
+#X obj 40 65 vsl 15 128 0 127 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 0 1;
+#X obj 85 87 sel 1 2 3 4 5 6 7 8;
+#X obj 84 42 loadbang;
+#X obj 131 309 s \$1.\$2.\$3.\$4.color-tag;
+#X msg 85 111 13 0 0;
+#X msg 98 135 14 0 2;
+#X msg 112 159 15 0 2;
+#X msg 126 181 16 0 0;
+#X msg 140 115 17 0 12;
+#X msg 154 137 18 0 0;
+#X msg 168 163 19 0 0;
+#X msg 182 188 0 0 12;
+#X connect 0 0 1 0;
+#X connect 1 0 5 0;
+#X connect 2 0 3 0;
+#X connect 3 0 6 0;
+#X connect 3 1 7 0;
+#X connect 3 2 8 0;
+#X connect 3 3 9 0;
+#X connect 3 4 10 0;
+#X connect 3 5 11 0;
+#X connect 3 6 12 0;
+#X connect 3 7 13 0;
+#X connect 4 0 2 0;
+#X connect 6 0 0 0;
+#X connect 7 0 0 0;
+#X connect 8 0 0 0;
+#X connect 9 0 0 0;
+#X connect 10 0 0 0;
+#X connect 11 0 0 0;
+#X connect 12 0 0 0;
+#X connect 13 0 0 0;
+#X restore 15 141 pd tag;
+#X obj 612 133 cnv 5 80 15 empty \$1.\$2.\$3.\$4.color-tag \$3-\$4
+4 8 0 10 -241291 -66577 0;
+#X floatatom 412 110 5 0 0 1 env.nbr - -;
+#X obj 422 155 bng 15 250 50 0 empty empty save.env 17 7 0 10 -4160
+-204800 -1;
+#X obj 422 134 bng 15 250 50 0 empty empty load.env 17 7 0 10 -4160
+-4032 -1;
+#X obj 625 110 bng 15 250 50 0 empty empty vis.env. 17 7 0 10 -4160
+-4032 -1;
+#X obj 355 266 s \$0-tgl.record.auto;
+#X obj 652 287 r \$0-tgl.record.auto;
+#X obj 510 111 tgl 15 0 empty empty rec.env 17 7 0 10 -258113 -257985
+-1 0 1;
+#X obj 967 94 route clear env rec.stop play.env;
+#X floatatom 510 154 5 0 0 1 play.speed - -;
+#X obj 589 125 bng 15 250 50 0 empty empty SIG.IN -8 -7 0 10 -257985
+-258113 -1;
+#X obj 615 150 cnv 15 75 20 empty \$0-original.duration Orig.Dur=460
+2 10 0 8 -1 -228856 0;
+#N canvas 830 403 702 566 playback 0;
+#X obj 162 406 tabread \$1/\$2/\$3-\$4.auto.env;
+#X obj 162 240 metro 100;
+#X obj 188 288 + 1;
+#X obj 293 269 r \$0-length.auto.data;
+#X obj 278 330 0;
+#X obj 278 353 t a a;
+#X obj 162 289 f;
+#X obj 278 307 sel;
+#X obj 392 124 r \$0-read.file;
+#X obj 392 147 0;
+#X obj 213 116 r \$0-playback.speed;
+#X obj 213 168 100;
+#X obj 213 139 t b a;
+#X obj 162 64 r \$0-playback.toggle;
+#X obj 213 191 /;
+#X obj 162 429 outlet;
+#X obj 305 378 s \$0-turn.off.playback.tgl;
+#X connect 0 0 15 0;
+#X connect 1 0 6 0;
+#X connect 2 0 6 1;
+#X connect 3 0 7 1;
+#X connect 4 0 5 0;
+#X connect 5 0 6 1;
+#X connect 5 1 1 0;
+#X connect 5 1 16 0;
+#X connect 6 0 2 0;
+#X connect 6 0 0 0;
+#X connect 6 0 7 0;
+#X connect 7 0 4 0;
+#X connect 8 0 9 0;
+#X connect 9 0 6 1;
+#X connect 10 0 12 0;
+#X connect 11 0 14 0;
+#X connect 12 0 11 0;
+#X connect 12 1 14 1;
+#X connect 13 0 1 0;
+#X connect 14 0 1 1;
+#X restore 19 345 pd playback;
+#X obj 1060 266 * 10;
+#X obj 1060 333 s \$0-original.duration;
+#X msg 1060 298 label Orig.Dur=\$1;
+#X obj 1060 240 r \$0-length.auto.data;
+#X obj 510 132 tgl 15 0 empty empty ply.env 17 7 0 10 -258113 -257985
+-1 0 1;
+#X obj 509 215 s \$0-playback.toggle;
+#X obj 535 188 s \$0-playback.speed;
+#X obj 455 25 loadbang;
+#X obj 455 48 1;
+#X obj 19 368 outlet;
+#X obj 550 65 r \$0-turn.off.playback.tgl;
+#X connect 1 0 3 0;
+#X connect 1 1 2 0;
+#X connect 6 0 35 0;
+#X connect 8 0 7 0;
+#X connect 15 0 35 0;
+#X connect 20 0 19 0;
+#X connect 28 0 14 0;
+#X connect 29 0 16 0;
+#X connect 30 0 17 0;
+#X connect 31 0 20 0;
+#X connect 33 0 1 0;
+#X connect 34 0 32 0;
+#X connect 35 0 9 0;
+#X connect 35 0 12 0;
+#X connect 36 0 46 0;
+#X connect 39 0 49 0;
+#X connect 40 0 42 0;
+#X connect 42 0 41 0;
+#X connect 43 0 40 0;
+#X connect 44 0 45 0;
+#X connect 47 0 48 0;
+#X connect 48 0 36 0;
+#X connect 50 0 44 0;
+#X coords 0 -1 1 1 300 80 2 400 100;
